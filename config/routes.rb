@@ -7,4 +7,6 @@ DiviService::Application.routes.draw do
   namespace :v1 do
     post "loginUser", to: 'sessions#create', as: :login, defaults: { format: 'json' }
   end
+
+  root to: 'admin/dashboard#index'
 end
