@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   def create
     @current_user = User.find_by_name params[:name]
     if @current_user && @current_user.authenticate(params[:password])
