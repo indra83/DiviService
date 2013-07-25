@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
 
 protected
   def current_user
-    @current_user ||= User.find(session[:current_user_id])
+    @current_user ||= User.find_by_token params[:token]
   end
+
+  def authenticate_user
+    render json: {error: 'Authentication Failed'}, status: 404 unless current_user
+  end
+
 end

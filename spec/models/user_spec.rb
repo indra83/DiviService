@@ -6,4 +6,12 @@ describe User do
     should_not be_nil
     should_not be_empty
   }
+
+  context "with class room" do
+    subject(:student) { create :user, role: :student }
+    let(:class_room) { create :class_room, user: student }
+
+    its(:class_room) { should eq class_room }
+
+  end
 end

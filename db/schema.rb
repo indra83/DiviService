@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130722134756) do
+ActiveRecord::Schema.define(version: 20130725170315) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -45,6 +45,53 @@ ActiveRecord::Schema.define(version: 20130722134756) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "books", force: true do |t|
+    t.string   "name"
+    t.integer  "course_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "books", ["course_id"], name: "index_books_on_course_id", using: :btree
+
+  create_table "class_rooms", force: true do |t|
+    t.string   "standard"
+    t.string   "section"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "courses", force: true do |t|
+    t.string   "name"
+    t.integer  "class_room_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courses", ["class_room_id"], name: "index_courses_on_class_room_id", using: :btree
+
+  create_table "participations", force: true do |t|
+    t.integer  "class_room_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "participations", ["class_room_id"], name: "index_participations_on_class_room_id", using: :btree
+  add_index "participations", ["user_id"], name: "index_participations_on_user_id", using: :btree
+
+  create_table "updates", force: true do |t|
+    t.string   "description"
+    t.decimal  "version",     precision: 5, scale: 2
+    t.string   "details"
+    t.string   "file"
+    t.integer  "book_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "updates", ["book_id"], name: "index_updates_on_book_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
