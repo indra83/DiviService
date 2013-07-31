@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     if @current_user && @current_user.authenticate(params[:password])
       session[:current_user_id] = @current_user.id
     else
-      render json: {error: 'Authentication Failed'}, status: 401
+      render json: {error: {code: 401, message: 'Authentication Failed'}}
     end
   end
 end
