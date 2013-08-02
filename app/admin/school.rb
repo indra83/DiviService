@@ -1,4 +1,4 @@
-ActiveAdmin.register Book do
+ActiveAdmin.register School do
 
 
   controller do
