@@ -14,4 +14,10 @@ describe User do
     its(:class_room) { should eq class_room }
 
   end
+
+  context "(student)" do
+    subject(:student) { create :user, role: :student }
+
+    its(:student?) { should be_true }
+  end
 end
