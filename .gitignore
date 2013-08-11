@@ -16,3 +16,7 @@
 /tmp
 config/database.yml
 config/heroku_env.rb
+
+# Ignore vim temp files
+*~
+*.swp
