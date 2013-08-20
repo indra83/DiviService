@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802144113) do
+ActiveRecord::Schema.define(version: 20130820184134) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -65,14 +65,16 @@ ActiveRecord::Schema.define(version: 20130802144113) do
 
   add_index "class_rooms", ["school_id"], name: "index_class_rooms_on_school_id", using: :btree
 
+  create_table "class_rooms_courses", force: true do |t|
+    t.integer "course_id"
+    t.integer "class_room_id"
+  end
+
   create_table "courses", force: true do |t|
     t.string   "name"
-    t.integer  "class_room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "courses", ["class_room_id"], name: "index_courses_on_class_room_id", using: :btree
 
   create_table "participations", force: true do |t|
     t.integer  "class_room_id"

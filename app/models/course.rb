@@ -1,6 +1,4 @@
 class Course < ActiveRecord::Base
-  belongs_to :class_room
+  has_and_belongs_to_many :class_rooms
   has_many :books
-
-  validates :class_room_id, presence: true
 end

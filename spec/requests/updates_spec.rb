@@ -6,7 +6,7 @@ describe "Updates" do
 
     let(:class_room)    { create :class_room, user: user }
 
-    let(:course)        { create :course, class_room: class_room }
+    let(:course)        { create :course, class_rooms: [class_room] }
     let(:book)          { create :book, course: course }
     let(:updates)       { create_list :update, 3, book: book }
 

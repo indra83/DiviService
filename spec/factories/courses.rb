@@ -3,6 +3,5 @@
 FactoryGirl.define do
   factory :course do
     name "MyString"
-    class_room nil
   end
 end
