@@ -2,13 +2,12 @@ require 'spec_helper'
 
 describe "Updates" do
   describe "POST /getContentUpdates" do
-    let(:user)          { create :user }
-
-    let(:class_room)    { create :class_room, user: user }
-
+    let(:class_room)    { create :class_room }
     let(:course)        { create :course, class_rooms: [class_room] }
     let(:book)          { create :book, course: course }
     let(:updates)       { create_list :update, 3, book: book }
+
+    let(:user)          { create :user, class_rooms: [class_room]}
 
     subject(:pattern) do
       {

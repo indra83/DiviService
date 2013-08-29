@@ -5,9 +5,9 @@ describe "Session" do
     let(:user) { create :user }
     let(:pattern) do
       {
-        id: user.id,
+        uid: user.id,
         token: user.token
-      }
+      }.ignore_extra_keys!
     end
 
     it "should return a token for successful login" do
