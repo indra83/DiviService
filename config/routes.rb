@@ -7,6 +7,7 @@ DiviService::Application.routes.draw do
   scope '/v1', defaults: { format: :json } do
     post "loginUser", to: 'sessions#create', as: :login
     post "getContentUpdates", to: 'updates#index', as: :content_updates
+    post "createLecture", to: 'lectures#create', as: :create_lectures
   end
 
   root to: 'admin/dashboard#index'

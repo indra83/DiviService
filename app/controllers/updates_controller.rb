@@ -3,6 +3,6 @@ class UpdatesController < ApplicationController
   before_filter :authenticate_user
 
   def index
-    @class_room = current_user.class_rooms.first
+    @class_room = current_user.class_room
   end
 end
