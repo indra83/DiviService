@@ -7,4 +7,8 @@ class LecturesController < ApplicationController
 
     render json: {error: {code:422, message: "The lecture can not be created due to validation errors", errors: @lecture.errors} }  unless @lecture.save
   end
+
+  def index
+    @lectures = @current_user.lectures
+  end
 end

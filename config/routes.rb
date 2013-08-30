@@ -8,6 +8,7 @@ DiviService::Application.routes.draw do
     post "loginUser", to: 'sessions#create', as: :login
     post "getContentUpdates", to: 'updates#index', as: :content_updates
     post "createLecture", to: 'lectures#create', as: :create_lectures
+    post "getLectures", to: 'lectures#index', as: :lectures
   end
 
   root to: 'admin/dashboard#index'
