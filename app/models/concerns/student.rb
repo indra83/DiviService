@@ -20,5 +20,7 @@ module Student
   def class_room
     class_rooms.first
   end
+
+  delegate :school_name, to: :class_room, allow_nil: true
 end
 
