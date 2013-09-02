@@ -3,7 +3,7 @@ ActiveAdmin.register Update do
   form do |f|
     filepicker_js_include_tag
     f.inputs "Details" do
-      f.input :book
+      f.input :book, member_label: :full_name
       f.input :description
       f.input :details
     end

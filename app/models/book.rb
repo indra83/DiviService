@@ -3,4 +3,8 @@ class Book < ActiveRecord::Base
   has_many :updates
 
   validates :course_id, presence: true
+
+  def full_name
+    "#{course.name} - #{name}"
+  end
 end
