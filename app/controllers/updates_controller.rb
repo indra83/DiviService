@@ -4,10 +4,7 @@ class UpdatesController < ApplicationController
 
   def index
     @class_rooms = current_user.class_rooms
-    @updates = @class_rooms.
-      flatten.map(&:courses).
-      flatten.map(&:books).
-      flatten.map { |book|
+    @updates = current_user.books.map { |book|
         version_def_for_book = params["versions"] && params["versions"].select {|version| version["bookId"] == book.id.to_s }.first
         present_version = version_def_for_book && version_def_for_book["version"].to_i || 0
         book.updates.recent_for(present_version, @current_user.role)
