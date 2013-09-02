@@ -10,7 +10,7 @@ class UpdatesController < ApplicationController
       flatten.map { |book|
         version_def_for_book = params["versions"] && params["versions"].select {|version| version["bookId"] == book.id.to_s }.first
         present_version = version_def_for_book && version_def_for_book["version"].to_i || 0
-        book.updates.where "version > ?", present_version
+        book.updates.recent_for(present_version, @current_user.role)
       }.flatten
   end
 end

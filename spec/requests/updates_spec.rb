@@ -46,6 +46,30 @@ describe "Updates" do
         ]
       })
     end
+
+    it "should return staging updates for teachers" do
+      staging_update = create :update, book: book, version: 4, status: 'staging'
+      user.update_attributes role: 'teacher'
+      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
+      response.body.should match_json_expression({
+        updates: [
+          {
+            courseId:     course.id,
+            bookId:       book.id,
+            version:      staging_update.version.to_s,
+            description:  staging_update.description,
+            details:      staging_update.details,
+            webUrl:       staging_update.file
+          }.ignore_extra_keys!
+        ]
+      })
+    end
+    it "should return staging updates for teachers" do
+      staging_update = create :update, book: book, version: 4, status: 'staging'
+      user.update_attributes role: 'student'
+      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
+      response.body.should match_json_expression({ updates: [] })
+    end
   end
 end
 
