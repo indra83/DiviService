@@ -6,6 +6,8 @@ FactoryGirl.define do
     version "9.99"
     details "MyString"
     file "MyString"
-    book nil
+    book
+    status "live"
+    strategy "replace"
   end
 end

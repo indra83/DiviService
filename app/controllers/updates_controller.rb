@@ -3,6 +3,14 @@ class UpdatesController < ApplicationController
   before_filter :authenticate_user
 
   def index
-    @class_room = current_user.class_room
+    @class_rooms = current_user.class_rooms
+    @updates = @class_rooms.
+      flatten.map(&:courses).
+      flatten.map(&:books).
+      flatten.map { |book|
+        version_def_for_book = params["versions"] && params["versions"].select {|version| version["bookId"] == book.id.to_s }.first
+        present_version = version_def_for_book && version_def_for_book["version"].to_i || 0
+        book.updates.where "version > ?", present_version
+      }.flatten
   end
 end
