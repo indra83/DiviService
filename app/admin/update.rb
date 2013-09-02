@@ -4,6 +4,7 @@ ActiveAdmin.register Update do
     filepicker_js_include_tag
     f.inputs "Details" do
       f.input :book, member_label: :full_name
+      f.input :version
       f.input :description
       f.input :details
       f.input :status, collection: %w[testing staging live], include_blank: false
