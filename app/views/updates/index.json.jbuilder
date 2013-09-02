@@ -1,3 +1,4 @@
+json.cdn @current_user.school.cdns.map(&:base_url)
 json.updates @updates do |update|
   json.courseId     update.book.course_id
   json.bookId       update.book_id

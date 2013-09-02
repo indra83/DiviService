@@ -25,6 +25,7 @@ module Student
     class_rooms.first
   end
 
-  delegate :school_name, to: :class_room, allow_nil: true
+  delegate :school, to: :class_room, allow_nil: true
+	delegate :name, to: :school, allow_nil: true, prefix: true
 end
 

@@ -21,7 +21,7 @@ describe "Updates" do
             webUrl:     update.file
           }.ignore_extra_keys!
         end
-      }
+      }.ignore_extra_keys!
     end
 
     it "should return list of user's updates" do
@@ -44,7 +44,7 @@ describe "Updates" do
             webUrl:         updates[2].file
           }.ignore_extra_keys!
         ]
-      })
+      }.ignore_extra_keys!)
     end
 
     it "should return staging updates for teachers" do
@@ -62,13 +62,13 @@ describe "Updates" do
             webUrl:       staging_update.file
           }.ignore_extra_keys!
         ]
-      })
+      }.ignore_extra_keys!)
     end
     it "should return staging updates for teachers" do
       staging_update = create :update, book: book, version: 4, status: 'staging'
       user.update_attributes role: 'student'
       post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression({ updates: [] })
+      response.body.should match_json_expression({ updates: [] }.ignore_extra_keys!)
     end
   end
 end
