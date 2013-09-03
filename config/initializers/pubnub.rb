@@ -1,4 +1,4 @@
 PUBNUB ||= Pubnub.new({
-	publish_key: ENV['PUBNUB_PUBLISH_KEY'],
-	subscribe_key: ENV['PUBNUB_SUBSCRIBE_KEY']
+	publish_key: ENV['PUBNUB_PUBLISH_KEY'] || 'TEST_PUBNUB_PUBLISH_KEY',
+	subscribe_key: ENV['PUBNUB_SUBSCRIBE_KEY'] || 'TEST_PUBNUB_SUBSCRIBE_KEY'
 })
