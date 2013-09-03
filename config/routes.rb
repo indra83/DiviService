@@ -10,6 +10,7 @@ DiviService::Application.routes.draw do
     post "createLecture", to: 'lectures#create', as: :create_lectures
     post "getLectures", to: 'lectures#index', as: :lectures
 		post "createInstruction", to: 'instructions#create', as: :create_instuctions
+		post "getInstructions", to: 'instructions#index', as: :instuctions
   end
 
   root to: 'admin/dashboard#index'

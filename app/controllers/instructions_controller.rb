@@ -2,6 +2,13 @@ class InstructionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :authenticate_user
 
+  def index
+		lecture = Lecture.find params[:lectureId]
+		render json: {error: {code: 401, message: "Unauthorized"} } unless lecture && lecture.class_room == current_user.class_room
+
+    @instructions = lecture.instructions.where("created_at > ?", Time.at(params[:since]))
+  end
+
 	def create
 		lecture = Lecture.find params[:lectureId]
 		render json: {error: {code: 401, message: "Unauthorized"} } unless current_user.teacher? && lecture && lecture.teacher == current_user

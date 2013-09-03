@@ -15,4 +15,5 @@ class User < ActiveRecord::Base
   end
 
   include Student
+  include Teacher
 end
