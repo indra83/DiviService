@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Lecture do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:lecture) { create :lecture }
+  its(:status) { should == 'live' }
 end
