@@ -9,9 +9,9 @@ describe "Lecture" do
     let(:pattern) do
       {
         id: :lecture_id,
-        classId: class_room.id,
+        classId: class_room.id.to_s,
         name: lecture.name,
-        teacherId: teacher.id,
+        teacherId: teacher.id.to_s,
         teacherName: teacher.name,
         channel: /^lecture_\d+$/,
         startTime: lecture.start_time.to_i

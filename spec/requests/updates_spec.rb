@@ -13,8 +13,8 @@ describe "Updates" do
       {
         updates: updates.map do |update|
           {
-            courseId:     course.id,
-            bookId:       book.id,
+            courseId:     course.id.to_s,
+            bookId:       book.id.to_s,
             version:      update.version.to_s,
             description:  update.description,
             details:      update.details,
@@ -36,8 +36,8 @@ describe "Updates" do
       response.body.should match_json_expression({
         updates: [
           {
-            courseId:     course.id,
-            bookId:       book.id,
+            courseId:     course.id.to_s,
+            bookId:       book.id.to_s,
             version:      updates[2].version.to_s,
             description:  updates[2].description,
             details:      updates[2].details,
@@ -54,8 +54,8 @@ describe "Updates" do
       response.body.should match_json_expression({
         updates: [
           {
-            courseId:     course.id,
-            bookId:       book.id,
+            courseId:     course.id.to_s,
+            bookId:       book.id.to_s,
             version:      staging_update.version.to_s,
             description:  staging_update.description,
             details:      staging_update.details,

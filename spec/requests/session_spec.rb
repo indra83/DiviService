@@ -5,7 +5,7 @@ describe "Session" do
     let(:user) { create :user }
     let(:pattern) do
       {
-        uid: user.id,
+        uid: user.id.to_s,
         token: user.token
       }.ignore_extra_keys!
     end
