@@ -4,7 +4,7 @@ class InstructionsController < ApplicationController
 
   def index
 		lecture = Lecture.find params[:lectureId]
-		render json: {error: {code: 401, message: "Unauthorized"} } unless lecture && lecture.class_room == current_user.class_room
+		render json: {error: {code: 401, message: "Unauthorized"} } unless lecture && current_user.class_rooms.include?(lecture.class_room)
 
     @instructions = lecture.instructions.where("created_at > ?", Time.at(params[:since].to_i))
   end
