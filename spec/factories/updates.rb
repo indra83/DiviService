@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :update do
     description "MyString"
-    version "9.99"
+    version "9"
     details "MyString"
     file "MyString"
     book

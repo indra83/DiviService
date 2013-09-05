@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :cdn do
-    baseUrl "MyString"
+    base_url "MyString"
     school nil
   end
 end
