@@ -21,7 +21,5 @@ class LecturesController < ApplicationController
 
     @instruction = @lecture.instructions.create payload: params[:instruction]
     render json: {error: {code:422, message: "The instruction can not be published due to validation errors.(The lecture has been expired)", errors: @instruction.errors} } and return if @instruction.errors.present?
-
-    render json: "OK"
   end
 end
