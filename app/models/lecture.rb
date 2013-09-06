@@ -14,6 +14,14 @@ class Lecture < ActiveRecord::Base
 		"lecture_#{id}"
 	end
 
+  def start_time
+    read_attribute(:start_time) || created_at || Time.now
+  end
+
+  def status
+    start_time < 1.hour.ago ? 'expired' : read_attribute(:status)
+  end
+
 private
   def set_status
     self.status ||= 'live'
