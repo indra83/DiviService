@@ -10,6 +10,8 @@ class ClassRoom < ActiveRecord::Base
 
   delegate :name, to: :school, prefix: true, allow_nil: true
 
+  alias_method :members, :users
+
   def name
     "#{standard} #{section} - #{school_name}"
   end

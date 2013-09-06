@@ -10,6 +10,8 @@ class Lecture < ActiveRecord::Base
 
   scope :live, where(status: 'live')
 
+  delegate :members, to: :class_room
+
 	def channel
 		"lecture_#{id}"
 	end
