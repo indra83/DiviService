@@ -1,7 +1,9 @@
+json.key_format! camelize: :lower
+
 json.id lecture.id.to_s
-json.classId lecture.class_room_id.to_s
+json.class_id lecture.class_room_id.to_s
 json.name lecture.name
-json.teacherId lecture.teacher_id.to_s
-json.teacherName lecture.teacher.name
+json.teacher_id lecture.teacher_id.to_s
+json.teacher_name lecture.teacher.name
 json.channel lecture.channel
-json.startTime lecture.start_time.to_i
+json.start_time lecture.start_time.to_i
