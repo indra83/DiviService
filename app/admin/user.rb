@@ -16,14 +16,24 @@ ActiveAdmin.register User do
     f.actions
   end
 
-	index as: :grid do |user|
-		link_to admin_user_path user do
-			image = image_tag user.profile_pic
-			name = content_tag :h3, user.name
+	index do
+		column :id
+		column :name
+		column :role
+		column :created_at
+		column :updated_at
 
-			image + name
-		end
+		actions
 	end
+
+  index as: :grid, default: true do |user|
+  	link_to admin_user_path user do
+  		image = filepicker_image_tag user.pic, user.profile_pic_opts
+  		name = content_tag :h3, user.name
+
+  		image + name
+  	end
+  end
 
   controller do
     def permitted_params

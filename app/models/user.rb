@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
     quality: 80
   }
 
+  def profile_pic_opts
+    PROFILE_PIC_OPTS
+  end
 protected
 
   def generate_token
