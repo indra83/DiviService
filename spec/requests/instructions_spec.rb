@@ -11,6 +11,8 @@ describe "Instructions" do
       instructions # create instructions
       post instructions_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
       pattern = {
+        lectureId: lecture.id,
+        lectureStatus: lecture.status,
         instructions: instructions.map { |instruction|
           {
             id: instruction.id.to_s,
