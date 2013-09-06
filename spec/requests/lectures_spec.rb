@@ -37,7 +37,7 @@ describe "Lecture" do
           uid:  member.id,
           name: member.name,
           role: member.role
-        }
+        }.ignore_extra_keys!
       } }
       post lecture_members_path(format: :json), %({"token": "#{teacher.token}", "lectureId": "#{lecture.id}"}), CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern

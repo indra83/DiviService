@@ -5,7 +5,15 @@ class User < ActiveRecord::Base
 
   before_create :generate_token
 
-  protected
+  PROFILE_PIC_OPTS = {
+    h: 140,
+    w: 140,
+    fit: 'clip',
+    format: 'jpg',
+    quality: 80
+  }
+
+protected
 
   def generate_token
     self.token = loop do
