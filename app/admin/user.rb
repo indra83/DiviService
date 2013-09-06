@@ -20,6 +20,9 @@ ActiveAdmin.register User do
 		column :id
 		column :name
 		column :role
+		column :class_rooms do |user|
+			user.class_rooms.map(&:name).join(', ')
+		end
 		column :created_at
 		column :updated_at
 
