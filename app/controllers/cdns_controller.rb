@@ -8,7 +8,7 @@ class CdnsController < ApplicationController
 
     render json: {error: {code:422, message: "The cdn can not be saved due to validation errors", errors: @cdn.errors} }  unless @cdn.save
 
-		@updates = @cdn.updates
+		@updates = @cdn.updates.uniq
 
   end
 end
