@@ -1,5 +1,9 @@
 ActiveAdmin.register ClassRoom do
-  menu parent: 'User', priority: 2
+  belongs_to :school, parent_class: School
+
+  action_item only: [:show, :edit] do
+    link_to "Users", admin_class_room_users_path(class_room)
+  end
 
   form do |f|
     f.inputs "Class Room Detials" do

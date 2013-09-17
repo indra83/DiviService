@@ -1,5 +1,9 @@
 ActiveAdmin.register School do
-  menu parent: 'User', priority: 1
+  menu priority: 1
+
+  action_item only: [:show, :edit] do
+    link_to "Class Rooms", admin_school_class_rooms_path(school)
+  end
 
   controller do
     def permitted_params

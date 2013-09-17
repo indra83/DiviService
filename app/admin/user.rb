@@ -1,6 +1,5 @@
 ActiveAdmin.register User do
-  menu parent: 'User', priority: 3
-
+  belongs_to :class_room, parent_class: ClassRoom
 
   form do |f|
     f.inputs "Security" do
@@ -32,7 +31,7 @@ ActiveAdmin.register User do
 	end
 
   index as: :grid, default: true do |user|
-  	link_to admin_user_path user do
+  	link_to resource_path user do
   		image = filepicker_image_tag user.pic, user.profile_pic_opts
   		name = content_tag :h3, user.name
 
