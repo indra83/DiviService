@@ -1,5 +1,5 @@
 ActiveAdmin.register Cdn do
-  menu parent: 'Content', priority: 7
+  belongs_to :school, parent_class: School
 
   controller do
     def permitted_params

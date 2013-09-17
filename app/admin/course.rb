@@ -1,6 +1,9 @@
 ActiveAdmin.register Course do
-  menu parent: 'Content', priority: 4
+  menu priority: 4
 
+  action_item only: [:show, :edit] do
+    link_to "Books", admin_course_books_path(course)
+  end
 
   controller do
     def permitted_params

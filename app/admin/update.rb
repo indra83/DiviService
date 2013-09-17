@@ -1,5 +1,5 @@
 ActiveAdmin.register Update do
-  menu parent: 'Content', priority: 6
+  belongs_to :book, parent_class: Book
 
   form do |f|
     filepicker_js_include_tag
