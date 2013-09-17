@@ -7,6 +7,7 @@ class Lecture < ActiveRecord::Base
   validates :class_room_id, presence: true
 
   before_validation :set_status
+  before_validation :set_start_time
 
   scope :live, where(status: 'live')
 
@@ -16,16 +17,32 @@ class Lecture < ActiveRecord::Base
 		"lecture_#{id}"
 	end
 
-  def start_time
-    read_attribute(:start_time) || created_at || Time.now
+  def computed_status
+    start_time < 1.hour.ago ? 'expired' : status
   end
 
-  def status
-    start_time < 1.hour.ago ? 'expired' : read_attribute(:status)
+  def start_time_stamp=(time_stamp)
+    self.start_time = Time.at time_stamp if time_stamp
+  end
+
+  def start_time_stamp
+    start_time.to_i
+  end
+
+  def live?
+    computed_status == 'live'
+  end
+
+  def expire!
+    update_attributes status: 'expired'
   end
 
 private
   def set_status
     self.status ||= 'live'
+  end
+
+  def set_start_time
+    self.start_time ||= Time.now
   end
 end

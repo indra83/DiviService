@@ -5,7 +5,7 @@ describe "Lecture" do
     let(:class_room) { create :class_room }
     let(:teacher) { create :user, role: 'teacher', class_rooms: [class_room] }
     let(:lecture) { build :lecture, teacher: teacher, class_room: class_room }
-    let(:json_payload) { %({"token": "#{teacher.token}", "classId": "#{class_room.id}", "name": "#{lecture.name}","startTime": "#{lecture.start_time.to_i}"}) }
+    let(:json_payload) { %({"token": "#{teacher.token}", "classId": "#{class_room.id}", "name": "#{lecture.name}","startTime": "#{lecture.start_time_stamp}"}) }
     let(:pattern) do
       {
         id: :lecture_id,
@@ -14,8 +14,8 @@ describe "Lecture" do
         teacherId: teacher.id.to_s,
         teacherName: teacher.name,
         channel: /^lecture_\d+$/,
-        startTime: lecture.start_time.to_i
-      }
+        startTime: /^\d{10}$/
+      }.ignore_extra_keys!
     end
 
     it "should be successfully created by a teacher" do

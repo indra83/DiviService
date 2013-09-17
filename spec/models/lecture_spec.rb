@@ -6,6 +6,6 @@ describe Lecture do
 
   it "should autoexpire in one hour" do
     lecture.start_time = 2.hours.ago
-    lecture.status.should == 'expired'
+    lecture.computed_status.should == 'expired'
   end
 end

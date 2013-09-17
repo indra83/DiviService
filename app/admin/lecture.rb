@@ -4,11 +4,10 @@ ActiveAdmin.register Lecture do
     column :id
     column :name
     column :teacher
-    column :status
     column :class_room
+    column :status
     column :start_time
-    column :created_at
-    column :updated_at
+    column :computed_status
   end
 end
 
