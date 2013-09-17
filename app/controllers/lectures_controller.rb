@@ -3,9 +3,7 @@ class LecturesController < ApplicationController
   before_filter :authenticate_user
 
   def index
-
     @lectures = @current_user.lectures.live
-                                      .select &:live? # Remove this when cron job or other means is introduced to persist autoexpiry
   end
 
   def create

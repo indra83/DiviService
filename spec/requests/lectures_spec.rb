@@ -5,7 +5,7 @@ describe "Lecture" do
     let(:class_room) { create :class_room }
     let(:teacher) { create :user, role: 'teacher', class_rooms: [class_room] }
     let(:lecture) { build :lecture, teacher: teacher, class_room: class_room }
-    let(:json_payload) { %({"token": "#{teacher.token}", "classId": "#{class_room.id}", "name": "#{lecture.name}","startTime": "#{lecture.start_time_stamp}"}) }
+    let(:json_payload) { %({"token": "#{teacher.token}", "classId": "#{class_room.id}", "name": "#{lecture.name}" }) }
     let(:pattern) do
       {
         id: :lecture_id,
@@ -21,6 +21,22 @@ describe "Lecture" do
     it "should be successfully created by a teacher" do
       post create_lectures_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern
+    end
+
+    it "should not allow teacher to create two live lectures simultaneously" do
+      error_pattern = {
+        error: {
+          code: 422,
+          errors: {
+            teacher: :teacher_errors,
+            class_room: :class_room_errors
+          }.ignore_extra_keys!
+        }.ignore_extra_keys!
+      }.ignore_extra_keys!
+
+      lecture.save
+      post create_lectures_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
+      response.body.should match_json_expression error_pattern
     end
 
     it "should list out all the lectures of a teacher" do

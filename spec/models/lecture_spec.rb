@@ -8,4 +8,10 @@ describe Lecture do
     lecture.start_time = 2.hours.ago
     lecture.computed_status.should == 'expired'
   end
+
+  it "should check if any lectures are live" do
+    lecture.save
+    Lecture.scoped.any_live?.should be_true
+  end
+
 end
