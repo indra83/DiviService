@@ -11,7 +11,7 @@ describe Lecture do
 
   it "should check if any lectures are live" do
     lecture.save
-    Lecture.scoped.any_live?.should be_true
+    Lecture.all.any_live?.should be_true
   end
 
 end

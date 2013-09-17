@@ -11,16 +11,16 @@ describe "Updates" do
 
     subject(:pattern) do
       {
-        updates: updates.map do |update|
+        updates: [
           {
             courseId:     course.id.to_s,
             bookId:       book.id.to_s,
-            version:      update.version.to_s,
-            description:  update.description,
-            details:      update.details,
-            webUrl:     update.file
+            version:      updates[2].version.to_s,
+            description:  updates[2].description,
+            details:      updates[2].details,
+            webUrl:       updates[2].file
           }.ignore_extra_keys!
-        end
+        ]
       }.ignore_extra_keys!
     end
 
@@ -50,8 +50,7 @@ describe "Updates" do
     it "should return staging updates for teachers" do
       staging_update = create :update, book: book, version: 4, status: 'staging'
       user.update_attributes role: 'teacher'
-      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression({
+      pattern = {
         updates: [
           {
             courseId:     course.id.to_s,
@@ -62,8 +61,11 @@ describe "Updates" do
             webUrl:       staging_update.file
           }.ignore_extra_keys!
         ]
-      }.ignore_extra_keys!)
+      }.ignore_extra_keys!
+      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
+      response.body.should match_json_expression pattern
     end
+
     it "should return staging updates for teachers" do
       staging_update = create :update, book: book, version: 4, status: 'staging'
       user.update_attributes role: 'student'

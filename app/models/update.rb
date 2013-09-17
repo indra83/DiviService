@@ -16,4 +16,6 @@ class Update < ActiveRecord::Base
     where(status: ALLOWED_CATEGORIES_FOR_ROLE[role]).
     where("version > ?", version)
   }
+
+  scope :latest, -> { order('version DESC').limit(1) }
 end

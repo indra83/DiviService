@@ -7,7 +7,7 @@ class UpdatesController < ApplicationController
     @updates = current_user.books.map { |book|
         version_def_for_book = params["versions"] && params["versions"].select {|version| version["bookId"] == book.id.to_s }.first
         present_version = version_def_for_book && version_def_for_book["version"].to_i || 0
-        book.updates.recent_for(present_version, @current_user.role)
+        book.updates.recent_for(present_version, @current_user.role).latest
       }.flatten
   end
 end
