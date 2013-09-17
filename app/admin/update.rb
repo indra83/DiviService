@@ -11,9 +11,13 @@ ActiveAdmin.register Update do
       f.input :status, collection: %w[testing staging live], include_blank: false
       f.input :strategy, collection: %w[replace], include_blank: false
     end
-    f.inputs "File Upload" do
-      f.input :file, as: :filepicker
+
+    unless resource.persisted?
+      f.inputs "File Upload" do
+        f.input :file, as: :filepicker
+      end
     end
+
     f.actions
   end
 
