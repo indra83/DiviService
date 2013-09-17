@@ -5,8 +5,9 @@ class Lecture < ActiveRecord::Base
 
   validates :teacher_id, presence: true
   validates :class_room_id, presence: true
-  validate :teacher_has_no_other_live_lectures
-  validate :class_room_has_no_other_live_lectures
+
+  validate :teacher_has_no_other_live_lectures, on: :create
+  validate :class_room_has_no_other_live_lectures, on: :create
 
   before_validation :set_status
   before_validation :set_start_time
