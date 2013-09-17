@@ -1,4 +1,5 @@
 ActiveAdmin.register Update do
+  menu parent: 'Content', priority: 6
 
   form do |f|
     filepicker_js_include_tag

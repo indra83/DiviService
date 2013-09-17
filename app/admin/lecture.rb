@@ -1,4 +1,6 @@
 ActiveAdmin.register Lecture do
+  menu priority: 8
+
   actions :index
   index do
     column :id

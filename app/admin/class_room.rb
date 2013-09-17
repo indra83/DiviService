@@ -1,4 +1,5 @@
 ActiveAdmin.register ClassRoom do
+  menu parent: 'User', priority: 2
 
   form do |f|
     f.inputs "Class Room Detials" do

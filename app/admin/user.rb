@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  menu parent: 'User', priority: 3
+
 
   form do |f|
     f.inputs "Security" do

@@ -1,4 +1,5 @@
 ActiveAdmin.register Course do
+  menu parent: 'Content', priority: 4
 
 
   controller do
