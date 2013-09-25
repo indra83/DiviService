@@ -16,3 +16,4 @@ json.class_rooms @current_user.class_rooms do |class_room|
     json.name course.name
   end
 end
+json.metadata   @current_user.metadata

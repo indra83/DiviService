@@ -14,6 +14,10 @@ ActiveAdmin.register User do
 			f.input :pic, as: :filepicker
 		end
 
+    f.inputs "extra" do
+      f.input :metadata
+    end
+
     f.actions
   end
 
