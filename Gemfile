@@ -6,10 +6,10 @@ gem 'rails', '4.0.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
+gem 'activeadmin',         github: 'gregbell/active_admin' #, branch: 'rails4'
   gem 'devise',              github: 'plataformatec/devise'
   gem 'formtastic',          github: 'justinfrench/formtastic'
-  #gem 'ransack',             github: 'ernie/ransack', branch: 'rails-4'
+  #gem 'ransack'#,             github: 'ernie/ransack', branch: 'rails-4'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'filepicker-rails'
