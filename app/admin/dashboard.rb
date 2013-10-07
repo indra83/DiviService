@@ -29,5 +29,26 @@ ActiveAdmin.register_page "Dashboard" do
     #     end
     #   end
     # end
+
+    panel "Recently updated content" do
+      table_for Version.order('id desc').limit(20) do # Use PaperTrail::Version if this throws an error
+        column :id
+        column "Item" do |v|
+          item = v.item || v.reify || Version.where(item_id: v.item_id).where("created_at > ?", v.created_at).order('created_at ASC').first.reify
+          item.try(:name) || item
+        end
+        # column "Item" do |v| link_to v.item, [:admin, v.item] end # Uncomment to display as link
+        column "Type" do |v|
+          v.item_type.underscore.humanize
+        end
+        column :event
+        column "Modified at" do |v|
+          v.created_at.to_s :long
+        end
+        column "Admin" do |v|
+          link_to AdminUser.find(v.whodunnit).email, admin_admin_user_path(AdminUser.find(v.whodunnit))
+        end
+      end
+    end
   end # content
 end

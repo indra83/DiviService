@@ -1,4 +1,6 @@
 class Instruction < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :lecture
 
 	validates :payload, presence: true

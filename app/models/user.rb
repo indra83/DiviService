@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_paper_trail
+
   has_secure_password
   validate :name, presence: true,
                   uniqueness: true
@@ -15,6 +17,12 @@ class User < ActiveRecord::Base
 
   def profile_pic_opts
     PROFILE_PIC_OPTS
+  end
+
+  include Rails.application.routes.url_helpers
+
+  def admin_path
+    admin_class_room_user_path class_room, self
   end
 protected
 

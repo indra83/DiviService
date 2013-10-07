@@ -12,4 +12,7 @@ protected
     render json: {error: 'Authentication Failed'}, status: 404 unless current_user
   end
 
+  def user_for_paper_trail
+    admin_user_signed_in? ? current_admin_user : 'Unknown user'
+  end
 end

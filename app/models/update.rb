@@ -1,4 +1,6 @@
 class Update < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :book
 
   validates :book_id, presence: true
@@ -18,4 +20,10 @@ class Update < ActiveRecord::Base
   }
 
   scope :latest, -> { order('version DESC').limit(1) }
+
+  include Rails.application.routes.url_helpers
+
+  def admin_path
+    admin_book_update_path book, self
+  end
 end

@@ -1,4 +1,6 @@
 class ClassRoom < ActiveRecord::Base
+  has_paper_trail
+
   belongs_to :school
   has_and_belongs_to_many :courses
   has_and_belongs_to_many :users
@@ -14,5 +16,11 @@ class ClassRoom < ActiveRecord::Base
 
   def name
     "#{standard} #{section} - #{school_name}"
+  end
+
+  include Rails.application.routes.url_helpers
+
+  def admin_path
+    admin_school_class_room_path school, self
   end
 end
