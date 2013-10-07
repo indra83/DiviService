@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
   belongs_to :course
-  has_many :updates
+  has_many :updates, dependent: :destroy
 
   validates :course_id, presence: true
 
