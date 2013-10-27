@@ -14,6 +14,8 @@ DiviService::Application.routes.draw do
     post "getLectureMembers", to: 'lectures#members',    as: :lecture_members
     post "sendInstruction",   to: 'instructions#create', as: :create_instructions
     post "getInstructions",   to: 'instructions#index',  as: :instructions
+    post "syncUp",            to: 'sync#create',         as: :sync_up
+    post "syncDown",          to: 'sync#index',          as: :sync_down
   end
 
   root to: 'admin/dashboard#index'

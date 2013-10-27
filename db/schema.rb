@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131007081935) do
+ActiveRecord::Schema.define(version: 20131027184927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,6 +126,22 @@ ActiveRecord::Schema.define(version: 20131007081935) do
     t.datetime "updated_at"
     t.string   "location"
   end
+
+  create_table "sync_items", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.integer  "assessment_id"
+    t.integer  "question_id"
+    t.integer  "points"
+    t.integer  "attempts"
+    t.string   "data"
+    t.datetime "last_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sync_items", ["book_id"], name: "index_sync_items_on_book_id", using: :btree
+  add_index "sync_items", ["user_id"], name: "index_sync_items_on_user_id", using: :btree
 
   create_table "updates", force: true do |t|
     t.string   "description"
