@@ -3,10 +3,8 @@ class SyncController < ApplicationController
   before_filter :authenticate_user
 
   def index
-		#@lecture = Lecture.find params[:lectureId]
-		#render json: {error: {code: 401, message: "Unauthorized"} } unless @lecture && current_user.class_rooms.include?(@lecture.class_room)
-
-    #@instructions = @lecture.instructions.where("created_at > ?", Time.at(params[:since].to_i))
+		@items = current_user.sync_items
+		@items = @items.where('updated_at > ?', Time.at(params[:last_sync_time].to_i)) if params[:last_sync_time]
   end
 
 	def create

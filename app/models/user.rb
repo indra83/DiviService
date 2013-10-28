@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_paper_trail
 
+	has_many :sync_items
+
   has_secure_password
   validate :name, presence: true,
                   uniqueness: true
