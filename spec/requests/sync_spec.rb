@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'SyncItems' do
-  describe 'POST /sync_up' do
+  describe 'POST /syncUp' do
     let(:user) { create :user }
     let(:book) { create :book }
     let(:sync_items) { build_list :sync_item, 3, user: user, book: book }
@@ -35,7 +35,7 @@ describe 'SyncItems' do
     end
   end
 
-  describe 'POST /sync_down' do
+  describe 'POST /syncDown' do
     let(:user) { create :user }
     let(:sync_items) { create_list :sync_item, 3, user: user, updated_at: Time.now }
     let(:json_payload) { %({"token": "#{user.token}", "last_sync_time": "#{1.hour.ago.to_i}" }) }
