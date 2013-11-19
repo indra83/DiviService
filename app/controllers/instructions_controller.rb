@@ -3,14 +3,14 @@ class InstructionsController < ApplicationController
   before_filter :authenticate_user
 
   def index
-		@lecture = Lecture.find params[:lectureId]
+		@lecture = Lecture.find params[:lecture_id]
 		render json: {error: {code: 401, message: "Unauthorized"} } unless @lecture && current_user.class_rooms.include?(@lecture.class_room)
 
     @instructions = @lecture.instructions.where("created_at > ?", Time.at(params[:since].to_i))
   end
 
 	def create
-		@lecture = Lecture.find params[:lectureId]
+		@lecture = Lecture.find params[:lecture_id]
 		render json: {error: {code: 401, message: "Unauthorized"} } unless current_user.teacher? && @lecture && @lecture.teacher == current_user
 		@instruction = @lecture.instructions.create payload: params[:instruction]
 

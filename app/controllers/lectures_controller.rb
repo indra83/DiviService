@@ -7,13 +7,13 @@ class LecturesController < ApplicationController
   end
 
   def create
-    @lecture = Lecture.create teacher: @current_user, class_room_id: params[:classId], name: params[:name], start_time_stamp: param_start_time
+    @lecture = Lecture.create teacher: @current_user, class_room_id: params[:class_id], name: params[:name], start_time_stamp: param_start_time
 
     render json: {error: {code:422, message: "The lecture can not be created due to validation errors", errors: @lecture.errors} }  if @lecture.errors.present?
   end
 
   def destroy
-    @lecture = Lecture.find params[:lectureId]
+    @lecture = Lecture.find params[:lecture_id]
     render json: {error: {code: 401, message: "Unauthorized"} } unless current_user.teacher? && @lecture && @lecture.teacher == current_user
     @lecture.update_attributes status: 'expired'
 
@@ -24,7 +24,7 @@ class LecturesController < ApplicationController
   end
 
   def members
-    @lecture = Lecture.find params[:lectureId]
+    @lecture = Lecture.find params[:lecture_id]
     render json: {error: {code: 401, message: "Unauthorized"} } unless current_user.teacher? && @lecture && @lecture.teacher == current_user
 
     @members = @lecture.members
@@ -33,6 +33,6 @@ class LecturesController < ApplicationController
 private
 
   def param_start_time
-    params[:startTime].to_i if params[:startTime]
+    params[:start_time].to_i if params[:start_time]
   end
 end

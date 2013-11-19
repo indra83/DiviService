@@ -6,7 +6,7 @@ FactoryGirl.define do
     book
     assessment_id 1
     sequence(:question_id)
-    points 1
+    total_points 1
     attempts 1
     data ""
     last_updated_at "2013-10-28 00:19:27"
