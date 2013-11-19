@@ -19,4 +19,6 @@ DiviService::Application.routes.draw do
   end
 
   root to: 'admin/dashboard#index'
+
+  post "/temp/dashboard", to: 'sync#dashboard', as: :dashboard
 end
