@@ -15,7 +15,7 @@ describe "Updates" do
           {
             courseId:     course.id.to_s,
             bookId:       book.id.to_s,
-            bookVersion: updates[2].book_version.to_s,
+            bookVersion: updates[2].book_version,
             description:  updates[2].description,
             details:      updates[2].details,
             webUrl:       updates[2].file
@@ -38,7 +38,7 @@ describe "Updates" do
           {
             courseId:     course.id.to_s,
             bookId:       book.id.to_s,
-            bookVersion: updates[2].book_version.to_s,
+            bookVersion: updates[2].book_version,
             description:  updates[2].description,
             details:      updates[2].details,
             webUrl:       updates[2].file
@@ -55,7 +55,7 @@ describe "Updates" do
           {
             courseId:     course.id.to_s,
             bookId:       book.id.to_s,
-            bookVersion: staging_update.book_version.to_s,
+            bookVersion: staging_update.book_version,
             description:  staging_update.description,
             details:      staging_update.details,
             webUrl:       staging_update.file
