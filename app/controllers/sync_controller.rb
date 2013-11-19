@@ -10,7 +10,7 @@ class SyncController < ApplicationController
 	def create
     @items_status = params[:sync_items].map do |item_params|
       search_params = item_params.extract! :user_id, :book_id, :assessment_id, :question_id
-      value_params = item_params.extract! :points, :attempts, :data, :last_updated_at
+      value_params = item_params.extract! :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :last_updated_at
 
       item = SyncItem.where(search_params).first_or_initialize
       existing = item.persisted?
