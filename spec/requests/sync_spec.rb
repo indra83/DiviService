@@ -47,7 +47,7 @@ describe 'SyncItems' do
             bookId:         item.book_id.to_s,
             assessmentId:   item.assessment_id.to_s,
             questionId:     item.question_id.to_s,
-            total_points:   item.total_points.to_s,
+            totalPoints:   item.total_points.to_s,
             attempts:       item.attempts.to_s,
             data:           item.data,
             lastUpdatedAt: item.last_updated_at.to_i.to_s

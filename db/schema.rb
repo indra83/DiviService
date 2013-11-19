@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119131658) do
+ActiveRecord::Schema.define(version: 20131119203305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20131119131658) do
 
   create_table "updates", force: true do |t|
     t.string   "description"
-    t.decimal  "version",     precision: 5, scale: 2
+    t.decimal  "book_version", precision: 5, scale: 2
     t.string   "details"
     t.string   "file"
     t.integer  "book_id"

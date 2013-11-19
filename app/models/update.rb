@@ -6,20 +6,20 @@ class Update < ActiveRecord::Base
   validates :book_id, presence: true
   validates :status, presence: true
   validates :strategy, presence: true
-  validates :version, presence: true,
-                      numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+  validates :book_version,  presence: true,
+                            numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
   ALLOWED_CATEGORIES_FOR_ROLE = {
     "student" => %w[live],
     "teacher" => %w[live staging]
   }
 
-  scope :recent_for, ->(version, role) {
+  scope :recent_for, ->(book_version, role) {
     where(status: ALLOWED_CATEGORIES_FOR_ROLE[role]).
-    where("version > ?", version)
+    where("book_version > ?", book_version)
   }
 
-  scope :latest, -> { order('version DESC').limit(1) }
+  scope :latest, -> { order('book_version DESC').limit(1) }
 
   include Rails.application.routes.url_helpers
 
