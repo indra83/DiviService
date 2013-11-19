@@ -17,3 +17,4 @@ json.class_rooms @current_user.class_rooms do |class_room|
   end
 end
 json.metadata   @current_user.metadata
+json.time       Time.now.to_i
