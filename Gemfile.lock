@@ -165,6 +165,10 @@ GEM
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
       rb-kqueue (>= 0.2)
+    localtunnel (0.3)
+      json (>= 1.2.4)
+      net-ssh (>= 2.0.22)
+      net-ssh-gateway (>= 1.0.1)
     lumberjack (1.0.4)
     macaddr (1.6.1)
       systemu (~> 2.5.0)
@@ -175,6 +179,9 @@ GEM
     mime-types (1.25)
     minitest (4.7.5)
     multi_json (1.8.0)
+    net-ssh (2.7.0)
+    net-ssh-gateway (1.2.0)
+      net-ssh (>= 2.6.5)
     orm_adapter (0.4.0)
     paper_trail (3.0.0.beta1)
       activerecord (>= 3.0, < 5.0)
@@ -308,6 +315,7 @@ DEPENDENCIES
   jquery-rails
   json_expressions
   libnotify
+  localtunnel
   paper_trail (>= 3.0.0.beta1)
   pg
   pry-rails

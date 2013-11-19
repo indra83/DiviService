@@ -26,13 +26,13 @@ class SyncController < ApplicationController
 	end
 
   def dashboard
-    @sync_items = SyncItem.where(
+    sync_items = SyncItem.where(
       assessment_id: params[:assessment_id],
       book_id: params[:book_id],
       user_id: ClassRoom.find(params[:class_id]).users.map(&:id)
     )
 
-    @students_points = @sync_items.group_by &:user_id
-    @questions_points = @sync_items.group_by &:question_id
+    @students_points = sync_items.group_by &:user_id
+    @questions_points = sync_items.group_by &:question_id
   end
 end

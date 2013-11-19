@@ -43,6 +43,7 @@ group :development, :test do
   gem 'guard-unicorn'
   gem 'hirb'
   gem 'json_expressions'
+  gem 'localtunnel'
   gem 'pry-rails'
   gem 'rspec-rails'
 end
