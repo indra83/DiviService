@@ -34,5 +34,8 @@ class SyncController < ApplicationController
 
     @students_points = sync_items.group_by &:user_id
     @questions_points = sync_items.group_by &:question_id
+
+    @scores_by_student = DashboardScoreCalculator.new sync_items, :user_id
+    @scores_by_question = DashboardScoreCalculator.new sync_items, :question_id
   end
 end
