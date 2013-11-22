@@ -24,18 +24,4 @@ class SyncController < ApplicationController
 
     render json: {last_sync_time: Time.now.to_i.to_s, status: @items_status}
 	end
-
-  def dashboard
-    sync_items = SyncItem.where(
-      assessment_id: params[:assessment_id],
-      book_id: params[:book_id],
-      user_id: ClassRoom.find(params[:class_id]).users.map(&:id)
-    )
-
-    @students_points = sync_items.group_by &:user_id
-    @questions_points = sync_items.group_by &:question_id
-
-    @scores_by_student = DashboardScoreCalculator.new sync_items, :user_id
-    @scores_by_question = DashboardScoreCalculator.new sync_items, :question_id
-  end
 end

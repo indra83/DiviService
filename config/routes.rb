@@ -16,9 +16,8 @@ DiviService::Application.routes.draw do
     post "getInstructions",   to: 'instructions#index',  as: :instructions
     post "syncUp",            to: 'sync#create',         as: :sync_up
     post "syncDown",          to: 'sync#index',          as: :sync_down
+    post "dashboardScores",   to: 'dashboard#score',     as: :dashboard_score
   end
 
   root to: 'admin/dashboard#index'
-
-  post "/temp/dashboard", to: 'sync#dashboard', as: :dashboard
 end
