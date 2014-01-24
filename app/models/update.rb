@@ -16,10 +16,16 @@ class Update < ActiveRecord::Base
 
   scope :recent_for, ->(book_version, role) {
     where(status: ALLOWED_CATEGORIES_FOR_ROLE[role]).
-    where("book_version > ?", book_version)
+    where("book_version >= ?", book_version)
   }
 
-  scope :latest, -> { order('book_version DESC').limit(1) }
+  scope :latest, -> {
+    order('book_version DESC')
+  }
+
+  scope :rewrites, -> {
+    where strategy: :replace
+  }
 
   include Rails.application.routes.url_helpers
 

@@ -51,3 +51,7 @@ end
 group :production do # Heroku
   gem 'rails_12factor'
 end
+
+group :development do
+  gem 'heroku_san'
+end

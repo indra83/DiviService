@@ -9,7 +9,7 @@ ActiveAdmin.register Update do
       f.input :description
       f.input :details
       f.input :status, collection: %w[testing staging live], include_blank: false
-      f.input :strategy, collection: %w[replace], include_blank: false
+      f.input :strategy, collection: %w[replace patch], include_blank: false
     end
 
     unless resource.persisted?

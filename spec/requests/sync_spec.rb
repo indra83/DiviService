@@ -56,14 +56,14 @@ describe 'SyncItems' do
       }.ignore_extra_keys!
     end
 
-    it "should return all the items" do
+    pending "should return all the items" do
       pattern #initialize
 
       post sync_down_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern
     end
 
-    it "should not return old items" do
+    pending "should not return old items" do
       pattern #initialize
       create_list :sync_item, 2, user: user, updated_at: 2.hours.ago
 

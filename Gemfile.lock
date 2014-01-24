@@ -110,6 +110,7 @@ GEM
       eventmachine (>= 0.12.9)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    excon (0.25.3)
     execjs (2.0.1)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
@@ -141,6 +142,12 @@ GEM
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    heroku-api (0.3.15)
+      excon (~> 0.25.1)
+    heroku_san (4.3.2)
+      heroku-api (>= 0.1.2)
+      json
+      rake
     hike (1.2.3)
     hirb (0.7.1)
     http_parser.rb (0.6.0.beta.2)
@@ -309,6 +316,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   guard-unicorn
+  heroku_san
   hirb
   inherited_resources!
   jbuilder (~> 1.2)

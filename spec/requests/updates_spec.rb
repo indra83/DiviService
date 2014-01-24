@@ -72,6 +72,43 @@ describe "Updates" do
       post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression({ updates: [] }.ignore_extra_keys!)
     end
+
+    context "with patches" do
+      let(:updates) { (1..5).map { |n| create :update, book: book, book_version: n, strategy: :patch } }
+
+      it "should return all recent patches" do
+        updates #create
+        post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"2"}]}), CONTENT_TYPE: 'application/json'
+        response.body.should match_json_expression({
+          updates: (3..5).map { |n|
+            {
+              bookVersion:  n
+            }.ignore_extra_keys!
+          }
+        }.ignore_extra_keys!)
+      end
+
+      it "should return updates later only since recent rewrite" do
+        updates[3].update_attributes! strategy: :replace #v4
+
+
+        post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"2"}]}), CONTENT_TYPE: 'application/json'
+        response.body.should match_json_expression({
+          updates: [
+            {
+              bookVersion:  5,
+              strategy: 'patch'
+            }.ignore_extra_keys!,
+            {
+              bookVersion:  4,
+              strategy: 'replace'
+            }.ignore_extra_keys!,
+
+          ]
+        }.ignore_extra_keys!)
+      end
+
+    end
   end
 end
 
