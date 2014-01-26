@@ -3,7 +3,9 @@ class Cdn < ActiveRecord::Base
 
   belongs_to :school
 
-  validates :school_id, presence: true
+  #validates :school_id, presence: true
+  validates :base_url, presence: true,
+                       length: {minimum: 10}
 
   delegate :updates, to: :school, allow_nil: true
 
