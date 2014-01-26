@@ -1,6 +1,6 @@
 json.key_format! camelize: :lower
 
-json.cdn @current_user.school.cdns.map(&:base_url)
+json.cdn @cdns
 json.updates @updates do |update|
   json.course_id      update.book.course_id.to_s
   json.book_id        update.book_id.to_s

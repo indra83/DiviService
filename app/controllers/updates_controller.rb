@@ -11,5 +11,7 @@ class UpdatesController < ApplicationController
         required_version = [(latest_rewrite && latest_rewrite.book_version || 0), present_version + 1].max
         book.updates.recent_for(required_version, @current_user.role).latest
       }.flatten
+
+    @cdns = @current_user.school.cdns.where("pinged_at >= ?", 30.minutes.ago).map(&:base_url)
   end
 end
