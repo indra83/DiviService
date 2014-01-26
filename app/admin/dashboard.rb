@@ -46,10 +46,10 @@ ActiveAdmin.register_page "Dashboard" do
           v.created_at.to_s :long
         end
         column "Admin" do |v|
-          if v.whodunnit == 'Unknown user'
-            v.whodunnit
-          else
+          begin
             link_to AdminUser.find(v.whodunnit).email, admin_admin_user_path(AdminUser.find(v.whodunnit))
+          rescue ActiveRecord::RecordNotFound
+            v.whodunnit || 'Unknown user'
           end
         end
       end
