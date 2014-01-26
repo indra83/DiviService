@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119210354) do
+ActiveRecord::Schema.define(version: 20131119232134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 20131119210354) do
   create_table "sync_items", force: true do |t|
     t.integer  "user_id"
     t.integer  "book_id"
-    t.integer  "assessment_id"
-    t.integer  "question_id"
+    t.string   "assessment_id"
+    t.string   "question_id"
     t.integer  "total_points"
     t.integer  "attempts"
     t.string   "data"
