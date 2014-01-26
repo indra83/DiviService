@@ -8,10 +8,46 @@ ActiveAdmin.register Cdn do
       params.permit!
     end
   end
+
+  index do
+    column :id
+    column :base_url
+    column :pinged_at do |cdn|
+      css_status = if cdn.pinged_at > 10.minutes.ago
+                     'ok'
+                   elsif cdn.pinged_at > 30.minutes.ago
+                     'warning'
+                   else
+                     'error'
+                   end
+      status_tag distance_of_time_in_words_to_now(cdn.pinged_at), css_status
+    end
+    column :created_at
+
+    default_actions
+  end
 end
 
 ActiveAdmin.register Cdn, as: "Orphan CDN" do
   config.sort_order = "pinged_at_desc"
+
+  index do
+    column :id
+    column :base_url
+    column :pinged_at do |cdn|
+      css_status = if cdn.pinged_at > 10.minutes.ago
+                     'ok'
+                   elsif cdn.pinged_at > 30.minutes.ago
+                     'warning'
+                   else
+                     'error'
+                   end
+      status_tag distance_of_time_in_words_to_now(cdn.pinged_at), css_status
+    end
+    column :created_at
+
+    default_actions
+  end
 
   controller do
     def collection
