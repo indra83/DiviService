@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119232134) do
+ActiveRecord::Schema.define(version: 20140126203616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20131119232134) do
     t.integer  "school_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "pinged_at"
   end
 
   add_index "cdns", ["school_id"], name: "index_cdns_on_school_id", using: :btree
