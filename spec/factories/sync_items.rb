@@ -4,8 +4,8 @@ FactoryGirl.define do
   factory :sync_item do
     user
     book
-    assessment_id 1
-    sequence(:question_id)
+    assessment_id '1'
+    sequence(:question_id, &:to_s)
     total_points 1
     attempts 1
     data ""

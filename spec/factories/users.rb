@@ -5,5 +5,6 @@ FactoryGirl.define do
     password_confirmation   "TestPass"
     class_rooms 						{ create_list :class_room, 1 }
 		role										"student"
+    sequence(:token)        { |n| "random.secret.#{Time.now.to_i}.#{n}" }
   end
 end

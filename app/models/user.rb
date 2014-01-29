@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validate :name, presence: true,
                   uniqueness: true
 
-  before_create :generate_token
+  #before_create :generate_token
 
   PROFILE_PIC_OPTS = {
     h: 140,
@@ -26,6 +26,13 @@ class User < ActiveRecord::Base
   def admin_path
     admin_class_room_user_path class_room, self
   end
+
+  def authenticate(password)
+    return false unless super
+    generate_token && save
+    return true
+  end
+
 protected
 
   def generate_token
