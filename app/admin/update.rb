@@ -6,6 +6,7 @@ ActiveAdmin.register Update do
     f.inputs "Details" do
       f.input :book, member_label: :full_name
       f.input :book_version
+      f.input :book_from_version
       f.input :description
       f.input :details
       f.input :status, collection: %w[testing staging live], include_blank: false
