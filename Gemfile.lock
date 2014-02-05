@@ -77,6 +77,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
+    airbrake (3.1.14)
+      builder
+      json
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (4.0.0)
@@ -305,6 +308,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  airbrake
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 4.0.0)
   devise!
