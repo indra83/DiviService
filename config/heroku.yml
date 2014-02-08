@@ -17,7 +17,7 @@ production:
   config:
     BUNDLE_WITHOUT: "development:test"
     GOOGLE_ANALYTICS: "UA-12345678-1"
-    ERRBIT_TOKEN: '600e99f0af40e46a999cc4db2d30c511'
+    ERRBIT_TOKEN: 'ba4df5c987e04fbf9c4caa65efeb6479'
 
 staging:
   stack: cedar
@@ -25,7 +25,7 @@ staging:
   repo: git@heroku.personal:divi-staging.git
   config: &default
     BUNDLE_WITHOUT: "development:test"
-    ERRBIT_TOKEN: 'ba4df5c987e04fbf9c4caa65efeb6479'
+    ERRBIT_TOKEN: '600e99f0af40e46a999cc4db2d30c511'
 
 # demo:
 #   app: awesomeapp-demo
