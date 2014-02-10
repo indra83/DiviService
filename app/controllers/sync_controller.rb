@@ -12,7 +12,7 @@ class SyncController < ApplicationController
       search_params = item_params.extract! :book_id, :assessment_id, :question_id
       search_params[:user_id] = current_user.id
       value_params = item_params.extract! :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :course_id
-      value_params[:last_updated_at] = Time.at item_params[:last_updated_at] if item_params[:last_updated_at]
+      value_params[:last_updated_at] = Time.at item_params[:last_updated_at].to_i if item_params[:last_updated_at]
 
 
       item = SyncItem.where(search_params).first_or_initialize
