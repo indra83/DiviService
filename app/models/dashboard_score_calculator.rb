@@ -5,7 +5,7 @@ class DashboardScoreCalculator < Array
     points_table.each do |k, v|
       push({
         :id => k,
-        group_by => k,
+        group_by.to_s.camelize(:lower) => k,
         :points => v.to_i,
         :accuracy => accuracy_table[k].to_i
       })
