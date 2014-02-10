@@ -4,7 +4,7 @@ class SyncController < ApplicationController
 
   def index
 		@items = current_user.sync_items
-		@items = @items.where('updated_at > ?', Time.at(params[:last_sync_time].to_i)) if params[:last_sync_time]
+		@items = @items.where('last_updated_at > ?', Time.at(params[:last_sync_time].to_i)) if params[:last_sync_time]
   end
 
 	def create
