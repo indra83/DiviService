@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140204122510) do
+ActiveRecord::Schema.define(version: 20140212124026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,6 +147,18 @@ ActiveRecord::Schema.define(version: 20140204122510) do
 
   add_index "sync_items", ["book_id"], name: "index_sync_items_on_book_id", using: :btree
   add_index "sync_items", ["user_id"], name: "index_sync_items_on_user_id", using: :btree
+
+  create_table "tablets", force: true do |t|
+    t.string   "device_id"
+    t.string   "device_tag"
+    t.string   "token"
+    t.integer  "user_id"
+    t.json     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tablets", ["user_id"], name: "index_tablets_on_user_id", using: :btree
 
   create_table "updates", force: true do |t|
     t.string   "description"
