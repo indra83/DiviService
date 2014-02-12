@@ -7,13 +7,14 @@ class Cdn < ActiveRecord::Base
   validates :base_url, presence: true,
                        length: {minimum: 10}
 
-  delegate :updates, to: :school, allow_nil: true
-
-
   include Rails.application.routes.url_helpers
 
   def admin_path
     admin_school_cdn_path school, self
   end
 
+  def updates
+    return [] unless school
+    school.updates
+  end
 end
