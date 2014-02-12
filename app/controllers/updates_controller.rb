@@ -3,9 +3,9 @@ class UpdatesController < ApplicationController
   before_filter :authenticate_user
 
   def index
-    if params[:tablet]
-      @tablet = Tablet.where(device_id: params[:tablet].delete(:device_id)).first_or_initialize
-      @tablet.update_attributes params[:tablet]
+    if params[:device_id]
+      @tablet = Tablet.where(device_id: params.delete(:device_id)).first_or_initialize
+      @tablet.update_attributes params
     end
 
     @class_rooms = current_user.class_rooms
