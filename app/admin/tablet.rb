@@ -5,6 +5,7 @@ ActiveAdmin.register Tablet do
     column :id
     column :device_id
     column :device_tag
+    column :battery_level
     column :token
     column :user
   end
