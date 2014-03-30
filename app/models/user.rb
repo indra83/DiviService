@@ -1,13 +1,18 @@
 class User < ActiveRecord::Base
   has_paper_trail
 
-	has_many :sync_items
+	has_many :sync_items, dependent: :destroy
+  has_many :commands, dependent: :destroy
+  has_one :tablet
 
   has_secure_password
   validate :name, presence: true,
                   uniqueness: true
 
   #before_create :generate_token
+
+  scope :students, where(role: :student)
+  scope :teachers, where(role: :teacher)
 
   PROFILE_PIC_OPTS = {
     h: 140,

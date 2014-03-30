@@ -17,6 +17,7 @@ DiviService::Application.routes.draw do
     post "syncUp",            to: 'sync#create',         as: :sync_up
     post "syncDown",          to: 'sync#index',          as: :sync_down
     post "dashboardScores",   to: 'dashboard#score',     as: :dashboard_score
+    post "tabCheckIn",        to: 'tablets#create',      as: :tab_check_in
   end
 
   root to: 'admin/dashboard#index'

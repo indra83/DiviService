@@ -3,8 +3,11 @@ class SyncController < ApplicationController
   before_filter :authenticate_user
 
   def index
-		@items = current_user.sync_items
-		@items = @items.where('last_updated_at > ?', Time.at(params[:last_sync_time].to_i)) if params[:last_sync_time]
+    @items = []
+    @commands = []
+
+	  @items = current_user.sync_items.where('last_updated_at > ?', Time.at(params[:last_sync_time][:attempts].to_i)) if params[:last_sync_time][:attempts]
+	  @commands = current_user.commands.where('updated_at > ?', Time.at(params[:last_sync_time][:commands].to_i)) if params[:last_sync_time][:commands]
   end
 
 	def create

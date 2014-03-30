@@ -93,6 +93,29 @@ ActiveRecord::Schema.define(version: 20140226044810) do
   add_index "class_rooms_users", ["class_room_id"], name: "index_class_rooms_users_on_class_room_id", using: :btree
   add_index "class_rooms_users", ["user_id"], name: "index_class_rooms_users_on_user_id", using: :btree
 
+  create_table "commands", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "class_room_id"
+    t.integer  "teacher_id"
+    t.integer  "course_id"
+    t.integer  "book_id"
+    t.string   "item_code"
+    t.string   "item_category"
+    t.string   "category"
+    t.string   "status"
+    t.json     "data"
+    t.datetime "applied_at"
+    t.datetime "ends_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "commands", ["book_id"], name: "index_commands_on_book_id", using: :btree
+  add_index "commands", ["class_room_id"], name: "index_commands_on_class_room_id", using: :btree
+  add_index "commands", ["course_id"], name: "index_commands_on_course_id", using: :btree
+  add_index "commands", ["teacher_id"], name: "index_commands_on_teacher_id", using: :btree
+  add_index "commands", ["user_id"], name: "index_commands_on_user_id", using: :btree
+
   create_table "courses", force: true do |t|
     t.string   "name"
     t.datetime "created_at"

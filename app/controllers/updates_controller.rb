@@ -3,6 +3,11 @@ class UpdatesController < ApplicationController
   before_filter :authenticate_user
 
   def index
+    if params[:device_id]
+      @tablet = Tablet.where(device_id: params.delete(:device_id)).first_or_initialize
+      @tablet.update_attributes params
+    end
+
     @class_rooms = current_user.class_rooms
     @updates = current_user.books.map { |book|
         version_def_for_book = params["versions"] && params["versions"].select {|version| version["book_id"] == book.id.to_s }.first
