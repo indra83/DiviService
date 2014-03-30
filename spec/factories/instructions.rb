@@ -3,6 +3,6 @@
 FactoryGirl.define do
   factory :instruction do
     lecture nil
-    payload "MyString"
+    payload '{"myKey": "myVal"}'
   end
 end

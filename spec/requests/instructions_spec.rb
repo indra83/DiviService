@@ -17,7 +17,7 @@ describe "Instructions" do
           {
             id: instruction.id.to_s,
             timeStamp: instruction.created_at.to_i.to_s,
-            data: instruction.payload
+            data: instruction.payload.to_s
           }
         }
       }
