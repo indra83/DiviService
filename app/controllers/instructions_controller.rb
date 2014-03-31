@@ -16,12 +16,9 @@ class InstructionsController < ApplicationController
 
     render json: {error: {code:422, message: "The instruction can not be created due to validation errors", errors: @instruction.errors} }  if @instruction.errors.present?
 
-    @commands = @lecture.class_room.users.students.map do |student|
-      student.commands.create params[:command]
-    end
+    @command = @lecture.class_room.commands.create params[:command]
 
-    errors = @commands.select {|c| c.errors.present?}
-    render json: {error: {code:422, message: "Some commands can not be created due to validation errors", errors: errors} } if errors.present?
+    render json: {error: {code:422, message: "Some commands can not be created due to validation errors", errors: @command.errors} } if @command.errors.present?
 
   end
 end

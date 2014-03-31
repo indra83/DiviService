@@ -7,6 +7,7 @@ class ClassRoom < ActiveRecord::Base
   has_many :lectures, dependent: :destroy
 	has_many :books, through: :courses
 	has_many :updates, through: :courses
+  has_many :commands, dependent: :destroy
 
   validates :school_id, presence: true
 
