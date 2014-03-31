@@ -6,7 +6,7 @@ class SyncController < ApplicationController
     @items = []
     @commands = []
 
-	  @items = current_user.attempts.where(last_updated_at: (Time.at(params[:last_sync_time][:attempts].to_i..Time.now))) if params[:last_sync_time][:attempts]
+	  @items = current_user.attempts.where(last_updated_at: (Time.at(params[:last_sync_time][:attempts].to_i)..Time.now)) if params[:last_sync_time][:attempts]
 	  @commands = current_user.commands.where(updated_at:(Time.at(params[:last_sync_time][:commands].to_i)..Time.now)) if params[:last_sync_time][:commands]
   end
 
