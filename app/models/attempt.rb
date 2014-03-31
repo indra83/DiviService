@@ -1,4 +1,4 @@
-class SyncItem < ActiveRecord::Base
+class Attempt < ActiveRecord::Base
   belongs_to :user
   belongs_to :book
 end

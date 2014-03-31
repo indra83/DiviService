@@ -6,19 +6,19 @@ class SyncController < ApplicationController
     @items = []
     @commands = []
 
-	  @items = current_user.sync_items.where('last_updated_at > ?', Time.at(params[:last_sync_time][:attempts].to_i)) if params[:last_sync_time][:attempts]
+	  @items = current_user.attempts.where('last_updated_at > ?', Time.at(params[:last_sync_time][:attempts].to_i)) if params[:last_sync_time][:attempts]
 	  @commands = current_user.commands.where('updated_at > ?', Time.at(params[:last_sync_time][:commands].to_i)) if params[:last_sync_time][:commands]
   end
 
 	def create
-    @items_status = params[:sync_items].map do |item_params|
+    @items_status = params[:attempts].map do |item_params|
       search_params = item_params.extract! :book_id, :assessment_id, :question_id
       search_params[:user_id] = current_user.id
       value_params = item_params.extract! :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :course_id
       value_params[:last_updated_at] = Time.at item_params[:last_updated_at].to_i if item_params[:last_updated_at]
 
 
-      item = SyncItem.where(search_params).first_or_initialize
+      item = Attempt.where(search_params).first_or_initialize
       existing = item.persisted?
       item.update_attributes value_params
 

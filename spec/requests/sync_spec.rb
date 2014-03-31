@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe 'SyncItems' do
+describe 'Attempts' do
   describe 'POST /syncUp' do
     let(:user) { create :user }
     let(:book) { create :book }
-    let(:sync_items) { build_list :sync_item, 3, user: user, book: book }
-    let(:json_payload) { %({"token": "#{user.token}", "sync_items": #{sync_items.to_json} }) }
+    let(:attempts) { build_list :attempt, 3, user: user, book: book }
+    let(:json_payload) { %({"token": "#{user.token}", "attempts": #{attempts.to_json} }) }
 
     it 'should create new sync items' do
       pattern = {
@@ -21,7 +21,7 @@ describe 'SyncItems' do
     end
 
     it 'should update existing sync items' do
-      sync_items.first.save
+      attempts.first.save
       pattern = {
         last_sync_time: /^\d{10}$/,
         status: [
@@ -37,11 +37,11 @@ describe 'SyncItems' do
 
   describe 'POST /syncDown' do
     let(:user) { create :user }
-    let(:sync_items) { create_list :sync_item, 3, user: user, updated_at: Time.now }
+    let(:attempts) { create_list :attempt, 3, user: user, updated_at: Time.now }
     let(:json_payload) { %({"token": "#{user.token}", "last_sync_time": "#{1.hour.ago.to_i}" }) }
     let(:pattern) do
       {
-        syncItems: sync_items.map do |item|
+        syncItems: attempts.map do |item|
           {
             userId:         item.user_id.to_s,
             bookId:         item.book_id.to_s,
@@ -65,7 +65,7 @@ describe 'SyncItems' do
 
     pending "should not return old items" do
       pattern #initialize
-      create_list :sync_item, 2, user: user, updated_at: 2.hours.ago
+      create_list :attempt, 2, user: user, updated_at: 2.hours.ago
 
       post sync_down_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern

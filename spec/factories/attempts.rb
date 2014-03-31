@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :sync_item do
+  factory :attempt do
     user
     book
     assessment_id '1'

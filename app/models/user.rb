@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_paper_trail
 
-	has_many :sync_items, dependent: :destroy
+	has_many :attempts, dependent: :destroy
   has_many :commands, dependent: :destroy
   has_one :tablet
 

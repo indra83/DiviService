@@ -1,4 +1,4 @@
-ActiveAdmin.register SyncItem do
+ActiveAdmin.register Attempt do
   actions :index
 
   index do
