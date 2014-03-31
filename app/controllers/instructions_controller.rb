@@ -16,9 +16,14 @@ class InstructionsController < ApplicationController
 
     render json: {error: {code:422, message: "The instruction can not be created due to validation errors", errors: @instruction.errors} }  if @instruction.errors.present?
 
-    @command = @lecture.class_room.commands.create params[:command]
+    @command = @lecture.class_room.commands.create command_params
 
     render json: {error: {code:422, message: "Some commands can not be created due to validation errors", errors: @command.errors} } if @command.errors.present?
 
+  end
+
+private
+  def command_params
+    params.require(:command).permit!
   end
 end
