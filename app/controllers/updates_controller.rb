@@ -3,9 +3,9 @@ class UpdatesController < ApplicationController
   before_filter :authenticate_user
 
   def index
-    if params[:device_id]
-      @tablet = Tablet.where(device_id: params.delete(:device_id)).first_or_initialize
-      @tablet.update_attributes params
+    if params[:tablet]
+      @tablet = Tablet.where(device_id: tablet_params.delete(:device_id)).first_or_initialize
+      @tablet.update_attributes tablet_params
     end
 
     @class_rooms = current_user.class_rooms
@@ -18,5 +18,10 @@ class UpdatesController < ApplicationController
       }.flatten
 
     @cdns = @current_user.school.cdns.where("pinged_at >= ?", 30.minutes.ago).map(&:base_url)
+  end
+
+private
+  def tablet_params
+    params.require(:tablet).permit!
   end
 end
