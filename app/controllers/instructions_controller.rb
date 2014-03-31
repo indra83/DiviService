@@ -12,13 +12,16 @@ class InstructionsController < ApplicationController
   def create
     @lecture = Lecture.find params[:lecture_id]
     render json: {error: {code: 401, message: "Unauthorized"} } unless current_user.teacher? && @lecture && @lecture.teacher == current_user
+
+    if params[:command]
+      @command = @lecture.class_room.commands.create command_params
+
+      render json: {error: {code:422, message: "Some commands can not be created due to validation errors", errors: @command.errors} } if @command.errors.present?
+    end
+
     @instruction = @lecture.instructions.create payload: params[:instruction]
 
     render json: {error: {code:422, message: "The instruction can not be created due to validation errors", errors: @instruction.errors} }  if @instruction.errors.present?
-
-    @command = @lecture.class_room.commands.create command_params
-
-    render json: {error: {code:422, message: "Some commands can not be created due to validation errors", errors: @command.errors} } if @command.errors.present?
 
   end
 
