@@ -201,13 +201,13 @@ ActiveRecord::Schema.define(version: 20140226044810) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "password_digest"
     t.string   "role"
-    t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "pic"
     t.string   "metadata"
+    t.string   "token"
+    t.string   "password_digest"
   end
 
   create_table "versions", force: true do |t|
