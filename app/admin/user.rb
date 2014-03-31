@@ -10,9 +10,9 @@ ActiveAdmin.register User do
       f.input :class_rooms
     end
 
-		f.inputs "Profile Picture" do
-			f.input :pic, as: :filepicker
-		end
+    f.inputs "Profile Picture" do
+      f.input :pic, as: :filepicker
+    end
 
     f.inputs "extra" do
       f.input :metadata
@@ -21,26 +21,26 @@ ActiveAdmin.register User do
     f.actions
   end
 
-	index do
-		column :id
-		column :name
-		column :role
-		column :class_rooms do |user|
-			user.class_rooms.map(&:name).join(', ')
-		end
-		column :created_at
-		column :updated_at
+  index do
+    column :id
+    column :name
+    column :role
+    column :class_rooms do |user|
+      user.class_rooms.map(&:name).join(', ')
+    end
+    column :created_at
+    column :updated_at
 
-		actions
-	end
+    actions
+  end
 
   index as: :grid, default: true do |user|
-  	link_to resource_path user do
-  		image = filepicker_image_tag user.pic, user.profile_pic_opts
-  		name = content_tag :h3, user.name
+    link_to resource_path user do
+      image = filepicker_image_tag user.pic, user.profile_pic_opts
+      name = content_tag :h3, user.name
 
-  		image + name
-  	end
+      image + name
+    end
   end
 
   controller do

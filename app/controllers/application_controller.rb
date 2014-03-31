@@ -5,9 +5,14 @@ class ApplicationController < ActionController::Base
 
   before_filter :underscore_param_keys
 
+  helper_method :account, :current_user
 protected
   def current_user
-    @current_user ||= User.find_by_token params[:token]
+    @current_user ||= account.try(:user)
+  end
+
+  def account
+    @account ||= Account.find_by_token params[:token]
   end
 
   def authenticate_user

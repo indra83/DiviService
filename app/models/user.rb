@@ -1,11 +1,12 @@
 class User < ActiveRecord::Base
   has_paper_trail
 
+  has_one :account, as: :user
+
 	has_many :sync_items, dependent: :destroy
   has_many :commands, dependent: :destroy
   has_one :tablet
 
-  has_secure_password
   validate :name, presence: true,
                   uniqueness: true
 
@@ -13,6 +14,8 @@ class User < ActiveRecord::Base
 
   scope :students, where(role: :student)
   scope :teachers, where(role: :teacher)
+
+  delegate :token, to: :account
 
   PROFILE_PIC_OPTS = {
     h: 140,
@@ -30,21 +33,6 @@ class User < ActiveRecord::Base
 
   def admin_path
     admin_class_room_user_path class_room, self
-  end
-
-  def authenticate(password)
-    return false unless super
-    generate_token && save
-    return true
-  end
-
-protected
-
-  def generate_token
-    self.token = loop do
-      random_token = SecureRandom.urlsafe_base64(nil, false)
-      break random_token unless self.class.where(token: random_token).exists?
-    end
   end
 
   include Student

@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226044810) do
+ActiveRecord::Schema.define(version: 20140331103136) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: true do |t|
+    t.string   "password_digest"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "accounts", ["user_id", "user_type"], name: "index_accounts_on_user_id_and_user_type", using: :btree
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -201,9 +212,7 @@ ActiveRecord::Schema.define(version: 20140226044810) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "password_digest"
     t.string   "role"
-    t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "pic"
