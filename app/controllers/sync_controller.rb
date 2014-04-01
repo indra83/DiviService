@@ -28,4 +28,19 @@ class SyncController < ApplicationController
 
     render json: {last_sync_time: Time.now.to_i.to_s, status: @items_status}
 	end
+
+  def scores
+    render json: {error: {code: 401, message: "Unauthorized"} } unless current_user.teacher?
+
+    @attempts = Attempt.where query_params
+  end
+
+private
+  def query_params
+    params[:user_id] = params.delete :student_id
+    keys =[:user_id, :course_id, :book_id, :assessment_id]
+    keys.each {|key| params.require key}
+
+    params.slice *keys
+  end
 end

@@ -4,6 +4,7 @@ ActiveAdmin.register ClassRoom do
 
   action_item only: [:show, :edit] do
     link_to "Users", admin_class_room_users_path(class_room)
+    link_to "Commands", admin_class_room_commands_path(class_room)
   end
 
   form do |f|
