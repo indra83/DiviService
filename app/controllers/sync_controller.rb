@@ -7,15 +7,15 @@ class SyncController < ApplicationController
     @commands = []
     @has_more_data = false
 
-    per_page = params[:items_per_page] || 100
+    per_page = params[:items_per_page].to_i || 100
 
-    if params[:last_sync_time][:attempts]
-      @attempts = current_user.attempts.paginated_latest(Time.at(params[:last_sync_time][:attempts].to_i), per_page)
+    if last_sync_times[:attempts]
+      @attempts = current_user.attempts.paginated_latest(Time.at(last_sync_times[:attempts].to_i), per_page)
       @has_more_data ||= @attempts.unscope(:limit).count > per_page
     end
 
-    if params[:last_sync_time][:commands]
-	    @commands = current_user.commands.paginated_latest(Time.at(params[:last_sync_time][:commands].to_i), per_page)
+    if last_sync_times[:commands]
+	    @commands = current_user.commands.paginated_latest(Time.at(last_sync_times[:commands].to_i), per_page)
       @has_more_data ||= @commands.unscope(:limit).count > per_page
     end
   end
@@ -52,5 +52,9 @@ private
     keys.each {|key| params.require key}
 
     params.slice *keys
+  end
+
+  def last_sync_times
+    params.require :last_sync_time
   end
 end

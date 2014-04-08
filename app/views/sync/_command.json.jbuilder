@@ -1,7 +1,6 @@
 json.key_format! camelize: :lower
 
 json.id            item.id.to_s
-json.user_id       item.user_id.to_s
 json.class_room_id item.class_room_id.to_s
 json.teacher_id    item.teacher_id.to_s
 json.course_id     item.course_id.to_s
