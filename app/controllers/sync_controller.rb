@@ -6,8 +6,10 @@ class SyncController < ApplicationController
     @items = []
     @commands = []
 
-	  @items = current_user.attempts.where(last_updated_at: (Time.at(params[:last_sync_time][:attempts].to_i+1)..Time.now)) if params[:last_sync_time][:attempts]
-	  @commands = current_user.commands.where(updated_at:(Time.at(params[:last_sync_time][:commands].to_i+1)..Time.now)) if params[:last_sync_time][:commands]
+    per_page = params[:items_per_page] || 100
+	  @attempts = current_user.attempts.paginated_latest(Time.at(params[:last_sync_time][:attempts].to_i), per_page) if params[:last_sync_time][:attempts]
+	  @commands = current_user.commands.paginated_latest(Time.at(params[:last_sync_time][:commands].to_i), per_page) if params[:last_sync_time][:commands]
+    @has_more_data = (@attempts.unscope(:limit).count > per_page) || (@commands.unscope(:limit).count > per_page)
   end
 
 	def create
