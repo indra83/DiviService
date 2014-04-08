@@ -3,13 +3,21 @@ class SyncController < ApplicationController
   before_filter :authenticate_user
 
   def index
-    @items = []
+    @attempts = []
     @commands = []
+    @has_more_data = false
 
     per_page = params[:items_per_page] || 100
-	  @attempts = current_user.attempts.paginated_latest(Time.at(params[:last_sync_time][:attempts].to_i), per_page) if params[:last_sync_time][:attempts]
-	  @commands = current_user.commands.paginated_latest(Time.at(params[:last_sync_time][:commands].to_i), per_page) if params[:last_sync_time][:commands]
-    @has_more_data = (@attempts.unscope(:limit).count > per_page) || (@commands.unscope(:limit).count > per_page)
+
+    if params[:last_sync_time][:attempts]
+      @attempts = current_user.attempts.paginated_latest(Time.at(params[:last_sync_time][:attempts].to_i), per_page)
+      @has_more_data ||= @attempts.unscope(:limit).count > per_page
+    end
+
+    if params[:last_sync_time][:commands]
+	    @commands = current_user.commands.paginated_latest(Time.at(params[:last_sync_time][:commands].to_i), per_page)
+      @has_more_data ||= @commands.unscope(:limit).count > per_page
+    end
   end
 
 	def create
