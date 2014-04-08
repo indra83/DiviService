@@ -28,8 +28,8 @@ class InstructionsController < ApplicationController
 private
   def command_params
     c = params.require(:command)
-    c.ends_at = Time.at c.ends_at.to_i
-    c.applied_at = Time.at c.applied_at.to_i
+    c[:ends_at] = Time.at c[:ends_at].to_i
+    c[:applied_at] = Time.at c[:applied_at].to_i
     c.permit!
   end
 end
