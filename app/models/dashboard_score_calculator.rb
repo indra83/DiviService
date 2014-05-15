@@ -1,7 +1,9 @@
 class DashboardScoreCalculator < Array
-  def initialize(items, group_by)
-    points_table = items.group(group_by).sum(ATTEMPT_POINTS)
-    accuracy_table = items.group(group_by).average(ATTEMPT_ACCURACY)
+  def initialize(attempts, group_by)
+    attempts = attempts.where('(correct_attemptt + wrong_attempts) != 0')
+
+    points_table = attempts.group(group_by).sum(ATTEMPT_POINTS)
+    accuracy_table = attempts.group(group_by).average(ATTEMPT_ACCURACY)
     points_table.each do |k, v|
       push({
         :id => k,
