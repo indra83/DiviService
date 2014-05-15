@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     PROFILE_PIC_OPTS
   end
 
+  def tiny_pic_opts
+    PROFILE_PIC_OPTS.merge h: 40, w: 40
+  end
+
   include Rails.application.routes.url_helpers
 
   def admin_path

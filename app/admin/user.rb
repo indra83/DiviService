@@ -23,11 +23,18 @@ ActiveAdmin.register User do
 
 	index do
 		column :id
+    column :picture do |user|
+      filepicker_image_tag user.pic, user.tiny_pic_opts
+    end
 		column :name
 		column :role
 		column :class_rooms do |user|
 			user.class_rooms.map(&:name).join(', ')
 		end
+    column :tablet do |user|
+      next 'n/a' unless user.tablet
+      link_to user.tablet.device_id, admin_tablet_path(user.tablet)
+    end
 		column :created_at
 		column :updated_at
 
