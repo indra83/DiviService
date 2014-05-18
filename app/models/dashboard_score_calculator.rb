@@ -1,6 +1,6 @@
 class DashboardScoreCalculator < Array
   def initialize(attempts, group_by)
-    attempts = attempts.where('(correct_attemptt + wrong_attempts) != 0')
+    attempts = attempts.where('(correct_attempts + wrong_attempts) != 0')
 
     points_table = attempts.group(group_by).sum(ATTEMPT_POINTS)
     accuracy_table = attempts.group(group_by).average(ATTEMPT_ACCURACY)
