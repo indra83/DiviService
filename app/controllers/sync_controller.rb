@@ -26,6 +26,7 @@ class SyncController < ApplicationController
       search_params[:user_id] = current_user.id
       value_params = item_params.extract! :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :course_id
       value_params[:last_updated_at] = Time.at item_params[:last_updated_at].to_i if item_params[:last_updated_at]
+      value_params[:solved_at] = Time.at item_params[:solved_at].to_i if item_params[:solved_at]
 
 
       item = Attempt.where(search_params).first_or_initialize

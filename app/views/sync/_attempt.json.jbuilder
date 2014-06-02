@@ -12,3 +12,4 @@ json.wrong_attempts     item.wrong_attempts
 json.subquestions       item.subquestions
 json.data               item.data
 json.last_updated_at    item.last_updated_at.to_i
+json.solved_at          item.solved_at.to_i
