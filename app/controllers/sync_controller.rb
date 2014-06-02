@@ -33,8 +33,11 @@ class SyncController < ApplicationController
       existing = item.persisted?
       item.update_attributes value_params
 
-      return {error: {code:422, message: "The instruction can not be created due to validation errors", errors: item.errors} } if item.errors.present?
-      { success: (existing ? 'updated' : 'created') }
+      if item.errors.present?
+        render json: { error: {code:422, message: "The instruction can not be created due to validation errors", errors: item.errors} }
+      else
+        render json: { success: (existing ? 'updated' : 'created') }
+      end
     end
 
     render json: {last_sync_time: Time.now.to_i.to_s, status: @items_status}
