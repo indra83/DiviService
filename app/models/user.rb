@@ -42,6 +42,15 @@ class User < ActiveRecord::Base
     return true
   end
 
+  def pending_updates(version_defs)
+    version_defs ||= []
+    version_map = version_defs.inject({}) {|h, vd| h[vd["book_id"].to_i] = vd["version"].to_i ; h}
+    books.map { |book|
+      book.pending_updates(version_map[book.id], role)
+    }.flatten
+  end
+
+  delegate :battery_level, :last_check_in, :is_content_up_to_date?, to: :tablet, allow_nil: true
 protected
 
   def generate_token

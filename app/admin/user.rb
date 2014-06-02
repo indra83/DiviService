@@ -21,27 +21,49 @@ ActiveAdmin.register User do
     f.actions
   end
 
-	index do
+	index default: true do
 		column :id
-    column :picture do |user|
-      filepicker_image_tag user.pic, user.tiny_pic_opts
-    end
 		column :name
 		column :role
-		column :class_rooms do |user|
-			user.class_rooms.map(&:name).join(', ')
-		end
     column :tablet do |user|
       next 'n/a' unless user.tablet
-      link_to user.tablet.device_id, admin_tablet_path(user.tablet)
+      link_to admin_tablet_path(user.tablet) do
+        span user.tablet.device_id
+        text_node "<br>".html_safe
+        span user.tablet.device_tag
+      end
     end
-		column :created_at
-		column :updated_at
+    column :content_status do |user|
+      case user.is_content_up_to_date?
+      when nil
+        'n/a'
+      when true
+        status_tag 'up to date'
+      when false
+        link_to 'pending', admin_tablet_path(user.tablet), class: 'status_tag error'
+      end
+    end
+    column :last_check_in do |user|
+      if user.last_check_in
+        time_in_words = time_ago_in_words user.last_check_in
+        if user.last_check_in > 10.minutes.ago
+          css_status = 'ok'
+        elsif user.last_check_in > 30.minutes.ago
+          css_status = 'warning'
+        else
+          css_status = 'error'
+        end
+        status_tag "#{time_in_words} ago", css_status
+      else
+        text_node 'n/a'
+      end
+    end
+    column :battery_level
 
 		actions
 	end
 
-  index as: :grid, default: true do |user|
+  index as: :grid do |user|
   	link_to resource_path user do
   		image = filepicker_image_tag user.pic, user.profile_pic_opts
   		name = content_tag :h3, user.name

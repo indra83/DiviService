@@ -2,11 +2,46 @@ ActiveAdmin.register Tablet do
   actions :index, :show
 
   index do
-    column :id
-    column :device_id
+    column :id do |t|
+      link_to t.id, admin_tablet_path(t)
+    end
+    column :device_id do |t|
+      link_to t.id, admin_tablet_path(t)
+    end
     column :device_tag
     column :battery_level
     column :token
     column :user
+  end
+
+  show do
+    attributes_table do
+      row :id
+      row :device_id
+      row :device_tag
+      row :user
+      row :created_at
+      row :updated_at
+    end
+
+    panel "Pending Updates" do
+      table_for tablet.pending_updates do
+        column :id
+        column :description
+        column :book
+        column :book_version
+        column :strategy do |update|
+          status_map = {
+            'patch'   => 'orange',
+            'replace' => 'red'
+          }
+          status_tag update.strategy, status_map[update.strategy]
+        end
+        column :status
+        column :file do |update|
+          link_to update.file, update.file
+        end
+      end
+    end
   end
 end
