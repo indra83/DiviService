@@ -34,9 +34,9 @@ class SyncController < ApplicationController
       item.update_attributes value_params
 
       if item.errors.present?
-        render json: { error: {code:422, message: "The instruction can not be created due to validation errors", errors: item.errors} }
+       :error
       else
-        render json: { success: (existing ? 'updated' : 'created') }
+        existing ? :updated : :created
       end
     end
 
