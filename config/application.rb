@@ -29,5 +29,6 @@ module DiviService
 
     config.filepicker_rails.api_key = ENV['FILEPICKER_API_KEY']
 
+    config.middleware.use Rack::Deflater
   end
 end
