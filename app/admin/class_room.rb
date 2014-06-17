@@ -2,6 +2,16 @@ ActiveAdmin.register ClassRoom do
   belongs_to :school, parent_class: School, optional: true
   menu false
 
+  index do
+    column :id
+    column :standard
+    column :section
+    actions
+    column do |c|
+      link_to 'Users', admin_class_room_users_path(c)
+    end
+  end
+
   action_item only: [:show, :edit] do
     link_to "Users", admin_class_room_users_path(class_room)
     link_to "Commands", admin_class_room_commands_path(class_room)
