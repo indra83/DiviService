@@ -24,7 +24,7 @@ ActiveAdmin.register Cdn do
     end
     column :created_at
 
-    default_actions
+    actions
   end
 end
 
@@ -46,7 +46,7 @@ ActiveAdmin.register Cdn, as: "Orphan CDN" do
     end
     column :created_at
 
-    default_actions
+    actions
   end
 
   controller do
