@@ -10,11 +10,7 @@ describe 'Attempts' do
     it 'should create new sync items' do
       pattern = {
         last_sync_time: /^\d{10}$/,
-        status: [
-          { 'success' => 'created' },
-          { 'success' => 'created' },
-          { 'success' => 'created' }
-        ]
+        status: [ 'created' ] * 3
       }
       post sync_up_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern
@@ -25,9 +21,9 @@ describe 'Attempts' do
       pattern = {
         last_sync_time: /^\d{10}$/,
         status: [
-          { 'success' => 'updated'},
-          { 'success' => 'created'},
-          { 'success' => 'created'}
+          'updated',
+          'created',
+          'created'
         ]
       }
       post sync_up_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'

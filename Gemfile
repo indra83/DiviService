@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.1.1'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -49,6 +49,7 @@ group :development, :test do
 # gem 'localtunnel'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'rspec-its'
 end
 
 group :production do # Heroku
@@ -57,4 +58,5 @@ end
 
 group :development do
   gem 'heroku_san'
+  gem 'spring'
 end

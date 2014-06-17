@@ -24,7 +24,7 @@ class SyncController < ApplicationController
     @items_status = params[:attempts].map do |item_params|
       search_params = item_params.extract! :book_id, :assessment_id, :question_id
       search_params[:user_id] = current_user.id
-      value_params = item_params.extract! :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :course_id
+      value_params = item_params.permit :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :course_id
       value_params[:last_updated_at] = Time.at item_params[:last_updated_at].to_i if item_params[:last_updated_at]
       value_params[:solved_at] = Time.at item_params[:solved_at].to_i if item_params[:solved_at]
 

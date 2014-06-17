@@ -22,6 +22,6 @@ describe User do
   context "(student)" do
     subject(:student) { create :user, role: :student }
 
-    its(:student?) { should be_true }
+    its(:student?) { is_expected.to eq true }
   end
 end

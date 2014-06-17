@@ -1,8 +1,8 @@
-ActiveAdmin.register Version do
+ActiveAdmin.register PaperTrail::Version do
   actions :index, :show
 
   member_action :restore, method: :post do
-    version = Version.find params[:id]
+    version = PaperTrail::Version.find params[:id]
     item = version.reify
     item.save
     redirect_to item.admin_path
@@ -11,7 +11,7 @@ ActiveAdmin.register Version do
   index do
     column :id
     column "Item" do |v|
-      item = v.item || v.reify || Version.where(item_id: v.item_id).where("created_at > ?", v.created_at).order('created_at ASC').first.reify
+      item = v.item || v.reify || PaperTrail::Version.where(item_id: v.item_id).where("created_at > ?", v.created_at).order('created_at ASC').first.reify
       name = item.try(:name) || item
       if item.respond_to? :admin_path
         link_to name, item.admin_path

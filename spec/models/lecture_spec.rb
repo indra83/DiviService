@@ -11,7 +11,7 @@ describe Lecture do
 
   it "should check if any lectures are live" do
     lecture.save
-    Lecture.all.any_live?.should be_true
+    expect(Lecture.all.any_live?).to eq true
   end
 
 end
