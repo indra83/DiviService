@@ -1,6 +1,19 @@
 ActiveAdmin.register Update do
   belongs_to :book, parent_class: Book
 
+  index do
+    column :id
+    column :decription
+    column :details
+    column :book_version
+    column :book_from_version
+    column :status
+    column :strategy
+    column :created_at
+    column :updated_at
+    actions
+  end
+
   form do |f|
     filepicker_js_include_tag
     f.inputs "Details" do
