@@ -14,6 +14,14 @@ ActiveAdmin.register User do
 			f.input :pic, as: :filepicker
 		end
 
+    f.inputs 'Contact details' do
+      f.input :phone
+      f.input :email
+      f.input :parent_phone
+      f.input :parent_email
+      f.input :report_starts_at
+    end
+
     f.inputs "extra" do
       f.input :metadata
     end
