@@ -10,4 +10,8 @@ class Tablet < ActiveRecord::Base
   end
 
   alias_attribute :last_check_in, :updated_at
+
+  def time_stamps
+    content['time_stamps'] || Hash.new('n/a')
+  end
 end
