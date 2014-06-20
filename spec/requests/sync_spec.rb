@@ -34,7 +34,7 @@ describe 'Attempts' do
   describe 'POST /syncDown' do
     let(:user) { create :user }
     let(:attempts) { create_list :attempt, 3, user: user, updated_at: Time.now }
-    let(:json_payload) { %({"token": "#{user.token}", "last_sync_time": "#{1.hour.ago.to_i}" }) }
+    let(:json_payload) { %({"token": "#{user.token}", "last_sync_time": "#{1.hour.ago.to_millistr}" }) }
     let(:pattern) do
       {
         syncItems: attempts.map do |item|

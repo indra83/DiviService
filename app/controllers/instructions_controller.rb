@@ -6,7 +6,7 @@ class InstructionsController < ApplicationController
     @lecture = Lecture.find params[:lecture_id]
     render json: {error: {code: 401, message: "Unauthorized"} } unless @lecture && current_user.class_rooms.include?(@lecture.class_room)
 
-    @instructions = @lecture.instructions.where("created_at > ?", Time.at(params[:since].to_i)).order(created_at: :desc).limit(10)
+    @instructions = @lecture.instructions.where("created_at > ?", Time.from_millistr(params[:since])).order(created_at: :desc).limit(10)
   end
 
   def create
@@ -28,8 +28,8 @@ class InstructionsController < ApplicationController
 private
   def command_params
     c = params.require(:command)
-    c[:ends_at] = Time.at c[:ends_at].to_i
-    c[:applied_at] = Time.at c[:applied_at].to_i
+    c[:ends_at] = Time.from_millistr c[:ends_at]
+    c[:applied_at] = Time.from_millistr c[:applied_at]
     c.permit!
   end
 end

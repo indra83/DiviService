@@ -5,16 +5,16 @@ describe "Lecture" do
     let(:class_room) { create :class_room }
     let(:teacher) { create :user, role: 'teacher', class_rooms: [class_room] }
     let(:lecture) { build :lecture, teacher: teacher, class_room: class_room }
-    let(:json_payload) { %({"token": "#{teacher.token}", "classId": "#{class_room.id}", "name": "#{lecture.name}" }) }
+    let(:json_payload) { %({"token": "#{teacher.token}", "classRoomId": "#{class_room.id}", "name": "#{lecture.name}" }) }
     let(:pattern) do
       {
         id: :lecture_id,
-        classId: class_room.id.to_s,
+        classRoomId: class_room.id.to_s,
         name: lecture.name,
         teacherId: teacher.id.to_s,
         teacherName: teacher.name,
         channel: /^lecture_\d+$/,
-        startTime: /^\d{10}$/
+        startTime: /^\d{13}$/
       }.ignore_extra_keys!
     end
 

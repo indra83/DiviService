@@ -7,7 +7,7 @@ class LecturesController < ApplicationController
   end
 
   def create
-    @lecture = Lecture.create teacher: @current_user, class_room_id: params[:class_id], name: params[:name], start_time_stamp: param_start_time
+    @lecture = Lecture.create lecture_params
 
     render json: {error: {code:422, message: "The lecture can not be created due to validation errors", errors: @lecture.errors} }  if @lecture.errors.present?
   end
@@ -32,7 +32,10 @@ class LecturesController < ApplicationController
 
 private
 
-  def param_start_time
-    params[:start_time].to_i if params[:start_time]
+  def lecture_params
+    p = params.permit :class_room_id, :name
+    p[:start_time] = Time.from_millistr params[:start_time] if params[:start_time]
+    p[:teacher] = @current_user
+    p
   end
 end

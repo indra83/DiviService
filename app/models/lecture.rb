@@ -30,14 +30,6 @@ class Lecture < ActiveRecord::Base
     start_time < 1.hour.ago ? 'expired' : status
   end
 
-  def start_time_stamp=(time_stamp)
-    self.start_time = Time.at time_stamp if time_stamp
-  end
-
-  def start_time_stamp
-    start_time.to_i
-  end
-
   def live?
     computed_status == 'live'
   end

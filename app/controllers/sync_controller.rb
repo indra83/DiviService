@@ -10,12 +10,12 @@ class SyncController < ApplicationController
     per_page = params[:items_per_page].to_i || 100
 
     if last_sync_times[:attempts]
-      @attempts = current_user.attempts.paginated_latest(Time.at(last_sync_times[:attempts].to_i), per_page)
+      @attempts = current_user.attempts.paginated_latest(Time.from_millistr(last_sync_times[:attempts]), per_page)
       @has_more_data ||= @attempts.unscope(:limit).count > per_page
     end
 
     if last_sync_times[:commands]
-	    @commands = current_user.commands.paginated_latest(Time.at(last_sync_times[:commands].to_i), per_page)
+	    @commands = current_user.commands.paginated_latest(Time.from_millistr(last_sync_times[:commands]), per_page)
       @has_more_data ||= @commands.unscope(:limit).count > per_page
     end
   end
@@ -25,8 +25,8 @@ class SyncController < ApplicationController
       search_params = item_params.extract! :book_id, :assessment_id, :question_id
       search_params[:user_id] = current_user.id
       value_params = item_params.permit :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :course_id
-      value_params[:last_updated_at] = Time.at item_params[:last_updated_at].to_i if item_params[:last_updated_at]
-      value_params[:solved_at] = Time.at item_params[:solved_at].to_i if item_params[:solved_at]
+      value_params[:last_updated_at] = Time.from_millistr item_params[:last_updated_at] if item_params[:last_updated_at]
+      value_params[:solved_at] = Time.from_millistr item_params[:solved_at] if item_params[:solved_at]
 
 
       item = Attempt.where(search_params).first_or_initialize
