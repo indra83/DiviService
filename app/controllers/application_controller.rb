@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
 protected
   def current_user
+    return unless params[:token]
     @current_user ||= User.find_by_token params[:token]
   end
 

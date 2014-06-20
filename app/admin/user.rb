@@ -85,4 +85,14 @@ ActiveAdmin.register User do
       params.permit!
     end
   end
+
+  member_action :force_logout, method: :post do
+    user = User.find(params[:id])
+    user.logout!
+    redirect_to({action: :show}, {notice: "#{user.name} is logged out."})
+  end
+
+  action_item only: :show do
+    button_to 'Force Logout',  action: :force_logout
+  end
 end

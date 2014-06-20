@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
   end
 
   delegate :battery_level, :last_check_in, :is_content_up_to_date?, to: :tablet, allow_nil: true
+
+  def logout!
+    update_attributes token: nil
+  end
 protected
 
   def generate_token
