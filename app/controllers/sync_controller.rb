@@ -40,7 +40,7 @@ class SyncController < ApplicationController
       end
     end
 
-    render json: {last_sync_time: Time.now.to_i.to_s, status: @items_status}
+    render json: {last_sync_time: Time.now.to_millistr, status: @items_status}
 	end
 
   def scores

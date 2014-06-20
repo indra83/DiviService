@@ -9,7 +9,7 @@ describe 'Attempts' do
 
     it 'should create new sync items' do
       pattern = {
-        last_sync_time: /^\d{10}$/,
+        last_sync_time: /^\d{13}$/,
         status: [ 'created' ] * 3
       }
       post sync_up_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
@@ -19,7 +19,7 @@ describe 'Attempts' do
     it 'should update existing sync items' do
       attempts.first.save
       pattern = {
-        last_sync_time: /^\d{10}$/,
+        last_sync_time: /^\d{13}$/,
         status: [
           'updated',
           'created',
@@ -46,7 +46,7 @@ describe 'Attempts' do
             totalPoints:   item.total_points.to_s,
             attempts:       item.attempts.to_s,
             data:           item.data,
-            lastUpdatedAt: item.last_updated_at.to_i.to_s
+            lastUpdatedAt: item.last_updated_at.to_millistr
           }.ignore_extra_keys!
         end
       }.ignore_extra_keys!

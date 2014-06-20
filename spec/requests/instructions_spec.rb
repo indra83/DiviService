@@ -16,7 +16,7 @@ describe "Instructions" do
         instructions: instructions.map { |instruction|
           {
             id: instruction.id.to_s,
-            timeStamp: instruction.created_at.to_i.to_s,
+            timeStamp: instruction.created_at.to_millistr,
             data: instruction.payload.to_s
           }
         }
