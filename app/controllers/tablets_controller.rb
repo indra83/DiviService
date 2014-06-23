@@ -10,6 +10,7 @@ class TabletsController < ApplicationController
     if tablet.errors.present?
       render json: {error: {code:422, message: "The tablet can not be #{status} due to validation errors", errors: tablet.errors} }
     else
+      tablet.touch
       render json: { success: status }
     end
   end
