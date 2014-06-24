@@ -19,8 +19,10 @@ class LecturesController < ApplicationController
 
     render json: {error: {code:422, message: "The lecture can not be expired due to validation errors", errors: @lecture.errors} } and return if @lecture.errors.present?
 
-    @instruction = @lecture.instructions.create payload: params[:instruction]
-    render json: {error: {code:422, message: "The instruction can not be published due to validation errors.(The lecture has been expired)", errors: @instruction.errors} } and return if @instruction.errors.present?
+    if params[:instruction]
+      @instruction = @lecture.instructions.create payload: params[:instruction]
+      render json: {error: {code:422, message: "The instruction can not be published due to validation errors.(The lecture has been expired)", errors: @instruction.errors} } and return if @instruction.errors.present?
+    end
   end
 
   def members

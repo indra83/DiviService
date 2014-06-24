@@ -34,8 +34,11 @@ class Lecture < ActiveRecord::Base
     computed_status == 'live'
   end
 
+  LECTURE_END_INSTRUCTION_PAYLOAD = {type: 2, location: 'get lost'}.to_json
   def expire!
     update_attributes status: 'expired'
+
+    instructions.create payload: LECTURE_END_INSTRUCTION_PAYLOAD
   end
 
   def self.any_live?
