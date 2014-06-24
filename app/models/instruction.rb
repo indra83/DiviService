@@ -11,7 +11,6 @@ class Instruction < ActiveRecord::Base
 	delegate :channel, to: :lecture
 
 	def publish
-    dummy_callback = lambda { |message| logger.info "published message: #{message}" }
-		PUBNUB.publish channel: channel, message: payload, callback: dummy_callback
+		PUBNUB.publish channel: channel, message: payload, http_sync: true
 	end
 end
