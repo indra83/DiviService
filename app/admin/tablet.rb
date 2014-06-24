@@ -12,16 +12,16 @@ ActiveAdmin.register Tablet do
     column :battery_level
     column :token
     column :user
-    column :time_stamps do |t|
-      span "attempts: #{time_ago_in_words Time.from_millistr t.time_stamps['attempts'] } ago"
+    column :timestamps do |t|
+      span "attempts: #{time_ago_in_words Time.from_millistr t.timestamps['attempts'] } ago"
       tag :br
-      span "commands: #{time_ago_in_words Time.from_millistr t.time_stamps['commands'] } ago"
+      span "commands: #{time_ago_in_words Time.from_millistr t.timestamps['commands'] } ago"
       tag :br
-      span "content:  #{time_ago_in_words Time.from_millistr t.time_stamps['content']  } ago"
+      span "content:  #{time_ago_in_words Time.from_millistr t.timestamps['content']  } ago"
       tag :br
-      span "logs:     #{time_ago_in_words Time.from_millistr t.time_stamps['logs']     } ago"
+      span "logs:     #{time_ago_in_words Time.from_millistr t.timestamps['logs']     } ago"
       tag :br
-      span "reports:  #{time_ago_in_words Time.from_millistr t.time_stamps['reports']  } ago"
+      span "reports:  #{time_ago_in_words Time.from_millistr t.timestamps['reports']  } ago"
     end
   end
 
