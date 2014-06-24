@@ -35,9 +35,9 @@ ActiveAdmin.register User do
 		column :role
     column :tablet do |user|
       next 'n/a' unless user.tablet
-      link_to admin_tablet_path(user.tablet) do
+      a href: admin_tablet_path(user.tablet) do
         span user.tablet.device_id
-        text_node "<br>".html_safe
+        tag :br
         span user.tablet.device_tag
       end
     end
