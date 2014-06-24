@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
                   uniqueness: true
 
   #before_create :generate_token
+  default_value_for(:report_starts_at) { Time.zone.now }
 
   scope :students, where(role: :student)
   scope :teachers, where(role: :teacher)
@@ -66,4 +67,5 @@ protected
 
   include Student
   include Teacher
+
 end

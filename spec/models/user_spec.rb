@@ -6,8 +6,12 @@ describe User do
   context 'after login' do
     before { user.authenticate 'password' }
     its(:token) {
-      should_not be_nil
-      should_not be_empty
+      is_expected.not_to be_nil
+      is_expected.not_to be_empty
+    }
+    its(:report_starts_at) {
+      is_expected.not_to be_nil
+      is_expected.to be_within(2.seconds).of(Time.zone.now)
     }
   end
 
