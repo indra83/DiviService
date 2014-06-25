@@ -23,6 +23,7 @@ production:
   addons:
     - newrelic:stark
     - pgbackups:plus
+    - scheduler:standard
 staging:
   stack: cedar
   app: divi-staging
@@ -35,6 +36,7 @@ staging:
   addons:
     - newrelic:stark
     - pgbackups:plus
+    - scheduler:standard
 
 # demo:
 #   app: awesomeapp-demo
