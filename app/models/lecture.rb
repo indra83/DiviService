@@ -11,14 +11,11 @@ class Lecture < ActiveRecord::Base
   validate :teacher_has_no_other_live_lectures, on: :create
   validate :class_room_has_no_other_live_lectures, on: :create
 
-  before_validation :set_status
-  before_validation :set_start_time
+  default_values  status: :live,
+                  start_time: -> { Time.zone.now }
 
-  # scope :live, where(status: 'live')
-  def self.live
-    where(status: 'live').select &:live?   # Remove this when cron job or other means is introduced to persist autoexpiry
-  end
-
+  scope :live, -> { where(status: 'live') }
+  scope :old, -> { where('start_time < ?', 1.hour.ago) }
 
   delegate :members, to: :class_room
 
@@ -26,12 +23,8 @@ class Lecture < ActiveRecord::Base
 		"lecture_#{id}"
 	end
 
-  def computed_status
-    start_time < 1.hour.ago ? 'expired' : status
-  end
-
   def live?
-    computed_status == 'live'
+    self.status == 'live'
   end
 
   LECTURE_END_INSTRUCTION_PAYLOAD = {type: 2, location: 'get lost'}.to_json
@@ -42,18 +35,10 @@ class Lecture < ActiveRecord::Base
   end
 
   def self.any_live?
-    live.present?
+    live.any?
   end
 
 private
-  def set_status
-    self.status ||= 'live'
-  end
-
-  def set_start_time
-    self.start_time ||= Time.now
-  end
-
   def teacher_has_no_other_live_lectures
     errors.add(:teacher, "can't create second live lecture without expiring the first.") if teacher.delivering_lectures.any_live?
   end
