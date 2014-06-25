@@ -12,10 +12,11 @@ class Lecture < ActiveRecord::Base
   validate :class_room_has_no_other_live_lectures, on: :create
 
   default_values  status: :live,
-                  start_time: -> { Time.zone.now }
+                  start_time: -> { Time.zone.now },
+                  ends_at: lambda { |l| l.start_time + 1.hour }
 
-  scope :live, -> { where(status: 'live') }
-  scope :old, -> { where('start_time < ?', 1.hour.ago) }
+  scope :live,  -> { where status: 'live' }
+  scope :old,   -> { where 'ends_at < ?', Time.zone.now }
 
   delegate :members, to: :class_room
 
