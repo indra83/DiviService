@@ -45,6 +45,6 @@ private
   end
 
   def class_room_has_no_other_live_lectures
-    errors.add(:class_room, "can't host second live lecture without expiring the first.") if teacher.delivering_lectures.any_live?
+    errors.add(:class_room, "can't host second live lecture without expiring the first.") if class_room.lectures.any_live?
   end
 end
