@@ -31,8 +31,19 @@ ActiveAdmin.register Tablet do
       row :device_id
       row :device_tag
       row :user
+      row :battery_level
       row :created_at
       row :updated_at
+    end
+
+    panel "Time Stamps" do
+      attributes_table_for tablet.timestamps do
+        row('attempts') { "#{time_ago_in_words Time.from_millistr tablet.timestamps['attempts'] } ago" }
+        row('commands') { "#{time_ago_in_words Time.from_millistr tablet.timestamps['commands'] } ago" }
+        row('content')  { "#{time_ago_in_words Time.from_millistr tablet.timestamps['content']  } ago" }
+        row('logs')     { "#{time_ago_in_words Time.from_millistr tablet.timestamps['logs']     } ago" }
+        row('reports')  { "#{time_ago_in_words Time.from_millistr tablet.timestamps['reports']  } ago" }
+      end
     end
 
     panel "Pending Updates" do
