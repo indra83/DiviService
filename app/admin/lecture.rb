@@ -15,11 +15,10 @@ ActiveAdmin.register Lecture do
         time_in_words += " from now"
       else
         time_in_words += " ago"
-        css_status = lecture.computed_status == 'expired' ? 'error' : 'warning'
+        css_status = lecture.status == 'expired' ? 'error' : 'warning'
       end
       status_tag time_in_words, css_status
     end
-    column :computed_status
   end
 end
 
