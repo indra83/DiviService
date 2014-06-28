@@ -7,7 +7,7 @@ json.profile_pic filepicker_image_url(@current_user.pic, User::PROFILE_PIC_OPTS)
 json.role        @current_user.role
 json.school_name @current_user.school_name
 json.school_location @current_user.school.location
-json.report_starts_at @current_user.report_starts_at
+json.report_starts_at @current_user.report_starts_at.to_millistr
 json.class_rooms @current_user.class_rooms do |class_room|
   json.class_id   class_room.id.to_s
   json.class_name class_room.standard
