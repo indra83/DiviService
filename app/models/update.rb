@@ -11,7 +11,8 @@ class Update < ActiveRecord::Base
 
   ALLOWED_CATEGORIES_FOR_ROLE = {
     "student" => %w[live],
-    "teacher" => %w[live staging]
+    "teacher" => %w[live staging],
+    "tester" => %w[live staging testing]
   }
 
   scope :recent_for, ->(book_version, role) {

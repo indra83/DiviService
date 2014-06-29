@@ -6,7 +6,7 @@ ActiveAdmin.register User do
       f.input :name
       f.input :password
       f.input :password_confirmation
-      f.input :role, collection: %w[student teacher]
+      f.input :role, collection: %w[student teacher tester]
       f.input :class_rooms
     end
 
