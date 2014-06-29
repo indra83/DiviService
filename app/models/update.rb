@@ -13,7 +13,7 @@ class Update < ActiveRecord::Base
     "student" => %w[live],
     "teacher" => %w[live staging],
     "tester" => %w[live staging testing]
-  }
+  }.with_indifferent_access
 
   scope :recent_for, ->(book_version, role) {
     where(status: ALLOWED_CATEGORIES_FOR_ROLE[role]).
