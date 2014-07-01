@@ -3,11 +3,10 @@ DiviService::Application.routes.draw do
   ActiveAdmin.routes(self)
   #resource :session
 
-  # V1 routes
-  scope '/v1', defaults: { format: :json } do
+  # V2 routes
+  scope '/v2', defaults: { format: :json } do
     post "loginUser",         to: 'sessions#create',     as: :login
     post "getContentUpdates", to: 'updates#index',       as: :content_updates
-    post "getCacheUpdates",   to: 'cdns#create',         as: :cache_updates
     post "createLecture",     to: 'lectures#create',     as: :create_lectures
     post "getLectures",       to: 'lectures#index',      as: :lectures
     post "endLecture",        to: 'lectures#destroy',    as: :end_lecture
@@ -19,6 +18,11 @@ DiviService::Application.routes.draw do
 		post "getScores",					to: 'sync#scores',			   as: :get_scores
     post "dashboardScores",   to: 'dashboard#score',     as: :dashboard_score
     post "tabCheckIn",        to: 'tablets#create',      as: :tab_check_in
+  end
+
+  # V1 routes
+  scope '/v1', defaults: { format: :json } do
+    post "getCacheUpdates",   to: 'cdns#create',         as: :cache_updates
   end
 
   root to: 'admin/dashboard#index'
