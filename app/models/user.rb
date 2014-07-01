@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
     version_defs ||= []
     version_map = version_defs.inject({}) {|h, vd| h[vd["book_id"].to_i] = vd["version"].to_i ; h}
     books.map { |book|
-      book.pending_updates(version_map[book.id], role)
+      book.pending_updates(version_map[book.id], book_branch)
     }.flatten
   end
 
@@ -67,5 +67,14 @@ protected
 
   include Student
   include Teacher
+
+private
+  def book_branch
+    {
+      student: 'live',
+      teacher: 'staging',
+      tester: 'testing'
+    }[role.to_sym]
+  end
 
 end

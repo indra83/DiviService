@@ -10,16 +10,23 @@ class Book < ActiveRecord::Base
     "#{course.name} - #{name}"
   end
 
-  def pending_updates(version, role)
+  def pending_updates(version, branch)
     version ||= 0
-    latest_rewrite = updates.rewrites.order('book_version DESC').first
-    required_version = [(latest_rewrite && latest_rewrite.book_version || 0), version + 1].max
-    updates.recent_for(required_version, role).order('book_version ASC')
+    updates.send(branch).since([attributes["#{branch}_updates_start"], version + 1].max)
   end
 
   include Rails.application.routes.url_helpers
 
   def admin_path
     admin_book_path self
+  end
+
+  def rebuild_version_caches
+    version_caches = Hash.new
+    latest_rewrites = updates.rewrites.latest
+    %w[live staging testing].each do |branch|
+      version_caches["#{branch}_updates_start"] = latest_rewrites.send(branch).first.book_version
+    end
+    update_attributes version_caches
   end
 end

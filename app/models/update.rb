@@ -9,28 +9,31 @@ class Update < ActiveRecord::Base
   validates :book_version,  presence: true,
                             numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
-  ALLOWED_CATEGORIES_FOR_ROLE = {
-    "student" => %w[live],
-    "teacher" => %w[live staging],
-    "tester" => %w[live staging testing]
-  }.with_indifferent_access
-
-  scope :recent_for, ->(book_version, role) {
-    where(status: ALLOWED_CATEGORIES_FOR_ROLE[role]).
-    where("book_version >= ?", book_version)
-  }
+  after_save :build_book
 
   scope :latest, -> {
     order('book_version DESC')
   }
 
+  scope :since, ->(v) { latest.where 'book_version >= ?', v }
+
   scope :rewrites, -> {
     where strategy: :replace
   }
+
+  scope :live,    -> { where status: %w[live] }
+  scope :staging, -> { where status: %w[live staging] }
+  scope :testing, -> { where status: %w[live staging testing] }
 
   include Rails.application.routes.url_helpers
 
   def admin_path
     admin_book_update_path book, self
+  end
+
+private
+  def build_book
+    return unless strategy == 'replace'
+    book.rebuild_version_caches
   end
 end
