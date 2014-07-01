@@ -11,6 +11,8 @@ ActiveAdmin.register Book do
     end
   end
 
+  config.filters = false
+
   action_item only: [:show, :edit] do
     link_to "Updates", admin_book_updates_path(book)
   end
