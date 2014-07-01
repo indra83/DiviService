@@ -12,7 +12,7 @@ class Book < ActiveRecord::Base
 
   def pending_updates(version, branch)
     version ||= 0
-    updates.send(branch).since([attributes["#{branch}_updates_start"], version + 1].max)
+    updates.send(branch).since([attributes["#{branch}_updates_start"], version + 1].compact.max)
   end
 
   include Rails.application.routes.url_helpers
