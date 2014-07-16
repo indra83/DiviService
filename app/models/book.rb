@@ -25,7 +25,7 @@ class Book < ActiveRecord::Base
     version_caches = Hash.new
     latest_rewrites = updates.rewrites.latest
     %w[live staging testing].each do |branch|
-      version_caches["#{branch}_updates_start"] = latest_rewrites.send(branch).first.try :book_version
+      version_caches["#{branch}_updates_start"] = latest_rewrites.send(branch).last.try :book_version
     end
     update_attributes version_caches
   end
