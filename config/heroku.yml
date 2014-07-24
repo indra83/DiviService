@@ -13,7 +13,7 @@
 production:
   app: divi-service
   stack: cedar
-  # repo: git@heroku.personal:divi-service.git
+  repo: git@heroku.personal:divi-service.git
   config:
     BUNDLE_WITHOUT: "development:test"
     GOOGLE_ANALYTICS: "UA-12345678-1"
@@ -27,7 +27,7 @@ production:
 staging:
   stack: cedar
   app: divi-staging
-  # repo: git@heroku.personal:divi-staging.git
+  repo: git@heroku.personal:divi-staging.git
   config: &default
     BUNDLE_WITHOUT: "development:test"
     ERRBIT_TOKEN: '600e99f0af40e46a999cc4db2d30c511'

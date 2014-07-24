@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701103700) do
+ActiveRecord::Schema.define(version: 20140724185724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20140701103700) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "pinged_at"
+    t.json     "metadata"
   end
 
   add_index "cdns", ["school_id"], name: "index_cdns_on_school_id", using: :btree
@@ -204,13 +205,13 @@ ActiveRecord::Schema.define(version: 20140701103700) do
 
   create_table "users", force: true do |t|
     t.string   "name"
-    t.string   "password_digest"
     t.string   "role"
-    t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "pic"
     t.string   "metadata"
+    t.string   "token"
+    t.string   "password_digest"
     t.string   "phone"
     t.string   "email"
     t.string   "parent_phone"

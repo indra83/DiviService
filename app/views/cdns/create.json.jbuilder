@@ -5,3 +5,4 @@ json.updates @updates do |update|
 	json.id update.id.to_s
 	json.url update.file
 end
+json.metadata @cdn.metadata
