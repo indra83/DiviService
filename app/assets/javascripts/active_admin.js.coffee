@@ -45,7 +45,7 @@ $ ->
         fileUrlInput.val(url)
         fileInput.val(null)
 
-        if url.substr(-3,3).toLowerCase == "jpg"
+        if url.match /\.(jpg|png)$/i
           image = $("<img />", src: url, width: 150, height: 150)
           fileUrlInput.after image
 
