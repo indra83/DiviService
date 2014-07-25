@@ -15,3 +15,16 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+// progress bar for file uploader
+.progress {
+  max-width: 600px;
+  margin:    0.2em 0 0.2em 0;
+
+  .bar {
+    height:  1.2em;
+    padding: 0.2em;
+    color:   white;
+    display: none;
+  }
+}

@@ -11,7 +11,7 @@ ActiveAdmin.register User do
     end
 
 		f.inputs "Profile Picture" do
-			f.input :pic, as: :filepicker
+			f.input :pic, as: :fileuploader #picker
 		end
 
     f.inputs 'Contact details' do

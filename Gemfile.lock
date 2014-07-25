@@ -83,6 +83,9 @@ GEM
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (5.0.1.20140414130214)
+    aws-sdk (1.49.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt (3.1.7)
     bourbon (3.2.3)
       sass (~> 3.2)
@@ -178,10 +181,13 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.6.0)
     minitest (5.3.5)
     multi_json (1.10.1)
     net-http-persistent (2.9.4)
     newrelic_rpm (3.8.1.221)
+    nokogiri (1.6.3.1)
+      mini_portile (= 0.6.0)
     orm_adapter (0.5.0)
     paper_trail (3.0.2)
       activerecord (>= 3.0, < 5.0)
@@ -306,6 +312,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin!
   airbrake
+  aws-sdk
   bcrypt
   coffee-rails
   default_value_for

@@ -28,7 +28,7 @@ ActiveAdmin.register Update do
 
     unless resource.persisted?
       f.inputs "File Upload" do
-        f.input :file, as: :filepicker
+        f.input :file, as: :fileuploader
       end
     end
 
