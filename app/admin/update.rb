@@ -15,7 +15,6 @@ ActiveAdmin.register Update do
   end
 
   form do |f|
-    filepicker_js_include_tag
     f.inputs "Details" do
       f.input :book, member_label: :full_name
       f.input :book_version

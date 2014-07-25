@@ -11,7 +11,7 @@ ActiveAdmin.register User do
     end
 
 		f.inputs "Profile Picture" do
-			f.input :pic, as: :fileuploader #picker
+			f.input :pic, as: :fileuploader
 		end
 
     f.inputs 'Contact details' do
@@ -73,7 +73,7 @@ ActiveAdmin.register User do
 
   index as: :grid do |user|
   	link_to resource_path user do
-  		image = filepicker_image_tag user.pic, user.profile_pic_opts
+  		image = image_tag user.pic
   		name = content_tag :h3, user.name
 
   		image + name

@@ -1,7 +1,5 @@
 #= require active_admin/base
 #
-#= require vendor/filepicker
-#
 #= require vendor/jquery.ui.widget
 #= require vendor/jquery.fileupload
 

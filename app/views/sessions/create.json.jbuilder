@@ -3,7 +3,7 @@ json.key_format! camelize: :lower
 json.uid         @current_user.id.to_s
 json.token       @current_user.token
 json.name        @current_user.name
-json.profile_pic filepicker_image_url(@current_user.pic, User::PROFILE_PIC_OPTS)
+json.profile_pic @current_user.pic
 json.role        @current_user.role
 json.school_name @current_user.school_name
 json.school_location @current_user.school.location
