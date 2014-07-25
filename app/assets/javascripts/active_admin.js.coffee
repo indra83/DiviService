@@ -10,7 +10,13 @@ $ ->
     submitButton = form.find("input[type=\"submit\"]")
     progressBar = $("<div class='bar'></div>")
     barContainer = $("<div class='progress'></div>").append(progressBar)
-    fileInput.after barContainer
+
+    fileUrlInput = $("<input />",
+                      name: fileInput.attr("name"),
+                      placeholder: 'or enter the url')
+    fileInput.after fileUrlInput
+    fileUrlInput.after barContainer
+
     fileInput.fileupload
       fileInput: fileInput
       url: fileInput.data("url")
@@ -30,26 +36,18 @@ $ ->
 
       done: (e, data) ->
         submitButton.prop "disabled", false
+        progressBar.text "Uploading done"
 
         # extract key and generate URL from response
         key = $(data.jqXHR.responseXML).find("Key").text()
         url = "//#{fileInput.data('host')}/#{key}"
 
-        progressBar.text "Uploading done: #{url}"
-
-        # create hidden field
-        input = $("<input />",
-          type: "hidden"
-          name: fileInput.attr("name")
-          value: url
-        )
-        form.append input
-
+        fileUrlInput.val(url)
         fileInput.val(null)
 
         if url.substr(-3,3).toLowerCase == "jpg"
           image = $("<img />", src: url, width: 150, height: 150)
-          fileInput.parent.append image
+          fileUrlInput.after image
 
       fail: (e, data) ->
         submitButton.prop "disabled", false
