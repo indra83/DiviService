@@ -24,19 +24,20 @@ $ ->
       replaceFileInput: false
       progressall: (e, data) ->
         progress = parseInt(data.loaded / data.total * 100, 10)
-        progressBar.css "width", "#{progress}%"
+        progressBar.css("width", "#{progress}%").text "Uploading... #{progress}%"
 
       start: (e) ->
         submitButton.prop "disabled", true
-        progressBar.css("background", "green").css("display", "block").css("width", "0%").text "Loading..."
+        progressBar.css("background", "green").css("display", "block").css("width", "0%").text "Upload starting..."
 
       done: (e, data) ->
         submitButton.prop "disabled", false
-        progressBar.text "Uploading done"
 
         # extract key and generate URL from response
         key = $(data.jqXHR.responseXML).find("Key").text()
         url = "//#{fileInput.data('host')}/#{key}"
+
+        progressBar.text "Uploading done: #{url}"
 
         # create hidden field
         input = $("<input />",
@@ -45,6 +46,8 @@ $ ->
           value: url
         )
         form.append input
+
+        fileInput.val(null)
 
         if url.substr(-3,3).toLowerCase == "jpg"
           image = $("<img />", src: url, width: 150, height: 150)
