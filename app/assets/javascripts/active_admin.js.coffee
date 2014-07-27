@@ -22,6 +22,35 @@ $ ->
     fileInput.after fileUrlInput
     fileUrlInput.after barContainer
 
+    crop_factor = $("##{fileInput.attr('id')}_crop_factor")
+    if crop_factor.length > 0
+      image = $("<img />").insertAfter crop_factor
+      preview = $("<div class='crop-preview' />")
+                  .insertAfter(crop_factor)
+                  .append("<img />")
+                  .children()
+      jcrop_api = null
+      jcropOpts =
+        aspectRatio: 1
+        minSize: [150, 150]
+        onChange: (coords)->
+          return unless jcrop_api
+          crop_factor.val JSON.stringify coords
+          rx = 150/coords.w
+          ry = 150/coords.h
+          image_size = jcrop_api.getBounds()
+
+          preview.css
+            width: "#{Math.round(rx*image_size[0])}px"
+            height: "#{Math.round(ry*image_size[1])}px"
+            marginLeft: "-#{Math.round(rx * coords.x)}px"
+            marginTop: "-#{Math.round(ry * coords.y)}px"
+
+      image.Jcrop jcropOpts, ->
+        jcrop_api = this
+
+
+
     fileInput.fileupload
       fileInput: fileInput
       url: fileInput.data("url")
@@ -53,29 +82,15 @@ $ ->
         fileUrlInput.val(url)
         fileInput.val(null)
 
-        if url.match /\.(jpg|png)$/i
-          crop_factor = $("##{fileInput.attr('id')}_crop_factor")
-          image = $("<img />", src: url).insertAfter crop_factor
-          preview = $("<div class='crop-preview' />")
-                      .insertAfter(crop_factor)
-                      .append("<img src='#{url}'/>")
-                      .children()
-
-          image.Jcrop
-            aspectRatio: 1
-            minSize: [150, 150]
-            setSelect: [0, 0, 150, 150]
-            onChange: (coords)->
-              crop_factor.val JSON.stringify coords
-              rx = 150/coords.w
-              ry = 150/coords.h
-
-              preview.css
-                width: "#{Math.round(rx*image.width())}px"
-                height: "#{Math.round(ry*image.height())}px"
-                marginLeft: "-#{Math.round(rx * coords.x)}px"
-                marginTop: "-#{Math.round(ry * coords.y)}px"
-
+        if jcrop_api
+          preview.attr('src', url)
+          if jcrop_api.tellSelect().w
+            s = jcrop_api.tellSelect()
+            select = [s.x, s.y, s.x2, s.y2]
+          else
+            select = [0,0,150,150]
+          jcrop_api.setImage url, ->
+            jcrop_api.setSelect select
 
       fail: (e, data) ->
         submitButton.prop "disabled", false
