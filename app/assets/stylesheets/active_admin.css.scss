@@ -21,14 +21,19 @@
 
 // progress bar for file uploader
 .progress {
-  max-width: 600px;
-  margin:    0.2em 0 0.2em 0;
-
+  position: relative;
+  * {
+    position: absolute;
+  }
+  .text {
+    width: 100%;
+    background: rgba(202, 202, 202, 0.4);
+    z-index: 2;
+    text-align: center;
+    color: #303030;
+  }
   .bar {
-    height:  1.2em;
-    padding: 0.2em;
-    color:   white;
-    display: none;
+    z-index: 1;
   }
 }
 

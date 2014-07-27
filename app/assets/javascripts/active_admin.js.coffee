@@ -11,8 +11,10 @@ $ ->
     fileInput = $(elem)
     form = $(fileInput.parents("form:first"))
     submitButton = form.find("input[type=\"submit\"]")
-    progressBar = $("<div class='bar'></div>")
-    barContainer = $("<div class='progress'></div>").append(progressBar)
+    progressBar = $("<div class='bar status_tag'>&nbsp;</div>")
+    progressText = $("<div class='text status_tag'>Select file to upload</div>")
+    barContainer = $("<div class='progress'>&nbsp;</div>").prepend(progressBar).prepend(progressText)
+
 
     fileUrlInput = $("<input />",
                       name: fileInput.attr("name"),
@@ -31,15 +33,18 @@ $ ->
       replaceFileInput: false
       progressall: (e, data) ->
         progress = parseInt(data.loaded / data.total * 100, 10)
-        progressBar.css("width", "#{progress}%").text "Uploading... #{progress}%"
+        progressBar.css "width", "#{progress}%"
+        progressText.text "Uploading... #{progress}%"
 
       start: (e) ->
         submitButton.prop "disabled", true
-        progressBar.css("background", "green").css("display", "block").css("width", "0%").text "Upload starting..."
+        progressBar.removeClass('red green').addClass('orange').css("width", "0%")
+        progressText.text "Upload starting..."
 
       done: (e, data) ->
         submitButton.prop "disabled", false
-        progressBar.text "Uploading done"
+        progressBar.removeClass('red orange').addClass('green')
+        progressText.text "Uploading done"
 
         # extract key and generate URL from response
         key = $(data.jqXHR.responseXML).find("Key").text()
@@ -49,12 +54,12 @@ $ ->
         fileInput.val(null)
 
         if url.match /\.(jpg|png)$/i
-          image = $("<img />", src: url).insertAfter fileUrlInput
+          crop_factor = $("##{fileInput.attr('id')}_crop_factor")
+          image = $("<img />", src: url).insertAfter crop_factor
           preview = $("<div class='crop-preview' />")
-                      .insertAfter(fileUrlInput)
+                      .insertAfter(crop_factor)
                       .append("<img src='#{url}'/>")
                       .children()
-          crop_factor = $("##{fileInput.attr('id')}_crop_factor")
 
           image.Jcrop
             aspectRatio: 1
@@ -74,5 +79,6 @@ $ ->
 
       fail: (e, data) ->
         submitButton.prop "disabled", false
-        progressBar.css("background", "red").text "Failed"
+        progressBar.removeClass('orange green').addClass('red')
+        progressText.text "Failed"
 
