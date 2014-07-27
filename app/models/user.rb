@@ -15,21 +15,7 @@ class User < ActiveRecord::Base
   scope :students, where(role: :student)
   scope :teachers, where(role: :teacher)
 
-  PROFILE_PIC_OPTS = {
-    h: 140,
-    w: 140,
-    fit: 'clip',
-    format: 'jpg',
-    quality: 80
-  }
-
-  def profile_pic_opts
-    PROFILE_PIC_OPTS
-  end
-
-  def tiny_pic_opts
-    PROFILE_PIC_OPTS.merge h: 40, w: 40
-  end
+  scope :need_pic_processing, where('pic_crop_factor IS NOT NULL')
 
   include Rails.application.routes.url_helpers
 
