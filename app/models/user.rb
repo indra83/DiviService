@@ -56,6 +56,24 @@ class User < ActiveRecord::Base
   def logout!
     update_attributes token: nil
   end
+
+  def crop_and_resize_pic
+    return unless pic_crop_factor
+    return unless pic
+
+    image = MiniMagick::Image.open(URI.encode pic)
+    image.crop "#{pic_crop_factor['w']}x#{pic_crop_factor['h']}+#{pic_crop_factor['x']}+#{pic_crop_factor['y']}"
+    image.resize '150x150'
+    image.format 'jpg'
+    processed_pic_name = "#{self.class.name}/#{id}/pic.jpg"
+
+    s3_obj = S3_BUCKET.objects[processed_pic_name]
+    s3_obj.write image.to_blob,
+      acl: :public_read,
+      content_type: 'image/jpeg; charset=binary'
+    update_attributes pic_crop_factor: nil, pic: s3_obj.public_url(secure: false).to_s
+  end
+
 protected
 
   def generate_token
