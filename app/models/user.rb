@@ -12,10 +12,10 @@ class User < ActiveRecord::Base
   #before_create :generate_token
   default_value_for(:report_starts_at) { Time.zone.now }
 
-  scope :students, where(role: :student)
-  scope :teachers, where(role: :teacher)
+  scope :students, -> { where(role: :student) }
+  scope :teachers, -> { where(role: :teacher) }
 
-  scope :need_pic_processing, where('pic_crop_factor IS NOT NULL')
+  scope :need_pic_processing, -> { where('pic_crop_factor IS NOT NULL') }
 
   include Rails.application.routes.url_helpers
 
