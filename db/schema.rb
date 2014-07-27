@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140724185724) do
+ActiveRecord::Schema.define(version: 20140727185010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,6 +217,7 @@ ActiveRecord::Schema.define(version: 20140724185724) do
     t.string   "parent_phone"
     t.string   "parent_email"
     t.datetime "report_starts_at"
+    t.json     "pic_crop_factor"
   end
 
   create_table "versions", force: true do |t|

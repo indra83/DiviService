@@ -12,6 +12,7 @@ ActiveAdmin.register User do
 
 		f.inputs "Profile Picture" do
 			f.input :pic, as: :fileuploader
+      f.input :pic_crop_factor, as: :hidden
 		end
 
     f.inputs 'Contact details' do

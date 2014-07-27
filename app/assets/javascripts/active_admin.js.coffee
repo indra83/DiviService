@@ -2,6 +2,9 @@
 #
 #= require vendor/jquery.ui.widget
 #= require vendor/jquery.fileupload
+#
+#= require vendor/jquery.color
+#= require vendor/jquery.Jcrop
 
 $ ->
   $("input:file.directUpload").each (i, elem) ->
@@ -46,8 +49,28 @@ $ ->
         fileInput.val(null)
 
         if url.match /\.(jpg|png)$/i
-          image = $("<img />", src: url, width: 150, height: 150)
-          fileUrlInput.after image
+          image = $("<img />", src: url).insertAfter fileUrlInput
+          preview = $("<div class='crop-preview' />")
+                      .insertAfter(fileUrlInput)
+                      .append("<img src='#{url}'/>")
+                      .children()
+          crop_factor = $("##{fileInput.attr('id')}_crop_factor")
+
+          image.Jcrop
+            aspectRatio: 1
+            minSize: [150, 150]
+            setSelect: [0, 0, 150, 150]
+            onChange: (coords)->
+              crop_factor.val JSON.stringify coords
+              rx = 150/coords.w
+              ry = 150/coords.h
+
+              preview.css
+                width: "#{Math.round(rx*image.width())}px"
+                height: "#{Math.round(ry*image.height())}px"
+                marginLeft: "-#{Math.round(rx * coords.x)}px"
+                marginTop: "-#{Math.round(ry * coords.y)}px"
+
 
       fail: (e, data) ->
         submitButton.prop "disabled", false

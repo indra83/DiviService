@@ -1,3 +1,6 @@
+//= require_self
+//= require vendor/jquery.Jcrop
+
 // SASS variable overrides must be declared before loading up Active Admin's styles.
 //
 // To view the variables that Active Admin provides, take a look at
@@ -27,4 +30,10 @@
     color:   white;
     display: none;
   }
+}
+
+.crop-preview {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
 }
