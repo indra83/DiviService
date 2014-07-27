@@ -77,7 +77,7 @@ $ ->
 
         # extract key and generate URL from response
         key = $(data.jqXHR.responseXML).find("Key").text()
-        url = "//#{fileInput.data('host')}/#{key}"
+        url = "#{window.location.protocol}//#{fileInput.data('host')}/#{key}"
 
         fileUrlInput.val(url)
         fileInput.val(null)
