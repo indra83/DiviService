@@ -25,6 +25,15 @@ class User < ActiveRecord::Base
 
   include Rails.application.routes.url_helpers
 
+  def pic_crop_factor=(value)
+    value = begin
+              JSON.parse value
+            rescue
+              nil
+            end
+    write_attribute :pic_crop_factor, value
+  end
+
   def admin_path
     admin_class_room_user_path class_room, self
   end
