@@ -91,7 +91,7 @@ private
   end
 
   def versioned_pic_key(version, ext = File.extname(pic))
-    "#{base_key}/#{version}{ext}"
+    "#{base_key}/#{version}#{ext}"
   end
 
   def base_key

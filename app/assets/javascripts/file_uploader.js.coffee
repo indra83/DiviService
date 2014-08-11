@@ -32,6 +32,7 @@ $ ->
       jcropOpts =
         aspectRatio: 1
         minSize: [150, 150]
+        boxWidth: form.width() - 170
         onChange: (coords)->
           return unless jcrop_api
           crop_factor.val JSON.stringify coords
