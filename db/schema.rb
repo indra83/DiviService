@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727185010) do
+ActiveRecord::Schema.define(version: 20140730001210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,7 @@ ActiveRecord::Schema.define(version: 20140727185010) do
     t.string   "status"
     t.string   "strategy"
     t.integer  "book_from_version"
+    t.boolean  "copy"
   end
 
   add_index "updates", ["book_id"], name: "index_updates_on_book_id", using: :btree

@@ -43,6 +43,16 @@ class User < ActiveRecord::Base
     update_attributes token: nil
   end
 
+  def process_pic
+    copy_original
+    crop_and_resize_pic
+  end
+
+  def copy_original
+    return unless pic
+    S3_BUCKET.objects[versioned_pic_key :original].write open pic
+  end
+
   def crop_and_resize_pic
     return unless pic_crop_factor
     return unless pic
@@ -51,9 +61,8 @@ class User < ActiveRecord::Base
     image.crop "#{pic_crop_factor['w']}x#{pic_crop_factor['h']}+#{pic_crop_factor['x']}+#{pic_crop_factor['y']}"
     image.resize '150x150'
     image.format 'jpg'
-    processed_pic_name = "#{self.class.name}/#{id}/pic.jpg"
 
-    s3_obj = S3_BUCKET.objects[processed_pic_name]
+    s3_obj = S3_BUCKET.objects[versioned_pic_key '150x150', '.jpg']
     s3_obj.write image.to_blob,
       acl: :public_read,
       content_type: 'image/jpeg; charset=binary'
@@ -81,4 +90,11 @@ private
     }[role.to_sym]
   end
 
+  def versioned_pic_key(version, ext = File.extname(pic))
+    "#{base_key}/#{version}{ext}"
+  end
+
+  def base_key
+    "#{self.class.name}/#{id}/pic"
+  end
 end

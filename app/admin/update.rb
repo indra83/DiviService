@@ -28,6 +28,7 @@ ActiveAdmin.register Update do
     unless resource.persisted?
       f.inputs "File Upload" do
         f.input :file, as: :fileuploader
+        f.input :copy, as: :hidden, input_html: {value: true}
       end
     end
 
