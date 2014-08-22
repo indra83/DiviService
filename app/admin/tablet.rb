@@ -47,22 +47,26 @@ ActiveAdmin.register Tablet do
     end
 
     panel "Pending Updates" do
-      table_for tablet.pending_updates do
-        column :id
-        column :description
-        column :book
-        column :book_version
-        column :strategy do |update|
-          status_map = {
-            'patch'   => 'orange',
-            'replace' => 'red'
-          }
-          status_tag update.strategy, status_map[update.strategy]
+      if tablet
+        table_for tablet.pending_updates do
+          column :id
+          column :description
+          column :book
+          column :book_version
+          column :strategy do |update|
+            status_map = {
+              'patch'   => 'orange',
+              'replace' => 'red'
+            }
+            status_tag update.strategy, status_map[update.strategy]
+          end
+          column :status
+          column :file do |update|
+            link_to update.file, update.file
+          end
         end
-        column :status
-        column :file do |update|
-          link_to update.file, update.file
-        end
+      else
+        "Not Assosiated with a user"
       end
     end
   end
