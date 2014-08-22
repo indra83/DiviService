@@ -5,4 +5,5 @@ json.members @members do |member|
   json.name         member.name
   json.role         member.role
   json.profile_pic  member.pic
+  json.last_sync_times member.tablet.try(:timestamps)
 end
