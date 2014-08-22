@@ -10,7 +10,11 @@ class Cdn < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   def admin_path
-    admin_school_cdn_path school, self
+    if school
+      admin_school_cdn_path school, self
+    else
+      admin_orphan_cdn_path self
+    end
   end
 
   def updates
