@@ -2,11 +2,17 @@ class User < ActiveRecord::Base
   has_paper_trail
 
 	has_many :attempts, dependent: :destroy
-  has_many :commands, through: :class_rooms
+  #has_many :class_room_commands, through: :class_rooms, source: :commands
+  #has_many :direct_commands, class_name: :Command, foreign_key: :student_id
   has_one :tablet
 
+  def commands
+    t=Command.arel_table
+    Command.where(t[:class_room_id].in(class_room_ids).or(t[:student_id].eq(id)))
+  end
+
   has_secure_password
-  validate :name, presence: true,
+  validates :name, presence: true,
                   uniqueness: true
 
   #before_create :generate_token
