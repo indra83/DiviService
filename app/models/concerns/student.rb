@@ -13,8 +13,6 @@ module Student
       too_short: "must include atleast one participation."
     }
 
-    validates :class_rooms, length: { maximum: 1 },
-                            if: :student?
   end
 
   def student?
