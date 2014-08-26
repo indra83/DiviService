@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826071747) do
+ActiveRecord::Schema.define(version: 20140826143031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -212,13 +212,13 @@ ActiveRecord::Schema.define(version: 20140826071747) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "pic"
-    t.string   "metadata"
     t.string   "phone"
     t.string   "email"
     t.string   "parent_phone"
     t.string   "parent_email"
     t.datetime "report_starts_at"
     t.json     "pic_crop_factor"
+    t.json     "metadata"
   end
 
   add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
