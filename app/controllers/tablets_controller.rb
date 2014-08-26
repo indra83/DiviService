@@ -20,7 +20,7 @@ class TabletsController < ApplicationController
 
 private
   def tablet_params
-    params.require(:tablet).permit!
+    @tablet_params ||= params.require(:tablet).permit!
   end
 
 end

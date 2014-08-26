@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140823011112) do
+ActiveRecord::Schema.define(version: 20140826071747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 20140823011112) do
     t.integer  "battery_level"
   end
 
+  add_index "tablets", ["device_id"], name: "index_tablets_on_device_id", unique: true, using: :btree
   add_index "tablets", ["user_id"], name: "index_tablets_on_user_id", using: :btree
 
   create_table "updates", force: true do |t|
@@ -223,6 +224,8 @@ ActiveRecord::Schema.define(version: 20140823011112) do
     t.datetime "report_starts_at"
     t.json     "pic_crop_factor"
   end
+
+  add_index "users", ["token"], name: "index_users_on_token", unique: true, using: :btree
 
   create_table "versions", force: true do |t|
     t.string   "item_type",  null: false
