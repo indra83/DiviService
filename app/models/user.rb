@@ -10,8 +10,8 @@ class User < ActiveRecord::Base
   end
 
   has_secure_password
-  validates :name, presence: true,
-                  uniqueness: true
+  validates :name, presence: true
+  #                uniqueness: true
 
   #before_create :generate_token
   default_value_for(:report_starts_at) { Time.zone.now }
@@ -48,7 +48,6 @@ class User < ActiveRecord::Base
   def authenticate(password)
     return false unless super
     generate_token && save
-    return true
   end
 
   def pending_updates(version_defs)
