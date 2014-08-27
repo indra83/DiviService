@@ -6,9 +6,7 @@ class TabletsController < ApplicationController
     tablet = Tablet.where(device_id: tablet_params.delete(:device_id)).first_or_initialize
     status = tablet.persisted? ? 'updated' : 'created'
     tablet.assign_attributes(tablet_params)
-    current_user.tablet = tablet
-    # Optionally save. But due to the weird implementation of has_one this is already done in the above assignment
-    # tablet.save
+    tablet.save
 
     if tablet.errors.present?
       render json: {error: {code:422, message: "The tablet can not be #{status} due to validation errors", errors: tablet.errors} }
@@ -20,7 +18,10 @@ class TabletsController < ApplicationController
 
 private
   def tablet_params
-    @tablet_params ||= params.require(:tablet).permit!
+    @tablet_params ||= params.require(:tablet).tap do |t|
+      t[:user_id] = current_user.id
+      t.permit!
+    end
   end
 
 end

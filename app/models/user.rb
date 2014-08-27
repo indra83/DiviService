@@ -3,10 +3,14 @@ class User < ActiveRecord::Base
 
 	has_many :attempts, dependent: :destroy
   has_many :commands, through: :class_rooms
-  has_one :tablet
+  has_many :tablets
+
+  def tablet
+    tablets.order(updated_at: :desc).first
+  end
 
   has_secure_password
-  validate :name, presence: true,
+  validates :name, presence: true,
                   uniqueness: true
 
   #before_create :generate_token

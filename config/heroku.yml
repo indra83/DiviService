@@ -11,7 +11,7 @@
 #
 
 admin:
-  app: divi-service
+  app: divi-admin
   stack: cedar
   repo: git@heroku.personal:divi-admin.git
   config:
