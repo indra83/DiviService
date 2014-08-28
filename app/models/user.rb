@@ -2,9 +2,11 @@ class User < ActiveRecord::Base
   has_paper_trail
 
 	has_many :attempts, dependent: :destroy
-  #has_many :class_room_commands, through: :class_rooms, source: :commands
-  #has_many :direct_commands, class_name: :Command, foreign_key: :student_id
-  has_one :tablet
+  has_many :tablets
+
+  def tablet
+    tablets.order(updated_at: :desc).first
+  end
 
   def commands
     t=Command.arel_table
@@ -12,8 +14,7 @@ class User < ActiveRecord::Base
   end
 
   has_secure_password
-  validates :name, presence: true,
-                  uniqueness: true
+  validates :name, presence: true
 
   #before_create :generate_token
   default_value_for(:report_starts_at) { Time.zone.now }
@@ -24,6 +25,15 @@ class User < ActiveRecord::Base
   scope :need_pic_processing, -> { where('pic_crop_factor IS NOT NULL') }
 
   include Rails.application.routes.url_helpers
+
+  def metadata=(value)
+    value = begin
+              JSON.parse value
+            rescue
+              nil
+            end
+    write_attribute :metadata, value
+  end
 
   def pic_crop_factor=(value)
     value = begin

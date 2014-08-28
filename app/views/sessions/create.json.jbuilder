@@ -17,5 +17,5 @@ json.class_rooms @current_user.class_rooms do |class_room|
     json.name course.name
   end
 end
-json.metadata   @current_user.metadata
+json.metadata   @current_user.metadata.to_json
 json.time       Time.now.to_millistr
