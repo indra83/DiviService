@@ -24,11 +24,11 @@ class User < ActiveRecord::Base
   include Rails.application.routes.url_helpers
 
   def metadata=(value)
-    begin
-      JSON.parse value
-    rescue
-      nil
-    end
+    value = begin
+              JSON.parse value
+            rescue
+              nil
+            end
     write_attribute :metadata, value
   end
 
