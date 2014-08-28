@@ -3,7 +3,6 @@ class Cdn < ActiveRecord::Base
 
   belongs_to :school
 
-  #validates :school_id, presence: true
   validates :base_url, presence: true,
                        length: {minimum: 10}
 
@@ -15,10 +14,5 @@ class Cdn < ActiveRecord::Base
     else
       admin_orphan_cdn_path self
     end
-  end
-
-  def updates
-    return [] unless school
-    school.updates
   end
 end
