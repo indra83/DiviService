@@ -151,6 +151,7 @@ GEM
       rake
     hike (1.2.3)
     hirb (0.7.2)
+    hodel_3000_compliant_logger (0.1.1)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -188,6 +189,9 @@ GEM
     newrelic_rpm (3.8.1.221)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
+    oink (0.10.1)
+      activerecord
+      hodel_3000_compliant_logger
     orm_adapter (0.5.0)
     paper_trail (3.0.2)
       activerecord (>= 3.0, < 5.0)
@@ -334,6 +338,7 @@ DEPENDENCIES
   libnotify
   mini_magick
   newrelic_rpm
+  oink
   paper_trail (>= 3.0.0.beta1)
   pg
   pry-rails
