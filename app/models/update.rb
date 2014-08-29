@@ -27,12 +27,6 @@ class Update < ActiveRecord::Base
 
   scope :copy_needed, -> { where copy: true }
 
-  include Rails.application.routes.url_helpers
-
-  def admin_path
-    admin_book_update_path book, self
-  end
-
   def process_file
     copy_original
     update_attributes copy: false

@@ -6,9 +6,4 @@ class Course < ActiveRecord::Base
 
 	has_many :updates, through: :books
 
-  include Rails.application.routes.url_helpers
-
-  def admin_path
-    admin_course_path self
-  end
 end

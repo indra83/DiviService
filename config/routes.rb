@@ -1,8 +1,4 @@
 DiviService::Application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  #resource :session
-
   # V2 routes
   scope '/v2', defaults: { format: :json } do
     post "loginUser",           to: 'sessions#create',      as: :login
@@ -26,6 +22,4 @@ DiviService::Application.routes.draw do
   scope '/v1', defaults: { format: :json } do
     post "getCacheUpdates",   to: 'cdns#create',         as: :cache_updates
   end
-
-  root to: 'admin/dashboard#index'
 end

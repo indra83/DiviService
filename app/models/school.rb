@@ -9,9 +9,4 @@ class School < ActiveRecord::Base
 
   validates :name, presence: true
 
-  include Rails.application.routes.url_helpers
-
-  def admin_path
-    admin_school_path self
-  end
 end

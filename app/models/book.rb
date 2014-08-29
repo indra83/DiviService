@@ -6,19 +6,9 @@ class Book < ActiveRecord::Base
 
   validates :course_id, presence: true
 
-  def full_name
-    "#{course.name} - #{name}"
-  end
-
   def pending_updates(version, branch)
     version ||= 0
     updates.send(branch).since([attributes["#{branch}_updates_start"], version + 1].compact.max)
-  end
-
-  include Rails.application.routes.url_helpers
-
-  def admin_path
-    admin_book_path self
   end
 
   def rebuild_version_caches

@@ -24,8 +24,6 @@ class User < ActiveRecord::Base
 
   scope :need_pic_processing, -> { where('pic_crop_factor IS NOT NULL') }
 
-  include Rails.application.routes.url_helpers
-
   def metadata=(value)
     value = begin
               JSON.parse value
@@ -42,10 +40,6 @@ class User < ActiveRecord::Base
               nil
             end
     write_attribute :pic_crop_factor, value
-  end
-
-  def admin_path
-    admin_class_room_user_path class_room, self
   end
 
   def authenticate(password)
