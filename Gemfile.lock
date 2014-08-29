@@ -16,14 +16,6 @@ GIT
       sass-rails
 
 GIT
-  remote: git://github.com/josevalim/inherited_resources.git
-  revision: 38009de075d4c7e5170a582af9c09002ff6fc4b5
-  specs:
-    inherited_resources (1.5.0)
-      has_scope (~> 0.6.0.rc)
-      responders (~> 1.0)
-
-GIT
   remote: git://github.com/justinfrench/formtastic.git
   revision: ee69d3355bd443d40472147a2d087ed4a5b5af9b
   specs:
@@ -40,13 +32,6 @@ GIT
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-
-GIT
-  remote: git://github.com/plataformatec/responders.git
-  revision: 977ef87ca20a3875cda1ee5ed1d934bfd13fc7da
-  specs:
-    responders (1.1.0)
-      railties (>= 3.2, < 5)
 
 GEM
   remote: http://rubygems.org/
@@ -153,9 +138,9 @@ GEM
     hirb (0.7.2)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
-    jbuilder (1.5.3)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.2.0)
+    inherited_resources (1.5.0)
+      has_scope (~> 0.6.0.rc)
+      responders (~> 1.0)
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -242,6 +227,8 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    responders (1.1.1)
+      railties (>= 3.2, < 4.2)
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -327,8 +314,6 @@ DEPENDENCIES
   guard-unicorn
   heroku_san
   hirb
-  inherited_resources!
-  jbuilder (~> 1.2)
   jquery-rails
   json_expressions
   libnotify
@@ -341,7 +326,6 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails_12factor
   rb-inotify
-  responders!
   rspec-its
   rspec-rails
   sass-rails (~> 4.0.0)
