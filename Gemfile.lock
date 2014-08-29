@@ -100,6 +100,7 @@ GEM
       rake
     hike (1.2.3)
     hirb (0.7.2)
+    hodel_3000_compliant_logger (0.1.1)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -124,6 +125,9 @@ GEM
     multi_json (1.10.1)
     net-http-persistent (2.9.4)
     newrelic_rpm (3.8.1.221)
+    oink (0.10.1)
+      activerecord
+      hodel_3000_compliant_logger
     paper_trail (3.0.2)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
@@ -240,6 +244,7 @@ DEPENDENCIES
   json_expressions
   libnotify
   newrelic_rpm
+  oink
   paper_trail (>= 3.0.0.beta1)
   pg
   pry-rails
