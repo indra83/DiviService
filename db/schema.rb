@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 20141008051604) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "battery_level"
-    t.json     "metadata"
+    t.text     "metadata"
   end
 
   add_index "tablets", ["device_id"], name: "index_tablets_on_device_id", unique: true, using: :btree
