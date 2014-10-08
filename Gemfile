@@ -9,11 +9,11 @@ gem 'pg'
 gem 'airbrake'
 gem 'bcrypt'
 gem 'default_value_for'
+gem 'lograge'
 gem 'jbuilder', '~> 1.2'
 gem 'inherited_resources', github: 'josevalim/inherited_resources'
   gem 'responders',          github: 'plataformatec/responders'
 gem 'newrelic_rpm'
-gem 'oink'
 gem 'paper_trail', '>= 3.0.0.beta1'
 gem 'pubnub'
 gem 'unicorn'
@@ -30,9 +30,6 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'foreman'
   gem 'guard'
-    gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
-    gem 'rb-inotify' if /linux/ =~ RUBY_PLATFORM
-    gem 'growl' if /darwin/ =~ RUBY_PLATFORM
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-unicorn'

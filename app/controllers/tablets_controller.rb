@@ -20,6 +20,7 @@ private
   def tablet_params
     @tablet_params ||= params.require(:tablet).tap do |t|
       t[:user_id] = current_user.id
+      t[:metadata] = params.except(:tablet, :token, :uid).permit!.to_json
       t.permit!
     end
   end

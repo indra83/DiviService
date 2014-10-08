@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe User do
   subject(:user) { create :user, password: 'password', password_confirmation: 'password' }

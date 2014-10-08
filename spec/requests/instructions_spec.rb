@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "Instructions" do
   describe "POST /getInstructions" do
