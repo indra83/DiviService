@@ -65,5 +65,11 @@ ActiveAdmin.register Tablet do
         end
       end
     end
+
+    panel "metadata" do
+      attributes_table do
+        row :metadata
+      end
+    end
   end
 end
