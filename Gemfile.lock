@@ -124,6 +124,7 @@ GEM
       dotenv (~> 0.11.1)
       thor (~> 0.19.1)
     formatador (0.2.5)
+    growl (1.0.3)
     guard (2.6.1)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -151,7 +152,6 @@ GEM
       rake
     hike (1.2.3)
     hirb (0.7.2)
-    hodel_3000_compliant_logger (0.1.1)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -168,12 +168,14 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.2)
-    libnotify (0.8.3)
-      ffi (>= 1.0.11)
     listen (2.7.9)
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    lograge (0.3.0)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     lumberjack (1.0.7)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -189,9 +191,6 @@ GEM
     newrelic_rpm (3.8.1.221)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
-    oink (0.10.1)
-      activerecord
-      hodel_3000_compliant_logger
     orm_adapter (0.5.0)
     paper_trail (3.0.2)
       activerecord (>= 3.0, < 5.0)
@@ -325,6 +324,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   foreman
   formtastic!
+  growl
   guard
   guard-livereload
   guard-rspec
@@ -335,17 +335,15 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   json_expressions
-  libnotify
+  lograge
   mini_magick
   newrelic_rpm
-  oink
   paper_trail (>= 3.0.0.beta1)
   pg
   pry-rails
   pubnub
   rails (= 4.1.1)
   rails_12factor
-  rb-inotify
   responders!
   rspec-its
   rspec-rails
