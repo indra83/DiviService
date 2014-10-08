@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe "Updates" do
   describe "POST /getContentUpdates" do
