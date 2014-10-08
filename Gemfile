@@ -42,9 +42,6 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'foreman'
   gem 'guard'
-    gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
-    gem 'rb-inotify' if /linux/ =~ RUBY_PLATFORM
-    gem 'growl' if /darwin/ =~ RUBY_PLATFORM
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-unicorn'
