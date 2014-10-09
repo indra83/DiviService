@@ -1,5 +1,8 @@
 source 'http://rubygems.org'
 ruby '2.1.0', engine: 'rbx', engine_version: '2.2.10'
+# http://blog.newrelic.com/2013/12/06/rubinius-2-x-support/
+gem 'rubysl', :platforms => :rbx
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
