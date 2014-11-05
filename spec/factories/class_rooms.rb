@@ -5,5 +5,6 @@ FactoryGirl.define do
     standard "MyString"
     section "MyString"
     school
+    courses  { create_list :course, 2 }
   end
 end

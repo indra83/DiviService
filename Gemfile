@@ -34,7 +34,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-unicorn'
   gem 'hirb'
-  gem 'json_expressions'
+  gem 'json_expressions', github: 'chancancode/json_expressions' # https://github.com/chancancode/json_expressions/issues/27
 # gem 'localtunnel'
   gem 'pry-rails'
   gem 'rspec-rails'

@@ -6,8 +6,29 @@ describe "Session" do
     let(:pattern) {
       {
         uid: user.id.to_s,
-        token: user.token
-      }.ignore_extra_keys!
+        token: user.token,
+        metadata: user.metadata,
+        name: user.name,
+        profilePic: user.pic,
+        reportStartsAt: String,
+        role: user.role,
+        schoolLocation: String,
+        schoolName: String,
+        time: String,
+        classRooms: user.class_rooms.map { |class_room|
+          {
+            classId: class_room.id.to_s,
+            className: class_room.standard,
+            section: class_room.section,
+            courses: class_room.courses.map { |course|
+              {
+                id: course.id.to_s,
+                name: course.name
+              }
+            }
+          }
+        }
+      }
     }
 
     it "should return a token for successful login" do
@@ -17,5 +38,3 @@ describe "Session" do
     end
   end
 end
-
-

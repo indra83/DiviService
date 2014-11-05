@@ -47,9 +47,9 @@ describe 'Attempts' do
             attempts:       item.attempts.to_s,
             data:           item.data,
             lastUpdatedAt: item.last_updated_at.to_millistr
-          }.ignore_extra_keys!
+          }
         end
-      }.ignore_extra_keys!
+      }
     end
 
     pending "should return all the items" do

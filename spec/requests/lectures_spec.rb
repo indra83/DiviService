@@ -15,7 +15,7 @@ describe "Lecture" do
         teacherName: teacher.name,
         channel: /^lecture_\d+$/,
         startTime: /^\d{13}$/
-      }.ignore_extra_keys!
+      }
     end
 
     it "should be successfully created by a teacher" do
@@ -30,9 +30,9 @@ describe "Lecture" do
           errors: {
             teacher: :teacher_errors,
             class_room: :class_room_errors
-          }.ignore_extra_keys!
-        }.ignore_extra_keys!
-      }.ignore_extra_keys!
+          }
+        }
+      }
 
       lecture.save
       post create_lectures_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
@@ -53,7 +53,7 @@ describe "Lecture" do
           uid:  member.id,
           name: member.name,
           role: member.role
-        }.ignore_extra_keys!
+        }
       } }
       post lecture_members_path(format: :json), %({"token": "#{teacher.token}", "lectureId": "#{lecture.id}"}), CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern

@@ -19,9 +19,9 @@ describe "Updates" do
             description:  updates[2].description,
             details:      updates[2].details,
             webUrl:       updates[2].file
-          }.ignore_extra_keys!
+          }
         ]
-      }.ignore_extra_keys!
+      }
     end
 
     it "should return list of user's updates" do
@@ -42,9 +42,9 @@ describe "Updates" do
             description:  updates[2].description,
             details:      updates[2].details,
             webUrl:       updates[2].file
-          }.ignore_extra_keys!
+          }
         ]
-      }.ignore_extra_keys!)
+      })
     end
 
     it "should return staging updates for teachers" do
@@ -59,9 +59,9 @@ describe "Updates" do
             description:  staging_update.description,
             details:      staging_update.details,
             webUrl:       staging_update.file
-          }.ignore_extra_keys!
+          }
         ]
-      }.ignore_extra_keys!
+      }
       post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern
     end
@@ -70,7 +70,7 @@ describe "Updates" do
       staging_update = create :update, book: book, book_version: 4, status: 'staging'
       user.update_attributes role: 'student'
       post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression({ updates: [] }.ignore_extra_keys!)
+      response.body.should match_json_expression({ updates: [] })
     end
 
     context "with patches" do
@@ -83,9 +83,9 @@ describe "Updates" do
           updates: (3..5).map { |n|
             {
               bookVersion:  n
-            }.ignore_extra_keys!
+            }
           }
-        }.ignore_extra_keys!)
+        })
       end
 
       it "should return updates later only since recent rewrite" do
@@ -98,14 +98,14 @@ describe "Updates" do
             {
               bookVersion:  5,
               strategy: 'patch'
-            }.ignore_extra_keys!,
+            },
             {
               bookVersion:  4,
               strategy: 'replace'
-            }.ignore_extra_keys!,
+            },
 
           ]
-        }.ignore_extra_keys!)
+        })
       end
 
     end
