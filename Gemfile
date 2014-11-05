@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 ruby '2.1.2'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
@@ -17,7 +18,6 @@ gem 'newrelic_rpm'
 gem 'paper_trail', '>= 3.0.0.beta1'
 gem 'pubnub'
 gem 'unicorn'
-
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

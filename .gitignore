@@ -21,3 +21,4 @@ config/heroku_env.rb
 # Ignore vim temp files
 *~
 *.swp
+public/assets
