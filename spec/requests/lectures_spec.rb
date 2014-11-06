@@ -55,9 +55,10 @@ describe "Lecture" do
       students = create_list :user, 3, class_rooms: [class_room]
       pattern = { members: (students + [teacher]).map { |member|
         {
-          uid:  member.id,
-          name: member.name,
-          role: member.role
+          uid:        member.id,
+          name:       member.name,
+          role:       member.role,
+          profilePic: member.pic
         }
       } }
       post lecture_members_path(format: :json), %({"token": "#{teacher.token}", "lectureId": "#{lecture.id}"}), CONTENT_TYPE: 'application/json'
