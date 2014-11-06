@@ -62,6 +62,9 @@ group :ci do
     watch('app/controllers/application_controller.rb')  { "spec/controllers" }
     watch('spec/rails_helper.rb')                       { "spec" }
 
+    # Factories
+    watch(%r{^spec/factories/(.+)\.rb$})                  { "spec" }
+
     # Capybara features specs
     watch(%r{^app/views/(.+)/.*\.(erb|haml|jbuilder)$}) { |m| "spec/features/#{m[1]}_spec.rb" }
 
