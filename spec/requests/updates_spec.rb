@@ -15,7 +15,7 @@ describe "Updates" do
           {
             courseId:     course.id.to_s,
             bookId:       book.id.to_s,
-            bookVersion: updates[2].book_version,
+            bookVersion:  updates[2].book_version,
             description:  updates[2].description,
             details:      updates[2].details,
             webUrl:       updates[2].file
@@ -26,19 +26,40 @@ describe "Updates" do
 
     it "should return list of user's updates" do
       pattern
-      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": []}), CONTENT_TYPE: 'application/json'
+      json_payload = {
+        token: user.token,
+        tablet: {
+          content: {
+            versions: []
+          }
+        }
+      }
+      post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern
     end
 
     it "should return only recent updates" do
       pattern
-      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"2"}]}), CONTENT_TYPE: 'application/json'
+      json_payload = {
+        token: user.token,
+        tablet: {
+          content: {
+            versions: [
+              {
+                bookId: book.id,
+                version: 2
+              }
+            ]
+          }
+        }
+      }
+      post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression({
         updates: [
           {
             courseId:     course.id.to_s,
             bookId:       book.id.to_s,
-            bookVersion: updates[2].book_version,
+            bookVersion:  updates[2].book_version,
             description:  updates[2].description,
             details:      updates[2].details,
             webUrl:       updates[2].file
@@ -55,21 +76,50 @@ describe "Updates" do
           {
             courseId:     course.id.to_s,
             bookId:       book.id.to_s,
-            bookVersion: staging_update.book_version,
+            bookVersion:  staging_update.book_version,
             description:  staging_update.description,
             details:      staging_update.details,
             webUrl:       staging_update.file
           }
         ]
       }
-      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
+      json_payload = {
+        token: user.token,
+        tablet: {
+          content: {
+            versions: [
+              {
+                bookId: book.id,
+                version: 3
+              }
+            ]
+          }
+        }
+      }
+
+      post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
       response.body.should match_json_expression pattern
     end
 
     it "should return staging updates for teachers" do
       staging_update = create :update, book: book, book_version: 4, status: 'staging'
       user.update_attributes role: 'student'
-      post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"3"}]}), CONTENT_TYPE: 'application/json'
+      json_payload = {
+        token: user.token,
+        tablet: {
+          content: {
+            versions: [
+              {
+                bookId: book.id,
+                version: 3
+              }
+            ]
+          }
+        }
+      }
+
+      post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
+
       response.body.should match_json_expression({ updates: [] })
     end
 
@@ -78,7 +128,22 @@ describe "Updates" do
 
       it "should return all recent patches" do
         updates #create
-        post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"2"}]}), CONTENT_TYPE: 'application/json'
+        json_payload = {
+          token: user.token,
+          tablet: {
+            content: {
+              versions: [
+                {
+                  bookId: book.id,
+                  version: 2
+                }
+              ]
+            }
+          }
+        }
+
+        post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
+
         response.body.should match_json_expression({
           updates: (3..5).map { |n|
             {
@@ -88,11 +153,26 @@ describe "Updates" do
         })
       end
 
-      it "should return updates later only since recent rewrite" do
+      it "should return updates only since recent rewrite" do
         updates[3].update_attributes! strategy: :replace #v4
 
 
-        post content_updates_path(format: :json), %({"token": "#{user.token}", "versions": [{ "bookId":"#{book.id}", "version":"2"}]}), CONTENT_TYPE: 'application/json'
+        json_payload = {
+          token: user.token,
+          tablet: {
+            content: {
+              versions: [
+                {
+                  bookId: book.id,
+                  version: 2
+                }
+              ]
+            }
+          }
+        }
+
+        post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
+
         response.body.should match_json_expression({
           updates: [
             {
@@ -109,7 +189,26 @@ describe "Updates" do
       end
 
     end
+
+    context "including cdns" do
+      it "should return only the live cdns for the school" do
+        dead_cdn = create :cdn, school: class_room.school, pinged_at: 1.hour.ago
+        live_cdn = create :cdn, school: class_room.school, pinged_at: 5.minutes.ago
+
+        pattern = { cdn: [live_cdn.base_url] }
+
+        json_payload = {
+          token: user.token,
+          tablet: {
+            content: {
+              versions: []
+            }
+          }
+        }
+
+        post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
+        response.body.should match_json_expression pattern
+      end
+    end
   end
 end
-
-
