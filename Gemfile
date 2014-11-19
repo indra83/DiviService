@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.1.0', engine: 'rbx', engine_version: '2.2.10'
-# http://blog.newrelic.com/2013/12/06/rubinius-2-x-support/
-gem 'rubysl', :platforms => :rbx
+ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -28,11 +26,10 @@ gem 'newrelic_rpm'
 #gem 'oink'
 gem 'paper_trail', '>= 3.0.0.beta1'
 gem 'pubnub'
-gem 'puma'
 gem 'sass-rails', '~> 4.0.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-#gem 'unicorn'
+gem 'unicorn'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
