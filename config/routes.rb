@@ -6,6 +6,7 @@ DiviService::Application.routes.draw do
   # V2 routes
   scope '/v2', defaults: { format: :json } do
     post "loginUser",           to: 'sessions#create',      as: :login
+    post "loginGoogleUser",     to: 'sessions#google',      as: :google_login
     post "getContentUpdates",   to: 'updates#index',        as: :content_updates
     post "createLecture",       to: 'lectures#create',      as: :create_lectures
     post "getLectures",         to: 'lectures#index',       as: :lectures

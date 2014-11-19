@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_paper_trail
 
+  alias_attribute :profile_pic, :pic
 	has_many :attempts, dependent: :destroy
   has_many :commands, through: :class_rooms
   has_many :tablets
@@ -9,7 +10,7 @@ class User < ActiveRecord::Base
     tablets.order(updated_at: :desc).first
   end
 
-  has_secure_password
+  has_secure_password validations: false
   validates :name, presence: true
   #                uniqueness: true
 
