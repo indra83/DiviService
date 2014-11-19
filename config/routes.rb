@@ -12,6 +12,7 @@ DiviService::Application.routes.draw do
     post "getLectures",         to: 'lectures#index',       as: :lectures
     post "endLecture",          to: 'lectures#destroy',     as: :end_lecture
     post "getLectureMembers",   to: 'lectures#members',     as: :lecture_members
+    post "createClassRoom",     to: 'class_rooms#create',   as: :create_class_rooms
     post "getClassRoomMembers", to: 'class_rooms#members',  as: :class_room_members
     post "sendInstruction",     to: 'instructions#create',  as: :create_instructions
     post "getInstructions",     to: 'instructions#index',   as: :instructions
