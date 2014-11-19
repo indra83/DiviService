@@ -11,6 +11,13 @@ class ClassRoomsController < ApplicationController
     render 'sessions/create'
   end
 
+  def join
+    current_user.class_room_ids += [params[:class_id]]
+    render 'sessions/create'
+  rescue ActiveRecord::RecordNotFound
+    render json: {error: {code: 404, message: "No class room with the ID #{params[:class_id]} found."}}
+  end
+
   def members
     @class_room = ClassRoom.find params[:class_room_id]
     render json: {error: {code: 401, message: "Unauthorized"} } unless current_user.teacher? && @class_room && @class_room.users.include?(current_user)

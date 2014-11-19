@@ -12,13 +12,14 @@ DiviService::Application.routes.draw do
     post "getLectures",         to: 'lectures#index',       as: :lectures
     post "endLecture",          to: 'lectures#destroy',     as: :end_lecture
     post "getLectureMembers",   to: 'lectures#members',     as: :lecture_members
-    post "createClassRoom",     to: 'class_rooms#create',   as: :create_class_rooms
+    post "createClassRoom",     to: 'class_rooms#create',   as: :create_class_room
+    post "joinClassRoom",       to: 'class_rooms#join',     as: :join_class_room
     post "getClassRoomMembers", to: 'class_rooms#members',  as: :class_room_members
     post "sendInstruction",     to: 'instructions#create',  as: :create_instructions
     post "getInstructions",     to: 'instructions#index',   as: :instructions
     post "syncUp",              to: 'sync#create',          as: :sync_up
     post "syncDown",            to: 'sync#index',           as: :sync_down
-		post "getScores",					  to: 'sync#scores',			    as: :get_scores
+    post "getScores",           to: 'sync#scores',          as: :get_scores
     post "dashboardScores",     to: 'dashboard#score',      as: :dashboard_score
     post "tabCheckIn",          to: 'tablets#create',       as: :tab_check_in
   end
