@@ -14,7 +14,7 @@ defaults: &defaults
   app: divi-service
   stack: cedar
   #repo: git@heroku.personal:divi-service.git
-  config:
+  config: &default_config
     BUNDLE_WITHOUT:         'development:test'
     GOOGLE_ANALYTICS:       'UA-12345678-1'
     ERRBIT_TOKEN:           'ba4df5c987e04fbf9c4caa65efeb6479'
@@ -29,9 +29,9 @@ defaults: &defaults
     NEW_RELIC_LOG:          'stdout'
     PUBNUB_PUBLISH_KEY:     'pub-c-92cb1e82-71a1-4fd0-81ed-8cce0f25e4a3'
     PUBNUB_SUBSCRIBE_KEY:   'sub-c-56e5356a-5071-11e3-98c1-02ee2ddab7fe'
-    S3_BUCKET:              'divi-content-playstore'
+    S3_BUCKET:              'divi-content-prod'
     WEB_CONCURRENCY:        1
-  addons: &addons
+  addons: &default_addons
     - newrelic:stark
     - pgbackups:plus
     - scheduler:standard
@@ -41,24 +41,28 @@ defaults: &defaults
 production:
   <<: *defaults
   addons:
-    - *addons
+    - *default_addons
     - heroku-postgresql:standard-0
 admin:
   <<: *defaults
   app: divi-admin
   #repo: git@heroku.personal:divi-admin.git
   config:
+    <<: *default_config
     SECRET_KEY_BASE:        '9a30e1238971c0398b8e93b8519522f7794f536eb0d72a417e0e988b3590de8444e1c2520798099de8af047ff2c4dd7ae77959ff81c51fd1a3f4ed0d2b5f1463'
 playstore:
   <<: *defaults
   app: divi-playstore
   #repo: git@heroku.personal:divi-service.git
   config:
+    <<: *default_config
     SECRET_KEY_BASE:        'cfe4950846741e9e8278215bc39811a5ea323ffa5feb9a420219649f576759e6cd855899efa70974093f673302dbf6f4c0b550bc0ca3888ecd3ad4ad80e37b18'
+    S3_BUCKET:              'divi-content-playstore'
 staging:
   <<: *defaults
   app: divi-staging
   #repo: git@heroku.personal:divi-staging.git
   config:
+    <<: *default_config
     ERRBIT_TOKEN:           '600e99f0af40e46a999cc4db2d30c511'
     SECRET_KEY_BASE:        '83026357c50fa5fdc9cd13e1020e1179fba7b126db8ffd181d00b4caa488d9184e6ead09e56ebee71cb8b0bbfef12bd1f67747f50c5b698b23caf975ecf3500f'
