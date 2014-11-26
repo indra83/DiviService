@@ -82,8 +82,6 @@ class User < ActiveRecord::Base
     update_attributes pic_crop_factor: nil, pic: s3_obj.public_url(secure: false).to_s
   end
 
-protected
-
   def generate_token
     self.token = loop do
       random_token = SecureRandom.urlsafe_base64(nil, false)
