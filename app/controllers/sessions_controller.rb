@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
     @current_user = User.where(google_id: params[:google_id])
                         .first_or_initialize(class_room_ids: [1])
     @current_user.assign_attributes google_params
+    @current_user.generate_token
 
     if @current_user.save
       render :create
