@@ -22,7 +22,8 @@ describe "Session" do
           googleID: "110833109878975856494",
           name: "blah blah",
           profilePic: "https://lh4.googleusercontent.com/-gHNF9cQ8M2M/AAAAAAAAAAI/AAAAAAAAAAA/lqHM3Rhw98Y/photo.jpg",
-          role: "teacher"
+          role: "teacher",
+          email: 'test@example.com'
         }
       }
 

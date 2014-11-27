@@ -32,6 +32,6 @@ binding.pry
 
 private
   def google_params
-    @google_params ||=  params.permit :google_id, :name, :profile_pic, :role
+    @google_params ||=  params.permit :google_id, :name, :profile_pic, :role, :email
   end
 end
