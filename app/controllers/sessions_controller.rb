@@ -19,7 +19,6 @@ class SessionsController < ApplicationController
     if @current_user.save
       render :create
     else
-binding.pry
       render json: {
         error: {
           code:     422,
