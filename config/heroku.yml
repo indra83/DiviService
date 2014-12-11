@@ -58,6 +58,7 @@ playstore:
     <<: *default_config
     SECRET_KEY_BASE:        'cfe4950846741e9e8278215bc39811a5ea323ffa5feb9a420219649f576759e6cd855899efa70974093f673302dbf6f4c0b550bc0ca3888ecd3ad4ad80e37b18'
     S3_BUCKET:              'divi-content-playstore'
+    PUBNUB_PREFIX:          'playstore'
 staging:
   <<: *defaults
   app: divi-staging

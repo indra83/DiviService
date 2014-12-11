@@ -21,7 +21,7 @@ class Lecture < ActiveRecord::Base
   delegate :members, to: :class_room
 
 	def channel
-		"lecture_#{id}"
+		[ENV['PUBNUB_PREFIX'], 'lecture', id].compact.join '_'
 	end
 
   def live?
