@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :tablets
 
   def tablet
-    tablets.order(updated_at: :desc).first
+    tablets.order('updated_at DESC').first
   end
 
   has_secure_password

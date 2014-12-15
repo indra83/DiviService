@@ -12,7 +12,7 @@ class Update < ActiveRecord::Base
   after_save :build_book
 
   scope :latest, -> {
-    order(:book_version)
+    order('book_version')
   }
 
   scope :since, ->(v) { latest.where 'book_version >= ?', v }
