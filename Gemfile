@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.2.0'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -12,7 +12,7 @@ gem 'activeadmin',         github: 'gregbell/active_admin' #, branch: 'rails4'
   gem 'formtastic',          github: 'justinfrench/formtastic'
   #gem 'ransack'#,             github: 'ernie/ransack', branch: 'rails-4'
 gem 'airbrake'
-gem 'aws-sdk'
+gem 'aws-sdk', '~>1.0'
 gem 'bcrypt'
 gem 'coffee-rails'
 gem 'default_value_for'

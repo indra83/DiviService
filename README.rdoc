@@ -1,28 +1,22 @@
-== README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Admin
 
-Things you may want to cover:
+    git checkout admin
+    rake <env>-admin deploy heroku:config heroku:addons
 
-* Ruby version
+## AWS
 
-* System dependencies
+Config is in heroku.yml
+create bucket to hold all the uploads and give it permission to be accessible by the user whose credentials are passed in the config
+Add cors rule to the bucket so that it can be used from the admin interface using js
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+    <?xml version="1.0" encoding="UTF-8"?>
+    <CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+        <CORSRule>
+            <AllowedOrigin>http://divi-<environment>-admin.herokuapp.com</AllowedOrigin>
+            <AllowedMethod>GET</AllowedMethod>
+            <AllowedMethod>POST</AllowedMethod>
+            <AllowedMethod>PUT</AllowedMethod>
+            <AllowedHeader>*</AllowedHeader>
+        </CORSRule>
+    </CORSConfiguration>
