@@ -57,6 +57,13 @@ GEM
     celluloid (0.16.0)
       timers (~> 4.0.0)
     coderay (1.1.0)
+    coffee-rails (4.1.0)
+      coffee-script (>= 2.2.0)
+      railties (>= 4.0.0, < 5.0)
+    coffee-script (2.3.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.9.1)
     default_value_for (3.0.0.1)
       activerecord (>= 3.2.0, < 5.0)
     diff-lcs (1.2.5)
@@ -69,6 +76,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     excon (0.37.0)
+    execjs (2.3.0)
     factory_girl (4.4.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.4.1)
@@ -200,6 +208,12 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.4)
+    sass (3.2.19)
+    sass-rails (4.0.3)
+      railties (>= 4.0.0, < 5.0)
+      sass (~> 3.2.0)
+      sprockets (~> 2.8, <= 2.11.0)
+      sprockets-rails (~> 2.0)
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
@@ -222,8 +236,13 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    turbolinks (2.2.2)
+      coffee-rails
     tzinfo (1.2.1)
       thread_safe (~> 0.1)
+    uglifier (2.7.0)
+      execjs (>= 0.3.0)
+      json (>= 1.8.0)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
@@ -258,6 +277,9 @@ DEPENDENCIES
   responders!
   rspec-its
   rspec-rails
+  sass-rails (~> 4.0.0)
   sdoc
   spring
+  turbolinks
+  uglifier (>= 1.3.0)
   unicorn

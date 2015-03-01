@@ -17,7 +17,11 @@ gem 'inherited_resources', github: 'josevalim/inherited_resources'
 gem 'newrelic_rpm'
 gem 'paper_trail', '>= 3.0.0.beta1'
 gem 'pubnub'
+gem 'sass-rails', '~> 4.0.0'
+gem 'turbolinks'
+gem 'uglifier', '>= 1.3.0'
 gem 'unicorn'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
