@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 ruby '2.1.2'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
 
@@ -15,9 +16,12 @@ gem 'aws-sdk'
 gem 'bcrypt'
 gem 'coffee-rails'
 gem 'default_value_for'
+gem 'lograge'
+gem 'jbuilder', '~> 1.2'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'newrelic_rpm'
+#gem 'oink'
 gem 'paper_trail', '>= 3.0.0.beta1'
 gem 'pubnub'
 gem 'sass-rails', '~> 4.0.0'
@@ -37,9 +41,6 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem 'foreman'
   gem 'guard'
-    gem 'libnotify' if /linux/ =~ RUBY_PLATFORM
-    gem 'rb-inotify' if /linux/ =~ RUBY_PLATFORM
-    gem 'growl' if /darwin/ =~ RUBY_PLATFORM
   gem 'guard-livereload'
   gem 'guard-rspec'
   gem 'guard-unicorn'

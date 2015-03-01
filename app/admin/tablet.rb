@@ -69,5 +69,9 @@ ActiveAdmin.register Tablet do
         "Not Assosiated with a user"
       end
     end
+
+    panel "metadata" do
+      tablet.metadata
+    end
   end
 end

@@ -50,7 +50,15 @@ Rails.application.configure do
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  config.lograge.enabled = true
+  config.lograge.formatter =  Lograge::Formatters::Json.new
 
+  config.lograge.custom_options = lambda do |event|
+    {
+      params: event.payload[:params].except('conroller', 'action', 'format')
+    }
+  end
+  
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 

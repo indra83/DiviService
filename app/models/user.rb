@@ -51,7 +51,6 @@ class User < ActiveRecord::Base
   def authenticate(password)
     return false unless super
     generate_token && save
-    return true
   end
 
   def pending_updates(version_defs)
