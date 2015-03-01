@@ -15,6 +15,9 @@ admin: &admin
   stack: cedar
   #repo: git@heroku.personal:divi-admin.git
   config: &admin-config
+    AWS_ACCESS_KEY_ID: "AKIAITYWUGKIHBHP4YGQ"
+    AWS_SECRET_ACCESS_KEY: "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"
+    S3_BUCKET: "divi-content-prod"
     BUNDLE_WITHOUT: "development:test"
     GOOGLE_ANALYTICS: "UA-12345678-1"
     ERRBIT_TOKEN: 'ba4df5c987e04fbf9c4caa65efeb6479'
@@ -29,6 +32,7 @@ dev-admin:
   app: divi-dev-admin
   config:
     <<: *admin-config
+    S3_BUCKET: "divi-content-dev"
     SECRET_KEY_BASE: 'a8472fd577a9dcd8b066e77d48bab76164717da4fa0b45a98330292c66f828ea63314a1dff0305fc224fc01f61c784101353f8691fcd789a480d86b44371e759'
 production:
   app: divi-service
