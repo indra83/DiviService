@@ -24,4 +24,13 @@ class ClassRoom < ActiveRecord::Base
   def admin_path
     admin_school_class_room_path school, self
   end
+
+  attr_accessor :allowed_app_packages_field
+  def allowed_app_packages_field
+    self.allowed_app_packages.join(", ") unless self.allowed_app_packages.nil?
+  end
+
+  def allowed_app_packages_field=(values)
+    self.allowed_app_packages = [values.split(",").map(&:strip)].flatten.compact.uniq
+  end
 end

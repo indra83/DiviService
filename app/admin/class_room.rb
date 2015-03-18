@@ -23,6 +23,7 @@ ActiveAdmin.register ClassRoom do
       f.input :standard
       f.input :section
       f.input :courses
+      f.input :allowed_app_packages_field
     end
     f.actions
   end
