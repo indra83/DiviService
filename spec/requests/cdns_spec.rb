@@ -16,8 +16,7 @@ describe 'Cdns' do
         } }
       }
       post cache_updates_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
   end
 end
-

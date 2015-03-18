@@ -17,11 +17,11 @@ describe "Instructions" do
           {
             id: instruction.id.to_s,
             timeStamp: instruction.created_at.to_millistr,
-            data: instruction.payload.to_s
+            data: instruction.payload.to_json
           }
         }
       }
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
   end
 end

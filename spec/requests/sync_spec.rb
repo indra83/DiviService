@@ -13,7 +13,7 @@ describe 'Attempts' do
         status: [ 'created' ] * 3
       }
       post sync_up_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
 
     it 'should update existing sync items' do
@@ -27,26 +27,26 @@ describe 'Attempts' do
         ]
       }
       post sync_up_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
   end
 
   describe 'POST /syncDown' do
     let(:user) { create :user }
-    let(:old_attempts)    { create_list :attempt, 2, user: user, updated_at: 2.hours.ago }
-    let(:cut_off_attempt) { create :attempt, user: user, updated_at: 1.hour.ago }
-    let(:new_attempts)    { create_list :attempt, 2, user: user, updated_at: Time.zone.now }
+    let(:old_attempts)    { (1..2).map {|n| create :attempt, user: user, last_updated_at: (120-n).minutes.ago } }
+    let(:cut_off_attempt) {                 create :attempt, user: user, last_updated_at:      60.minutes.ago   }
+    let(:new_attempts)    { (1..2).map {|n| create :attempt, user: user, last_updated_at: ( 50-n).minutes.ago } }
 
-    let(:old_commands)    { create_list :command, 2, student: user, updated_at: 2.hours.ago }
-    let(:cut_off_command) { create :command, student: user, updated_at: 1.hour.ago }
-    let(:new_commands)    { create_list :command, 2, student: user, updated_at: Time.zone.now }
+    let(:old_commands)    { (1..2).map {|n| create :command, student: user, updated_at: (120-n).minutes.ago } }
+    let(:cut_off_command) {                 create :command, student: user, updated_at:      60.minutes.ago   }
+    let(:new_commands)    { (1..2).map {|n| create :command, student: user, updated_at: ( 50-n).minutes.ago } }
 
     let(:json_payload)    {
       {
         token: user.token,
         lastSyncTime: {
-          attempts: cut_off_attempt.updated_at.to_millistr.to_s,
-          commands: cut_off_command.updated_at.to_millistr.to_s
+          attempts: cut_off_attempt.last_updated_at.to_millistr,
+          commands: cut_off_command.updated_at.to_millistr
         }
       }
     }
@@ -64,20 +64,21 @@ describe 'Attempts' do
             assessmentId:     item.assessment_id.to_s,
             questionId:       item.question_id.to_s,
             subquestions:     item.subquestions,
-            totalPoints:      item.total_points.to_s,
-            attempts:         item.attempts.to_s,
+            totalPoints:      item.total_points,
+            attempts:         item.attempts,
             correctAttempts:  item.correct_attempts,
             wrongAttempts:    item.wrong_attempts,
             data:             item.data,
-            solvedAt:         item.solved_at.to_millistr,
+            solvedAt:         item.solved_at.try(:to_millistr),
             lastUpdatedAt:    item.last_updated_at.to_millistr
           }
-        },
+        }.ordered!,
         commands: expected_commands.map { |command|
           {
-
+            id:               command.id.to_s,
+            studentId:        user.id.to_s
           }
-        },
+        }.ordered!,
         hasMoreData: false
       }
     end
@@ -86,7 +87,7 @@ describe 'Attempts' do
       pattern #initialize
 
       post sync_down_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
 
     context "with pageination" do
@@ -99,18 +100,18 @@ describe 'Attempts' do
         pattern #initialize
 
         post sync_down_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
-        response.body.should match_json_expression pattern
+        expect(response.body).to match_json_expression pattern
       end
 
       context "with no new commands" do
-        let(:json_payload) {super().deep_merge lastSyncTime: {command: 1.minute.from_now}}
+        let(:json_payload) {super().deep_merge lastSyncTime: {commands: 1.minute.from_now.to_millistr}}
         let(:expected_commands) {[]}
 
         it "should return first page of new attempts with hasMoreData set" do
           pattern #initialize
 
           post sync_down_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
-          response.body.should match_json_expression pattern
+          expect(response.body).to match_json_expression pattern
         end
 
       end

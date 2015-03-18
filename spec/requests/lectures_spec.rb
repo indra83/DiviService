@@ -20,7 +20,7 @@ describe "Lecture" do
   describe "POST /createLecture" do
     it "should be successfully created by a teacher" do
       post create_lectures_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
 
     it "should not allow teacher to create two live lectures simultaneously" do
@@ -36,7 +36,7 @@ describe "Lecture" do
 
       lecture.save
       post create_lectures_path(format: :json), json_payload, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression error_pattern
+      expect(response.body).to match_json_expression error_pattern
     end
 
   end
@@ -45,7 +45,7 @@ describe "Lecture" do
     it "should list out all the lectures of a teacher" do
       lecture.save
       post lectures_path(format: :json), %({"token": "#{teacher.token}"}), CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression [pattern]
+      expect(response.body).to match_json_expression [pattern]
     end
   end
 
@@ -62,7 +62,7 @@ describe "Lecture" do
         }
       } }
       post lecture_members_path(format: :json), %({"token": "#{teacher.token}", "lectureId": "#{lecture.id}"}), CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
   end
 end

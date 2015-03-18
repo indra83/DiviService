@@ -35,7 +35,7 @@ describe "Updates" do
         }
       }
       post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
 
     it "should return only recent updates" do
@@ -54,7 +54,7 @@ describe "Updates" do
         }
       }
       post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression({
+      expect(response.body).to match_json_expression({
         updates: [
           {
             courseId:     course.id.to_s,
@@ -98,7 +98,7 @@ describe "Updates" do
       }
 
       post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
 
     it "should return staging updates for teachers" do
@@ -120,7 +120,7 @@ describe "Updates" do
 
       post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
 
-      response.body.should match_json_expression({ updates: [] })
+      expect(response.body).to match_json_expression({ updates: [] })
     end
 
     context "with patches" do
@@ -144,7 +144,7 @@ describe "Updates" do
 
         post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
 
-        response.body.should match_json_expression({
+        expect(response.body).to match_json_expression({
           updates: (3..5).map { |n|
             {
               bookVersion:  n
@@ -173,7 +173,7 @@ describe "Updates" do
 
         post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
 
-        response.body.should match_json_expression({
+        expect(response.body).to match_json_expression({
           updates: [
             {
               bookVersion:  5,
@@ -207,7 +207,7 @@ describe "Updates" do
         }
 
         post content_updates_path(format: :json), json_payload.to_json, CONTENT_TYPE: 'application/json'
-        response.body.should match_json_expression pattern
+        expect(response.body).to match_json_expression pattern
       end
     end
   end

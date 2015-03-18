@@ -7,7 +7,7 @@ class SyncController < ApplicationController
     @commands = []
     @has_more_data = false
 
-    per_page = params[:items_per_page].to_i || 100
+    per_page = (params[:items_per_page] || 100).to_i
 
     if last_sync_times[:attempts]
       @attempts = current_user.attempts.paginated_latest(Time.from_millistr(last_sync_times[:attempts]), per_page)
@@ -22,7 +22,7 @@ class SyncController < ApplicationController
 
 	def create
     @items_status = params[:attempts].map do |item_params|
-      search_params = item_params.extract! :book_id, :assessment_id, :question_id
+      search_params = item_params.permit :book_id, :assessment_id, :question_id
       search_params[:user_id] = current_user.id
       value_params = item_params.permit :total_points, :attempts, :correct_attempts, :wrong_attempts, :subquestions, :data, :course_id
       value_params[:last_updated_at] = Time.from_millistr item_params[:last_updated_at] if item_params[:last_updated_at]

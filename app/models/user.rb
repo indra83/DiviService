@@ -48,11 +48,15 @@ class User < ActiveRecord::Base
   end
 
   def pending_updates(version_defs)
-    version_defs ||= []
-    version_map = version_defs.inject({}) {|h, vd| h[vd["book_id"].to_i] = vd["version"].to_i ; h}
-    books.map { |book|
-      book.pending_updates(version_map[book.id], book_branch)
-    }.flatten
+    logger.tagged('PendingUpdates', "user: #{self.id}") do
+      logger.debug "Recieved version_defs: #{version_defs.inspect}"
+      version_defs ||= []
+      version_map = version_defs.inject({}) {|h, vd| h[vd["book_id"].to_i] = vd["version"].to_i ; h}
+      logger.debug "Computed version_map: #{version_map.inspect}"
+      books.map { |book|
+        book.pending_updates(version_map[book.id], book_branch)
+      }.flatten
+    end
   end
 
   delegate :battery_level, :last_check_in, :is_content_up_to_date?, to: :tablet, allow_nil: true

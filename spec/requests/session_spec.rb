@@ -12,15 +12,17 @@ describe "Session" do
         profilePic: user.pic,
         reportStartsAt: String,
         role: user.role,
-        schoolLocation: String,
+        # schoolLocation: String,
         schoolName: String,
         time: String,
         classRooms: user.class_rooms.map { |class_room|
           {
-            classId: class_room.id.to_s,
-            className: class_room.standard,
-            section: class_room.section,
-            courses: class_room.courses.map { |course|
+            classId:            class_room.id.to_s,
+            className:          class_room.standard,
+            section:            class_room.section,
+            allowedAppPackages: class_room.allowed_app_packages,
+
+            courses:            class_room.courses.map { |course|
               {
                 id: course.id.to_s,
                 name: course.name
@@ -34,7 +36,8 @@ describe "Session" do
     it "should return a token for successful login" do
       post login_path(format: :json), %({"uid": "#{user.id}", "password": "#{user.password}"}), CONTENT_TYPE: 'application/json'
       user.reload
-      response.body.should match_json_expression pattern
+      expect(response.body).to match_json_expression pattern
     end
+
   end
 end

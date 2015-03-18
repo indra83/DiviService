@@ -28,5 +28,7 @@ module DiviService
     # config.i18n.default_locale = :de
 
     config.middleware.use Rack::Deflater
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

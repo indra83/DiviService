@@ -12,8 +12,7 @@ json.item_category item.item_category
 json.category      item.category
 json.status        item.status
 json.data          item.data.to_s
-json.applied_at    item.applied_at.to_millistr
+json.applied_at    item.applied_at.try(:to_millistr)
 json.ends_at       item.ends_at.to_millistr
 json.created_at    item.created_at.to_millistr
 json.updated_at    item.updated_at.to_millistr
-
