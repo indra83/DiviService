@@ -2,6 +2,7 @@ class Tablet < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :user
+  belongs_to :lab
 
   def is_content_up_to_date?
     pending_updates.empty?

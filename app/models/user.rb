@@ -44,6 +44,10 @@ class User < ActiveRecord::Base
 
   def authenticate(password)
     return false unless super
+    post_authenticate!
+  end
+
+  def post_authenticate!
     generate_token && save
   end
 
