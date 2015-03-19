@@ -31,6 +31,6 @@ class ClassRoom < ActiveRecord::Base
   end
 
   def allowed_app_packages_field=(values)
-    self.allowed_app_packages = [values.split(",").map(&:strip)].flatten.compact.uniq
+    self.allowed_app_packages = [values.split(",").map(&:strip)].flatten.select(&:present?).uniq
   end
 end
