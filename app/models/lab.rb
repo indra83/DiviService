@@ -1,5 +1,6 @@
 class Lab < ActiveRecord::Base
   belongs_to :school
+  has_many :tablets
 
   attr_accessor :class_room
   def class_room

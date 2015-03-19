@@ -12,6 +12,7 @@ ActiveAdmin.register Tablet do
     column :battery_level
     column :token
     column :user
+    column :lab
     column :timestamps do |t|
       span "attempts: #{time_ago_in_words Time.from_millistr t.timestamps['attempts'] } ago"
       tag :br
@@ -31,6 +32,7 @@ ActiveAdmin.register Tablet do
       row :device_id
       row :device_tag
       row :user
+      row :lab
       row :battery_level
       row :created_at
       row :updated_at

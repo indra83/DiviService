@@ -7,6 +7,7 @@ class Tablet < ActiveRecord::Base
   end
 
   belongs_to :user
+  belongs_to :lab
 
   def is_content_up_to_date?
     pending_updates.empty?

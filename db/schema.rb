@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150318184700) do
+ActiveRecord::Schema.define(version: 20150319124426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,7 @@ ActiveRecord::Schema.define(version: 20150318184700) do
     t.datetime "updated_at"
     t.integer  "battery_level"
     t.text     "metadata"
+    t.integer  "lab_id"
   end
 
   add_index "tablets", ["device_id"], name: "index_tablets_on_device_id", unique: true, using: :btree
