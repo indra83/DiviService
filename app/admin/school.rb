@@ -9,6 +9,9 @@ ActiveAdmin.register School do
     column do |s|
       link_to 'Class Rooms', admin_school_class_rooms_path(s)
     end
+    column do |s|
+      link_to 'Labs', admin_school_labs_path(s)
+    end
   end
 
   action_item only: [:show, :edit] do
