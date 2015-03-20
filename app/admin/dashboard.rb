@@ -34,8 +34,12 @@ ActiveAdmin.register_page "Dashboard" do
       table_for PaperTrail::Version.order('id desc').limit(20) do # Use PaperTrail::Version if this throws an error
         column :id
         column "Item" do |v|
-          item = v.item || v.reify || PaperTrail::Version.where(item_id: v.item_id).where("created_at > ?", v.created_at).order('created_at ASC').first.reify
-          item.try(:name) || item
+          begin
+            item = v.item || v.reify || PaperTrail::Version.where(item_id: v.item_id).where("created_at > ?", v.created_at).order('created_at ASC').first.reify
+            item.try(:name) || item
+          rescue NameError
+            "#{v.item_type}: #{v.item_id}"
+          end
         end
         # column "Item" do |v| link_to v.item, [:admin, v.item] end # Uncomment to display as link
         column "Type" do |v|
