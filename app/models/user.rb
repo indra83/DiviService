@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
       version_map = version_defs.inject({}) {|h, vd| h[vd["book_id"].to_i] = vd["version"].to_i ; h}
       logger.debug "Computed version_map: #{version_map.inspect}"
       books.map { |book|
-        book.pending_updates(version_map[book.id], book_branch)
+        book.pending_updates(version_map[book.id] || 0, book_branch)
       }.flatten
     end
   end

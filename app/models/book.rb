@@ -6,8 +6,7 @@ class Book < ActiveRecord::Base
 
   validates :course_id, presence: true
 
-  def pending_updates(version, branch)
-    version ||= 0
+  def pending_updates(version = 0, branch = :live)
     updates.send(branch).since([attributes["#{branch}_updates_start"], version + 1].compact.max)
   end
 

@@ -9,6 +9,6 @@ class Cdn < ActiveRecord::Base
 
   def updates
     return [] unless school
-    school.updates
+    school.books.map(&:pending_updates).flatten
   end
 end
