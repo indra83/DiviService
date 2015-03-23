@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
     attempts = Attempt.where(
       assessment_id: params[:assessment_id],
       book_id: params[:book_id],
-      user_id: ClassRoom.find(params[:class_id]).users.map(&:id)
+      user_id: ClassRoom.find(params[:class_id]).users.students.pluck(:id)
     )
 
     @scores_by_student = DashboardScoreCalculator.new attempts, :user_id
