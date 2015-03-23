@@ -89,7 +89,8 @@ class User < ActiveRecord::Base
     s3_obj = S3_BUCKET.objects[versioned_pic_key '150x150', '.jpg']
     s3_obj.write image.to_blob,
       acl: :public_read,
-      content_type: 'image/jpeg; charset=binary'
+      content_type: 'image/jpeg; charset=binary',
+      cache_control: 'max-age=86400'
     update_attributes pic_crop_factor: nil, pic: s3_obj.public_url(secure: false).to_s
   end
 

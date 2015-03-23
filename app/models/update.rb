@@ -53,7 +53,10 @@ class Update < ActiveRecord::Base
       end
     end
     t.rewind
-    o.write t
+    o.write t,
+            acl: :public_read,
+            content_type: 'application/zip; charset=binary',
+            cache_control: 'max-age=3153600'
     self.file = o.public_url(secure: false).to_s
   end
 
