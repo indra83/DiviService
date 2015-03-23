@@ -41,10 +41,9 @@ describe "Session" do
 
     context 'when auto provisioning' do
       let(:lab) {create :lab, pending_user_ids: [user.id]}
-      let(:tablet) {create :tablet, lab: lab}
 
       it "should provision the user on tablet" do
-        payload = %({"tab_id": "#{tablet.id}"})
+        payload = %({"lab_id": "#{lab.id}"})
         post autoprovision_path(format: :json), payload , CONTENT_TYPE: 'application/json'
         user.reload
         expect(response.body).to match_json_expression pattern
