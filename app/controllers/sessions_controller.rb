@@ -11,12 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def autoprovision
-    @tablet = Tablet.find(params[:tab_id])
-    lab_update = @tablet.lab.tap { |lab|
-      session[:current_user_id] = lab.pending_user_ids.shift
-    }.save
-
-    @current_user = User.find_by_id session[:current_user_id]
+    @current_user = Lab.find(params[:lab_id]).pop_pending_user
 
     if @current_user && @current_user.post_authenticate!
       render :create
