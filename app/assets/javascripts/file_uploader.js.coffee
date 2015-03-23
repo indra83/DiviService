@@ -22,13 +22,13 @@ $ ->
     fileUrlInput.after barContainer
 
     crop_factor = $("##{fileInput.attr('id')}_crop_factor")
+    jcrop_api = null
     if crop_factor.length > 0
-      image = $("<img />").insertAfter crop_factor
+      image = $("<img src='http://placehold.it/450&text=Upload+image+to+crop'/>").insertAfter crop_factor
       preview = $("<div class='crop-preview' />")
                   .insertAfter(crop_factor)
                   .append("<img />")
                   .children()
-      jcrop_api = null
       jcropOpts =
         aspectRatio: 1
         minSize: [150, 150]
