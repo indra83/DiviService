@@ -55,7 +55,7 @@ private
     keys =[:user_id, :course_id, :book_id, :assessment_id]
     keys.each {|key| params.require key}
 
-    params.slice *keys
+    params.permit(*keys)
   end
 
   def last_sync_times
