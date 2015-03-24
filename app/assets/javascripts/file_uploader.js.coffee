@@ -17,7 +17,8 @@ $ ->
 
     fileUrlInput = $("<input />",
                       name: fileInput.attr("name"),
-                      placeholder: 'or enter the url')
+                      placeholder: 'or enter the url',
+                      type: 'text')
     fileInput.after fileUrlInput
     fileUrlInput.after barContainer
 
@@ -27,12 +28,12 @@ $ ->
       image = $("<img src='http://placehold.it/450&text=Upload+image+to+crop'/>").insertAfter crop_factor
       preview = $("<div class='crop-preview' />")
                   .insertAfter(crop_factor)
-                  .append("<img />")
+                  .append("<img src='http://placehold.it/150&text=preview' />")
                   .children()
       jcropOpts =
         aspectRatio: 1
         minSize: [150, 150]
-        boxWidth: form.width() - 170
+        boxWidth: barContainer.width() - 153
         onChange: (coords)->
           return unless jcrop_api
           crop_factor.val JSON.stringify coords
@@ -96,4 +97,3 @@ $ ->
         submitButton.prop "disabled", false
         progressBar.removeClass('orange green').addClass('red')
         progressText.text "Failed"
-

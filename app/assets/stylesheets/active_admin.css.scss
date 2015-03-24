@@ -38,7 +38,32 @@
 }
 
 .crop-preview {
+  margin: 0px 11px;
   width: 150px;
   height: 150px;
   overflow: hidden;
+  float: left;
+}
+
+.jcrop-holder {
+  width: calc(100% - 183px);
+  float: left;
+}
+
+form {
+  select {
+    width: 80%;
+  }
+
+  input[type=file] {
+    width: 20%;
+    + input[type=text] {
+      width: calc(60% - 22px)
+    }
+  }
+
+  li.input .progress {
+    margin: 11px;
+    margin-left: 0px;
+  }
 }
