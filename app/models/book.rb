@@ -10,6 +10,10 @@ class Book < ActiveRecord::Base
     updates.send(branch).since([attributes["#{branch}_updates_start"], version + 1].compact.max)
   end
 
+  def cdn_updates
+    updates.since(live_updates_start || 1)
+  end
+
   def rebuild_version_caches
     version_caches = Hash.new
     latest_rewrites = updates.rewrites.latest
