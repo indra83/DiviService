@@ -47,6 +47,7 @@ end
 
 group :production do # Heroku
   gem 'rails_12factor'
+  gem 'bounscale'
 end
 
 group :development do

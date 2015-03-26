@@ -73,6 +73,8 @@ GEM
       multi_json
     arel (6.0.0)
     bcrypt (3.1.10)
+    bounscale (0.0.4)
+      json
     builder (3.2.2)
     celluloid (0.16.0)
       timers (~> 4.0.0)
@@ -292,6 +294,7 @@ PLATFORMS
 DEPENDENCIES
   airbrake
   bcrypt
+  bounscale
   default_value_for
   factory_girl_rails (~> 4.0)
   foreman
