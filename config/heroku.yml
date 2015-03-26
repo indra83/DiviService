@@ -10,7 +10,7 @@
 #     - <Heroku config:var name>: <Heroku config:var value>
 #
 
-admin: &default
+production: &default
   app: divi-admin
   #repo: git@heroku.personal:divi-admin.git
   config: &default_config
@@ -27,7 +27,7 @@ admin: &default
     - pgbackups:plus
     - scheduler:standard
 
-staging-admin:
+staging:
   <<: *default
   app: divi-staging-admin
   config:
@@ -35,7 +35,7 @@ staging-admin:
     S3_BUCKET:              "divi-content-staging"
     SECRET_KEY_BASE:        'd7cb8463b04bba15282457c2f5f8309296e065e711996463a9ab93748253db08aeab1c98bf1ae288e958e18ca0c7a99bf29532417ddefc180abb0997f1c66cdf'
 
-dev-admin:
+dev:
   <<: *default
   app: divi-dev-admin
   config:
