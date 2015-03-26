@@ -10,62 +10,33 @@
 #     - <Heroku config:var name>: <Heroku config:var value>
 #
 
-admin:
-  app: divi-admin
-  stack: cedar
-  #repo: git@heroku.personal:divi-admin.git
-  config:
-    BUNDLE_WITHOUT: "development:test"
-    GOOGLE_ANALYTICS: "UA-12345678-1"
-    ERRBIT_TOKEN: 'ba4df5c987e04fbf9c4caa65efeb6479'
-    NEW_RELIC_APP_NAME: 'divi-service'
-    SECRET_KEY_BASE: '5e632f8b8b4f74e25c7b9103fb21ea3b14245b461a21510c1c32cc9635ca234d940532c9f8af0f1717faa8febf83590de40c947b5b5ca1fff825235e638819ed'
-  addons:
-    - newrelic:stark
-    - pgbackups:plus
-    - scheduler:standard
-production:
+production: &default
   app: divi-service
   stack: cedar
   #repo: git@heroku.personal:divi-service.git
-  config:
+  config: &default_config
     BUNDLE_WITHOUT: "development:test"
     GOOGLE_ANALYTICS: "UA-12345678-1"
     ERRBIT_TOKEN: 'ba4df5c987e04fbf9c4caa65efeb6479'
     NEW_RELIC_APP_NAME: 'divi-service'
     SECRET_KEY_BASE: '5e632f8b8b4f74e25c7b9103fb21ea3b14245b461a21510c1c32cc9635ca234d940532c9f8af0f1717faa8febf83590de40c947b5b5ca1fff825235e638819ed'
-  addons:
+  addons: &default_addons
     - newrelic:stark
     - pgbackups:plus
     - scheduler:standard
+
 staging:
-  stack: cedar
+  <<: *default
   app: divi-staging
-  #repo: git@heroku.personal:divi-staging.git
-  config: &default
-    BUNDLE_WITHOUT: "development:test"
-    ERRBIT_TOKEN: '600e99f0af40e46a999cc4db2d30c511'
-    NEW_RELIC_APP_NAME: 'divi-service'
-    SECRET_KEY_BASE: '83026357c50fa5fdc9cd13e1020e1179fba7b126db8ffd181d00b4caa488d9184e6ead09e56ebee71cb8b0bbfef12bd1f67747f50c5b698b23caf975ecf3500f'
-  addons:
-    - newrelic:stark
-    - pgbackups:plus
-    - scheduler:standard
-dev:
-  stack: cedar
-  app: divi-dev
-  #repo: git@heroku.personal:divi-staging.git
   config:
-    BUNDLE_WITHOUT: "development:test"
+    <<: *default_config
+    ERRBIT_TOKEN: '600e99f0af40e46a999cc4db2d30c511'
+    SECRET_KEY_BASE: '83026357c50fa5fdc9cd13e1020e1179fba7b126db8ffd181d00b4caa488d9184e6ead09e56ebee71cb8b0bbfef12bd1f67747f50c5b698b23caf975ecf3500f'
+
+dev:
+  <<: *default
+  app: divi-dev
+  config:
+    <<: *default_config
     ERRBIT_TOKEN: 'a9a60f0926264fb3467dfbd8238d1850'
-    NEW_RELIC_APP_NAME: 'divi-service'
     SECRET_KEY_BASE: '5e39208a6832a2331340df184bdbfbfd30e498266dcde4423d31878804e01adb8d7be73dd74c150b1b0d9a02688c82445badb38baca6842819866a46dd1d8518'
-  addons:
-    - newrelic:stark
-    - pgbackups:plus
-    - scheduler:standard
-# demo:
-#   app: awesomeapp-demo
-#   config: *default
-
-
