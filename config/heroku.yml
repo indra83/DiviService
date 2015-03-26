@@ -42,3 +42,11 @@ dev-admin:
     <<: *default_config
     S3_BUCKET:              "divi-content-dev"
     SECRET_KEY_BASE:        'a8472fd577a9dcd8b066e77d48bab76164717da4fa0b45a98330292c66f828ea63314a1dff0305fc224fc01f61c784101353f8691fcd789a480d86b44371e759'
+
+seed:
+  <<: *default
+  app: divi-seed
+  config:
+    <<: *default_config
+    S3_BUCKET:              "divi-content-seed"
+    SECRET_KEY_BASE:        '329988c552c240b0a79196aa6272caf3dcf10eb0206b20e2d415e0deabdac52b3330e3baf4c9b8c05c64b672f82026e7cf23b3adec4578c8b0e43d67313ad98a'
